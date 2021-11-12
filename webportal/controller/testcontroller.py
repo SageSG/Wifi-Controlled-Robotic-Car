@@ -6,5 +6,6 @@ parser.add_argument('name', required=True)
 
 
 class TestControllerAPI(Resource):
-	def get(self):
+	def post(self):
+		args = parser.parse_args()
 		return 200

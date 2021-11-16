@@ -9,3 +9,6 @@ class TestControllerAPI(Resource):
 	def post(self):
 		args = parser.parse_args()
 		return 200
+
+	def get(self):
+		return {"command": "a"}

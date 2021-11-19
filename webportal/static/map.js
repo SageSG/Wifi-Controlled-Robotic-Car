@@ -93,7 +93,7 @@ function saveMap() {
             else if (tile.includes("end_tile")) {
                 columns.push(end)
             }
-            else if (tile.includes("route_tile"))
+            else if (tile.includes("route_tile")) {
                 columns.push(route)
             }
         }

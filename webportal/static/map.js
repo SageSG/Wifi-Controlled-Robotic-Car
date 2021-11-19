@@ -87,16 +87,14 @@ function saveMap() {
         // Column has either a start, route, or end tile
         if (map_column[c].hasChildNodes()) {
             var tile = map_column[c].firstChild.id.toString();
-            switch (tile) {
-                case ("cloned_start_tile"):
-                    columns.push(start);
-                    break;
-                case ("cloned_end_tile"):
-                    columns.push(end);
-                    break;
-                case ("cloned_route_tile"):
-                    columns.push(route);
-                    break;
+            if (tile.includes("start_tile")) {
+                columns.push(start)
+            }
+            else if (tile.includes("end_tile")) {
+                columns.push(end)
+            }
+            else if (tile.includes("route_tile"))
+                columns.push(route)
             }
         }
         else {

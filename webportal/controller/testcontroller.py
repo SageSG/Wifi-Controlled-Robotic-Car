@@ -11,4 +11,4 @@ class TestControllerAPI(Resource):
 		return 200
 
 	def get(self):
-		return {"command": "a"}
+		return {"command": "1, 2, 3, 4, 1, 2, 3, 4, 5, 6, 7"}

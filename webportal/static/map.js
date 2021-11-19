@@ -31,7 +31,7 @@ function removeNode(node) {
 function drop(ev) {
       ev.preventDefault();
       var data = ev.dataTransfer.getData("text");   // Get the ID of the item to be dropped which can be either start_tile, end_tile, route_tile, or empty_tile
-      var routing_tile = 'route_tile' == data || "empty_tile" == data;
+      var routing_tile = 'route_tile' == data
 
       // Clone the selected tile & set a new id on cloned tile.
       var nodeCopy = document.getElementById(data).cloneNode(true);

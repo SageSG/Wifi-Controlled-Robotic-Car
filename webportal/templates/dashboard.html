@@ -181,6 +181,55 @@
 	    }
 	});
 
+
+	// Line Detect Chart Count Chart
+	var line_detect_count_chart_stats = JSON.parse('{{ car_data[4] | tojson | safe}}');
+	var line_detect_count_chart_labels = [];
+	var line_detect_count_chart_data = [];
+	for (const [key, value] of Object.entries(line_detect_count_chart_stats)) {
+		line_detect_count_chart_labels.push(key);
+		line_detect_count_chart_data.push(value);
+	}	
+
+	const ctx3 = document.getElementById('line_detect_count_chart').getContext('2d');
+	const myChart3 = new Chart(ctx3, {
+	    type: 'bar',
+	    data: {
+	        labels: line_detect_count_chart_labels,
+	        datasets: [{
+	            label: 'Line Detected Count',
+	            data: line_detect_count_chart_data,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true,
+			        ticks: {
+			            precision: 0,	            
+			        }        
+	            }
+	        }
+	    }
+	});
+
 	// Line Detection Chart 
 	var line_detect_chart_stats = JSON.parse('{{ car_data[3] | tojson | safe}}');
 	var line_detect_chart_labels = [];
@@ -232,111 +281,13 @@
 	        }
 	    }
 	});
-
-
-	// Line Detect Chart Count Chart
-	var line_detect_count_chart_stats = JSON.parse('{{ car_data[4] | tojson | safe}}');
-	var line_detect_count_chart_labels = [];
-	var line_detect_count_chart_data = [];
-	for (const [key, value] of Object.entries(line_detect_count_chart_stats)) {
-		line_detect_count_chart_labels.push(key);
-		line_detect_count_chart_data.push(value);
-	}	
-
-	const ctx3 = document.getElementById('line_detect_count_chart').getContext('2d');
-	const myChart3 = new Chart(ctx3, {
-	    type: 'bar',
-	    data: {
-	        labels: line_detect_count_chart_labels,
-	        datasets: [{
-	            label: 'Line Detected Count',
-	            data: line_detect_count_chart_data,
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            y: {
-	                beginAtZero: true,
-			        ticks: {
-			            precision: 0,	            
-			        }        
-	            }
-	        }
-	    }
-	});
 </script>
 
-<!-- <script>
-const ctx3 = document.getElementById('command_radar_chart').getContext('2d');
-const myChart3 = new Chart(ctx3, {
-    type: 'radar',
-    data: {
-        labels: ['forward', 'left', 'right', 'backwards'],
-        datasets: [{
-            label: 'Line Detected',
-            data: [20, 1, 1, 0],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-		        ticks: {
-		            precision: 0,	            
-		        }        
-            }
-        }
-    }
-});
-</script> -->
 
 <script>
-    setInterval(function(){$.ajax({
-        url: '/update',
-        type: 'POST',
-        success: function(response) {
-            console.log(response);
-            $("#num").html(response["value"]);
-            $("#time").html(response["time"]);
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    })}, 1000);
+	setTimeout(function() {
+	  location.reload();
+	}, 30000);
 </script>
 {% endblock %}
 

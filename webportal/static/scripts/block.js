@@ -56,7 +56,7 @@ Blockly.Blocks['turn'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Turn")
-            .appendField(new Blockly.FieldDropdown([["Left 90°", "Motor_Left();"], ["Right 90°", "Motor_Right();"]]), "NAME");
+            .appendField(new Blockly.FieldDropdown([["Left 90°", "Motor_Left();\n"], ["Right 90°", "Motor_Right();\n"]]), "NAME");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(330);
@@ -107,7 +107,7 @@ Blockly.JavaScript['stop'] = function (block) {
 Blockly.JavaScript['turn'] = function (block) {
     var dropdown_name = block.getFieldValue('NAME');
     var result = dropdown_name.concat("\n");
-    if(dropdown_name == "Motor_Left();"){
+    if(dropdown_name == "Motor_Left();\n"){
         directionArr.push("2\n"); 
     }else{
         directionArr.push("3\n"); 

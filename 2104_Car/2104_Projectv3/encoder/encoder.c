@@ -58,7 +58,7 @@ void Encoder_Init()
 
     Interrupt_enableInterrupt(INT_PORT3);
     Interrupt_enableInterrupt(INT_PORT2);
-    Interrupt_enableMaster();
+//    Interrupt_enableMaster();
 
 //    printf("\nDIstance: %.2f", getHCSR04Distance());
 //    /* Obtain distance from HCSR04 sensor and check if its less then minimum distance */
@@ -84,8 +84,8 @@ void PORT3_IRQHandler(void)
     for (i = 0; i < 5000; i++)
         ; //sleep
 
-    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
-    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
+//    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
+//    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
 
 }
 
@@ -94,14 +94,14 @@ void PORT2_IRQHandler(void)
     uint32_t status2 = 0;
     status2 = GPIO_getEnabledInterruptStatus(GPIO_PORT_P2) & BIT7;
     GPIO_clearInterruptFlag(GPIO_PORT_P2, status2);
+//        printf("\nleft: %d", left);
 
     // Delay for switch debounce
-//    printf("\nleft: %d", left);
     left += 1;
     for (i = 0; i < 5000; i++)
         ; //sleep
 
-    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
-    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
+//    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
+//    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
 }
 

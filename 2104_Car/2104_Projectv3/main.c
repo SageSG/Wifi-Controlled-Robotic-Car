@@ -64,7 +64,16 @@
 #include "uart/uart.h"
 
 //volatile bool car_stop = false;
-//char commands[20] = "01230";
+char commandsM[20] = "123010";
+volatile static int secCounter = 0;
+
+static void Delay(uint32_t loop)
+{
+    volatile uint32_t i;
+
+    for (i = 0; i < loop; i++)
+        ;
+}
 
 int main(void)
 {
@@ -79,57 +88,152 @@ int main(void)
     //    GPIO_setAsOutputPin(GPIO_PORT_P2, GPIO_PIN0 | GPIO_PIN1 | GPIO_PIN2);
     //    GPIO_setOutputLowOnPin(GPIO_PORT_P2, GPIO_PIN0 | GPIO_PIN1 | GPIO_PIN2);
 
+//    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//    Initalise_HCSR04();
     Motor_Init();
-    Encoder_Init();
+//    Initalise_HCSR04();
+//    Encoder_Init();
 //    Ultrasonic_Init();
     Uart_Init();
 //        Temp_Init();
+//    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//    GPIO_setAsInputPin(GPIO_PORT_P5, GPIO_PIN6);
-//    GPIO_setAsInputPin(GPIO_PORT_P5, GPIO_PIN7);
-
-//    size_t length = strlen(commands);
-//    int i = 0;
-//    for (; i < length; i++)
-//    {
-//        printf("%c\n", commands[i]); /* Print each character of the string. */
-//        switch (commands[i])
-//        {
-//        case '0':
-//            printf("stop Car");
-//            break;
-//        case '1':
-//            printf("Start CAr");
-//            break;
-//        case '2':
-//            printf("Left");
-//            break;
-//        case '3':
-//            printf("Right");
-//            break;
-//        }
-//    }
+//    printf("\nDIstance: %.2f", getHCSR04Distance());
 
     /* Enabling interrupts and starting the watchdog timer */
     //    Interrupt_enableInterrupt(INT_PORT1);
     //    Interrupt_enableInterrupt(INT_PORT2);
     //    Interrupt_enableInterrupt(INT_PORT3);
     //    Interrupt_enableInterrupt(INT_PORT4);
-        Interrupt_enableInterrupt(INT_PORT5);
+    Interrupt_enableInterrupt(INT_PORT5);
     //    Interrupt_enableInterrupt(INT_PORT6);
     //    Interrupt_enableSleepOnIsrExit();
     //    Interrupt_enableMaster();
-    while (1)
+}
+
+void runString()
+{
+    printf("ONEEEEEE?;");
+    size_t length = strlen(commandsM);
+    int i = 0;
+    for (; i < length; i++)
     {
-//        if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 0)
-//        {
-//            printf("\nLINE DECTECTED");
-//        }
-//        if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 0)
-//        {
-//            printf("\nHello2");
-//        }
-        //        PCM_gotoLPM0();
-        //        PCM_gotoLPM3();
+        printf("%c\n", commandsM[i]); /* Print each character of the string. */
+        printf("hellooo?;");
+        switch (commandsM[i])
+        {
+        case '0':
+            printf("Motor_Stop();");
+            Motor_Stop();
+            while (secCounter < 3)
+            {
+                printf("%d", secCounter);
+                //        ===============================================================================
+                TIMER32_1->LOAD = 3000000; /* set the reload value */
+                //    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
+
+                /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
+                TIMER32_1->CONTROL = 0xC3;
+                //    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
+                //                           TIMER32_FREE_RUN_MODE);
+                while ((TIMER32_1->RIS & 1) == 0)
+                    ; /* wait until the RAW_IFG is set */
+                TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+                ////        P2->OUT ^= 4; /* toggle blue LED */
+                ////        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+                //        ===============================================================================
+                secCounter += 1;
+            }
+            secCounter = 0;
+            //            printf("stop Car");
+            //            Motor_Stop();
+            //            Delay(5000);
+            break;
+        case '1':
+            printf("Motor_Start();");
+            Motor_Start();
+            while (secCounter < 3)
+            {
+                printf("%d", secCounter);
+                //        ===============================================================================
+                TIMER32_1->LOAD = 3000000; /* set the reload value */
+                //    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
+
+                /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
+                TIMER32_1->CONTROL = 0xC3;
+                //    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
+                //                           TIMER32_FREE_RUN_MODE);
+                while ((TIMER32_1->RIS & 1) == 0)
+                    ; /* wait until the RAW_IFG is set */
+                TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+                ////        P2->OUT ^= 4; /* toggle blue LED */
+                ////        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+                //        ===============================================================================
+                secCounter += 1;
+            }
+            secCounter = 0;
+            //            printf("Start CAr");
+            //            Motor_Start();
+            //            Delay(5000);
+            break;
+        case '2':
+            printf("Motor_Left();");
+            Motor_Left();
+            while (secCounter < 3)
+            {
+                printf("%d", secCounter);
+                //        ===============================================================================
+                TIMER32_1->LOAD = 3000000; /* set the reload value */
+                //    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
+
+                /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
+                TIMER32_1->CONTROL = 0xC3;
+                //    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
+                //                           TIMER32_FREE_RUN_MODE);
+                while ((TIMER32_1->RIS & 1) == 0)
+                    ; /* wait until the RAW_IFG is set */
+                TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+                ////        P2->OUT ^= 4; /* toggle blue LED */
+                ////        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+                //        ===============================================================================
+                secCounter += 1;
+            }
+            secCounter = 0;
+            //            printf("Left");
+            //            Motor_Left();
+            //            Delay(5000);
+            break;
+        case '3':
+            printf("Motor_Right();");
+            Motor_Right();
+            while (secCounter < 3)
+            {
+                printf("%d", secCounter);
+                //        ===============================================================================
+                TIMER32_1->LOAD = 3000000; /* set the reload value */
+                //    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
+
+                /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
+                TIMER32_1->CONTROL = 0xC3;
+                //    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
+                //                           TIMER32_FREE_RUN_MODE);
+                while ((TIMER32_1->RIS & 1) == 0)
+                    ; /* wait until the RAW_IFG is set */
+                TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+                ////        P2->OUT ^= 4; /* toggle blue LED */
+                ////        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+                //        ===============================================================================
+                secCounter += 1;
+            }
+            secCounter = 0;
+            //            printf("Right");
+            //            Motor_Right();
+            //            Delay(5000);
+            break;
+        }
     }
 }

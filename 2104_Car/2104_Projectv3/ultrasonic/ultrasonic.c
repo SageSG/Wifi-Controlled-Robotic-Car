@@ -63,7 +63,6 @@ void Initalise_HCSR04(void)
 
     //Timer_A_stopTimer(TIMER_A0_BASE);
     Timer_A_clearTimer(TIMER_A0_BASE);
-
 }
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -137,29 +136,29 @@ float getHCSR04Distance(void)
 
 // -------------------------------------------------------------------------------------------------------------------
 
-uint32_t Ultrasonic_Init(void)
-{
-    Initalise_HCSR04();
-
-    /* Configure P1.0 and set it to LOW */
-    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
-    GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
-
-    while (1)
-    {
-        Delay(3000);
-        printf("\nDIstance: %.2f", getHCSR04Distance());
-        /* Obtain distance from HCSR04 sensor and check if its less then minimum distance */
-        if ((getHCSR04Distance() < MIN_DISTANCE))
-        {
-            GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN0);
-            Motor_Stop();
-        }
-        else
-        {
-            GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
-//            Motor_Stop();
-        }
-    }
-}
+//void Ultrasonic_Init(void)
+//{
+//    Initalise_HCSR04();
+//
+//    /* Configure P1.0 and set it to LOW */
+//    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN0);
+//    GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
+//
+////    while (1)
+////    {
+////        Delay(3000);
+////        printf("\nDIstance: %.2f", getHCSR04Distance());
+////        /* Obtain distance from HCSR04 sensor and check if its less then minimum distance */
+////        if ((getHCSR04Distance() < MIN_DISTANCE))
+////        {
+////            GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN0);
+////            Motor_Stop();
+////        }
+////        else
+////        {
+////            GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
+//////            Motor_Stop();
+////        }
+////    }
+//}
 

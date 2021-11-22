@@ -18,7 +18,7 @@
 
 char secString[20];
 char rpmString[20];
-char commands[20] = "0123";
+char commands[20] = "123010";
 volatile uint32_t rpmRight;
 volatile uint32_t rpmLeft;
 uint32_t fiveSec = 0;
@@ -27,6 +27,14 @@ uint32_t lineCount = 0;
 volatile static float rpm = 0.0;
 volatile static float secCounter = 0.0;
 volatile bool car_stop = false;
+
+static void Delay(uint32_t loop)
+{
+    volatile uint32_t i;
+
+    for (i = 0; i < loop; i++)
+        ;
+}
 
 void uPrintf(unsigned char *TxArray)
 {
@@ -122,15 +130,17 @@ void Uart_Init(void)
     GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
 
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN6);
+    GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN7);
+
     Interrupt_enableInterrupt(INT_PORT5);
 
-    TIMER32_1->LOAD = 3000000; /* set the reload value */
-//    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
-
-    /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
-    TIMER32_1->CONTROL = 0xC3;
-//    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
-//                           TIMER32_FREE_RUN_MODE);
+//    TIMER32_1->LOAD = 3000000; /* set the reload value */
+////    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
+//
+//    /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
+//    TIMER32_1->CONTROL = 0xC3;
+////    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
+////                           TIMER32_FREE_RUN_MODE);
 
     /* Selecting P1.2 and P1.3 in UART mode */
     GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P1,
@@ -149,67 +159,73 @@ void Uart_Init(void)
     /* Enabling interrupts (Rx) */
     UART_enableInterrupt(EUSCI_A0_BASE, EUSCI_A_UART_RECEIVE_INTERRUPT);
     Interrupt_enableInterrupt(INT_EUSCIA0);
-    Interrupt_enableMaster();
-    uPrintf("Starting Car.\n\r");
+//    Interrupt_enableMaster();
+    uPrintf("| Starting Car.\n\r");
 
-    while (car_stop == false)
-    {
-//        uPrintf("in loop :)");
-        while ((TIMER32_1->RIS & 1) == 0)
-            ; /* wait until the RAW_IFG is set */
-        TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
-//        MAP_Timer32_clearInterruptFlag(TIMER32_BASE);
-//        P2->OUT ^= 4; /* toggle blue LED */
-//        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
-//        uPrintf("hiiiiiiiiii :)");
+    runString();
 
-        TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
-
-        secCounter += 1;
-//        ftoaUart(secCounter, secString, 1);
-//        uPrintf(secString);
-        rpmRight = getRight();
-        rpmLeft = getLeft();
-        rpm = (rpmRight + rpmLeft) / 2;
-        rpm = (rpm / secCounter) * 6;
-
-        ftoaUart(rpm, rpmString, 1);
-        strcat(rpmString, "rpm | ");
-        uPrintf(rpmString);
-
-        if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 0
-                && GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 0
-                && fiveSec < 3)
-        {
-            lineCount++;
-            GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN0);
-            uPrintf("LINE DECTECTED");
-            if (lineCount == 3)
-            {
-                uPrintf("BIGGGGGG LINE DETECTEDDD");
-
-                Motor_Stop();
-                car_stop = true;
-            }
-        }
-        else
-        {
-            lineCount = 0;
-            GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
-//            Motor_Start();
-        }
-    }
+//    while (car_stop == false)
+//    {
+//        while ((TIMER32_1->RIS & 1) == 0)
+//            ; /* wait until the RAW_IFG is set */
+//        TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+//////        P2->OUT ^= 4; /* toggle blue LED */
+//////        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
+//        TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//
+//        secCounter += 1;
+////        ftoaUart(secCounter, secString, 1);
+////        uPrintf(secString);
+//        rpmRight = getRight();
+//        rpmLeft = getLeft();
+//        rpm = (rpmRight + rpmLeft) / 2;
+//        rpm = (rpm / secCounter) * 6;
+//        ftoaUart(rpm, rpmString, 1);
+//        strcat(rpmString, "rpm | ");
+////        uPrintf(rpmString);
+//
+////        printf("\nDIstance: %.2f", getHCSR04Distance());
+////        uPrintf("hi");
+//        /* Obtain distance from HCSR04 sensor and check if its less then minimum distance */
+////        if ((getHCSR04Distance() < 15.0))
+////        {
+////            GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN0);
+////            Motor_Stop();
+////        }
+////        else
+////        {
+////            GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN0);
+////            //            Motor_Stop();
+////        }
+//    }
 }
 
 void PORT5_IRQHandler(void)
 {
-    uint32_t status = 0;
-//    uint32_t status2 = 0;
-    status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT6;
-//    status2 = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT7;
-    GPIO_clearInterruptFlag(GPIO_PORT_P5, status);
+    uint32_t statusLeft = 0;
+    uint32_t statusRight = 0;
+    statusLeft = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT6;
+    statusRight = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT7;
+    GPIO_clearInterruptFlag(GPIO_PORT_P5, statusLeft);
+    GPIO_clearInterruptFlag(GPIO_PORT_P5, statusRight);
 
-   uPrintf("It workdeds");
+    if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 0
+            && GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 0)
+    {
+        uPrintf("LINEEEEEEEEEEEEEEEEEEEEEEE");
+        Motor_Stop();
+//        lineCount++;
+//        if (lineCount == 3)
+//        {
+//            uPrintf("CAR STOPPPED");
+//            Motor_Stop();
+//            car_stop = true;
+//        }
+    }
+//    else
+//    {
+//        lineCount = 0;
+//    }
 
     SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
     __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR

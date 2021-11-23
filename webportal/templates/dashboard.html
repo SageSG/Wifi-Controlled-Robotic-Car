@@ -1,85 +1,298 @@
 {% extends "layout.html" %} {% block content %}
-<h1><i class="bi bi-clipboard-data"></i> Dashboard</h1>
-<div class="row mb-12">
-	<div class="col-md-3 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#73C6B6">
-			<h2 style="text-align:center;">Car Connection</h2>
-			<h3 style="text-align:center;"><i class="bi bi-reception-4"></i> <b>Connected</b></h2>
+ <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+   <div class="container-fluid py-1 px-3">
+     	<nav aria-label="breadcrumb">
+      	<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+      		<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+				<li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+       	</ol>
+      	<h6 class="font-weight-bolder mb-0"><b>Dashboard</b></h6>
+     	</nav>
+  	</div>
+</nav>
+<div class="container-fluid py-4">
+	<div class="row">
+		<!-- Row 1 -->
+		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+			<div class="card">
+				<div class="card-body p-3">
+					<div class="row">
+						<div class="col-8">
+							<div class="numbers">
+								<p class="text-sm mb-0 text-capitalize font-weight-bold">Connectivity</p>
+								<h5 class="font-weight-bolder mb-0">
+									<b>Connected</b>
+									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+								</h5>
+							</div>
+						</div>
+                	<div class="col-4 text-end">
+                  	<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414" object-fit: cover;>
+                    		<h2><i class="fas fa-wifi" style="color: white;"></i></h2>
+                  	</div>
+                  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+			<div class="card">
+				<div class="card-body p-3">
+					<div class="row">
+						<div class="col-8">
+							<div class="numbers">
+								<p class="text-sm mb-0 text-capitalize font-weight-bold">Current Speed</p>
+								<h5 class="font-weight-bolder mb-0">
+									<b>{{car_data[0].current_speed}}km/h</b>
+									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+								</h5>
+							</div>
+						</div>
+                	<div class="col-4 text-end">
+                		<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
+                    		<h2><i class="bi bi-speedometer" style="color: white;"></i></h2>
+                  	</div>
+                  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+			<div class="card">
+				<div class="card-body p-3">
+					<div class="row">
+						<div class="col-8">
+							<div class="numbers">
+								<p class="text-sm mb-0 text-capitalize font-weight-bold">Current Temps</p>
+								<h5 class="font-weight-bolder mb-0">
+									<b>{{car_data[0].current_temps}}°C</b>
+									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+								</h5>
+							</div>
+						</div>
+                	<div class="col-4 text-end">
+							<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
+                    		<h2><i class="bi bi-thermometer-half" style="color: white;"></i></h2>
+                  	</div>
+                  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+			<div class="card">
+				<div class="card-body p-3">
+					<div class="row">
+						<div class="col-8">
+							<div class="numbers">
+								<p class="text-sm mb-0 text-capitalize font-weight-bold">Distance Travelled</p>
+								<h5 class="font-weight-bolder mb-0">
+									<b>20km</b>
+									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+								</h5>
+							</div>
+						</div>
+                	<div class="col-4 text-end">
+							<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
+                    		<h2><i class="bi bi-map-fill" style="color: white;"></i></h2>
+                  	</div>
+                  </div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
+	<!-- Row 2 -->
+	<div class="row mt-4">
+	  	<div class="col-lg-7 mb-lg-0 mb-4">
+	 		<div class="card">
+				<div class="card-body p-3">
+	        		<div class="row">
+	        			<div class="col-lg-6">
+	        				<div class="d-flex flex-column h-100">
+	        					<p class="mb-1 pt-2 text-bold">Built by the Bumbling Pandas</p>
+	        					 <h5 class="font-weight-bolder"><b>UI Dashboard</b></h5>
+	        					 <p class="mb-5">Statistics sent by the car via HTTP POST requests are displayed here.</p>
+	     					</div>
+	     				</div>
+               	<div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
+                  	<div class="bg-gradient-primary border-radius-lg h-100">
+                    		<!-- <div class="position-relative d-flex align-items-center justify-content-center h-100"> -->
+                      		<img class="w-100 position-relative z-index-2 pt-4" src="{{ url_for('static', filename='/img/panda.jpg')}}" alt="panda" style="height: 190px; width: 40px">
+                    		<!-- </div> -->
+                  	</div>
+                	</div>
+	     			</div>
+	     		</div>
+	     	</div>
+     	</div>
+		<div class="col-lg-5">
+			<div class="card h-100 p-3">
+				<div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('{{ url_for("static", filename="/img/robotics1.jpg")}}'); background-repeat: no-repeat;">
+					<span class="mask bg-gradient-dark"></span>
 
-	<div class="col-md-3 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#AED6F1">
-			<h2 style="text-align:center;">Current Speed</h2>
-			<h3 style="text-align:center;"><i class="bi bi-speedometer"></i> <b>{{car_data[0].current_speed}}km/h</b></h2>
+              	<div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+               	<h5 class="text-white font-weight-bolder mb-4 pt-2"><b>Car Description</b></h5>
+               	<p class="text-white">Bobby is a car that is powered by a MSP432 and 4x double AA batteries.</p>
+              	</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<div class="col-md-3 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#85C1E9">
-			<h2 style="text-align:center;">Current Temps</h2>
-			<h3 style="text-align:center"><i class="bi bi-thermometer-half"></i> <b>{{car_data[0].current_temps}}°C</b></h2>
-		</div>
+	<!-- Row 3 -->
+	<div class="row mt-4">
+	  	<div class="col-lg-5 mb-lg-0 mb-4">
+	 		<div class="card">
+				<div class="card-body p-3">
+	        		<div class="row">
+	        			<h6 class="text-black font-weight-bolder mb-4 pt-2"><b>Temperature Chart</b></h6>
+	        			<div class="col-lg-12">
+	        				<canvas id="temp_chart" width="400" height="210"></canvas>
+	     				</div>
+	     			</div>
+	     		</div>
+	     	</div>
+     	</div>
+
+	  	<div class="col-lg-7 mb-lg-0 mb-4">
+	 		<div class="card">
+				<div class="card-body p-3">
+	        		<div class="row">
+	        			<h6 class="text-black font-weight-bolder mb-4 pt-2"><b>Speed Chart</b></h6>
+	        			<div class="col-lg-12">
+	        				<canvas id="speed_chart" width="400" height="210"></canvas>
+	     				</div>
+	     			</div>
+	     		</div>
+	     	</div>
+     	</div>
 	</div>
 
-	<div class="col-md-3 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#D4E6F1">
-			<h2 style="text-align:center;">Distance Travelled</h2>
-			<h3 style="text-align:center"><i class="bi bi-map-fill"></i><b></b></h2>
-		</div>
+	<!-- Row 4 -->
+	<div class="row mt-4">
+	  	<div class="col-lg-7 mb-lg-0 mb-4">
+	 		<div class="card">
+				<div class="card-body p-3">
+	        		<div class="row">
+	        			<h6 class="text-black font-weight-bolder mb-4 pt-2"><b>Line Detection Count Chart</b></h6>
+	        			<div class="col-lg-12">
+	        				<canvas id="line_detect_count_chart" width="400" height="210"></canvas>
+	     				</div>
+	     			</div>
+	     		</div>
+	     	</div>
+     	</div>
+
+	  	<div class="col-lg-5 mb-lg-0 mb-4">
+	 		<div class="card">
+				<div class="card-body p-3">
+	        		<div class="row">
+	        			<h6 class="text-black font-weight-bolder mb-4 pt-2"><b>Line Detection Rate Chart</b></h6>
+	        			<div class="col-lg-12">
+	        				<canvas id="line_detect_chart" width="400" height="210"></canvas>
+	     				</div>
+	     			</div>
+	     		</div>
+	     	</div>
+     	</div>
 	</div>
-</div>
 
 
-<div class="row mb-12">
-	<div class="col-md-6 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
-			<h4 style="text-align:center;">Temperature Graph</h4>
+	
+
+  
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row mb-12">
+	<div class="col-md-8 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-chart-line"></i> Temperature Graph</b></p>
+		</div>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
 			<canvas id="temp_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
 
+	<div class="col-md-4 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-wifi"></i> Connection</p>
+		</div>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
+			<div style="padding-top: 65px;">
+				<h1 style="text-align:center; color: green;"><b><i class="fas fa-wifi"></i></b></h1>
+				<h1 style="text-align:center; color: green;"><b>Connected</b></h1>
+			</div>
+		</div>
+	</div>
+</div>
 
-	<div class="col-md-6 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
-			<h4 style="text-align:center;">Speed Graph</h4>
-			<canvas id="speed_chart" width="400" height="210"></canvas>
+<div class="row mb-12">
+	<div class="col-md-4 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-thermometer-quarter"></i> Current Temp</b></p>
+		</div>		
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
+			
+		</div>
+	</div>
+
+	<div class="col-md-4 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-tachometer-alt"></i> Current Speed</b></p>
+		</div>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
+		
+		</div>
+	</div>
+
+	<div class="col-md-4 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-chart-area"></i> Distance Travelled</b></p>
+		</div>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
+		
 		</div>
 	</div>
 </div>
 
 <div class="row mb-12">
 	<div class="col-md-6 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
-			<h4 style="text-align:center;">Line Detection Count</h4>
-			<canvas id="line_detect_count_chart" width="400" height="210"></canvas>
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-tachometer-alt"></i>  Speed Graph</b></p>
+		</div>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
+			<canvas id="speed_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
 
 	<div class="col-md-6 p-1 d-flex flex-column position-static">
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
-			<h4 style="text-align:center;">Rate of Line Detection</h4>
+		<div class="row g-0 border rounded" style="background-color: #0099ff;">
+			<p style="text-align:center; color: white; vertical-align: center; width: 50%; margin: auto;"><b><i class="fas fa-vector-square"></i> Rate of Line Detection</p>
+		</div>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 250px; background-color: white">
 			<canvas id="line_detect_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
+</div> -->
 
-<!-- 	<div class="col-md-6 p-1 d-flex flex-column position-static">
-		<h2 style="text-align:center;">Movement Commands Radar</h2>
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 650px; background-color: white">
-			<canvas id="command_radar_chart" width="0" height="0"></canvas>
-		</div>
-	</div> -->
-</div>
-
-
-<!-- {% for dict_item in data %}
-   {% for key, value in dict_item.items() %}
-      <h1>Key: {{key}}</h1>
-      <h2>Value: {{value}}</h2>
-   {% endfor %}
-{% endfor %}
- -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.esm.js"></script>
@@ -105,7 +318,6 @@
 	    data: {
 	        labels: temp_chart_labels,
 	        datasets: [{
-	            label: 'temp',
 	            data: temp_chart_data,
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
@@ -126,14 +338,24 @@
 	            borderWidth: 1
 	        }]
 	    },
+
 	    options: {
 	        scales: {
 	            y: {
-	                beginAtZero: true
+	                beginAtZero: true,
+	                precision: 0,
 	            }
-	        }
-	    }
-	});
+	        },
+
+           plugins:{   
+             legend: {
+               display: false
+					},
+            },
+
+            maintainAspectRatio: false,
+	    	}
+	})
 
 	// Speed graph 
 	var speed_chart_stats = JSON.parse('{{ car_data[2] | tojson | safe}}');
@@ -177,12 +399,20 @@
 	                beginAtZero: true,
 	                precision: 0,
 	            }
-	        }
-	    }
+	        },
+
+           plugins:{   
+             legend: {
+               display: false
+					},
+            },
+
+            maintainAspectRatio: false,
+	    	}
 	});
 
 
-	// Line Detect Chart Count Chart
+	// // Line Detect Chart Count Chart
 	var line_detect_count_chart_stats = JSON.parse('{{ car_data[4] | tojson | safe}}');
 	var line_detect_count_chart_labels = [];
 	var line_detect_count_chart_data = [];
@@ -226,8 +456,16 @@
 			            precision: 0,	            
 			        }        
 	            }
-	        }
-	    }
+	        },
+
+           plugins:{   
+             legend: {
+               display: false
+					},
+            },
+
+            maintainAspectRatio: false,
+	    	}
 	});
 
 	// Line Detection Chart 
@@ -278,8 +516,16 @@
 				        }		            
 			        }        
 	            }
-	        }
-	    }
+	        },
+
+           plugins:{   
+             legend: {
+               display: false
+					},
+            },
+
+            maintainAspectRatio: false,
+	    	}
 	});
 </script>
 

@@ -6,94 +6,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap Assets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
 
     <!-- Fonts/Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-    {% if title == "Terminal" %}
-    <!-- JavaScript for Control.html -->
+    <!-- Terminal Assets -->
     <script defer src="{{ url_for('static', filename='terminal.js')}}"></script>
     {% endif %}
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}">
+    <!--  Layout Assets -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css')}}"> 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css')}}"> 
+    <script defer src="{{ url_for('static', filename='layout.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
-    {% if title == "Maps" %}
-    <!-- JavaScript for map.html -->
+    <!-- Map Assets -->
     <link rel="styleshhet" hrefe="https://use.fontawesome.com/releases/v.5.9.0/css/all.css">
     <link rel="stylesheet" href="style.css">
     <script defer src="{{ url_for('static', filename='map.js')}}"></script>
     {% endif %}
 
-    {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
     <title> ICT2X01 </title>
-    {% endif %}
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-            <div class="container">
-                <a class="navbar-brand mr-4" href="/">ICT2X01</a>
-
-                <!-- Toggler/collapsibe Button -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-                <!-- Navbar links -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/maps">Maps</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/terminal">Terminal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/tutorials">Tutorials</a>
-                        </li>
-                    </ul>
+    <div class="wrapper">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <div class="hamburger__inner">
+                    <div class="one"></div>
+                    <div class="two"></div>
+                    <div class="three"></div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main role="main" class="container">
-        <div class="row">
-            <!-- Content of Web Page -->
-            <div class="col-md-12">
-                {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
-                <!-- if there is a flash message -->
-                {% for category, message in messages %}
-                <!-- Retrieve passed argument -->
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
+            <div class="menu">
+                <div>
+                    <h2 style="color: white;"><b><i class="fas fa-paw"></i> Bumbling Pandas</b></h2>
                 </div>
-                {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
             </div>
         </div>
-    </main>
 
-    <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-</body>
-<footer>
-    <div class="text-center p-4 bg-steel">
-        © 2021 Copyright:
-        <a class="text-reset fw-bold" href="">Bumbling Cat Pandas</a>
+        
+        <div class="main_container">
+            <div class="sidebar">
+                <div class="sidebar__inner">
+                    <div class="profile">
+                        <div class="img">
+                            <img src="{{ url_for('static', filename='/img/grp_icon.png')}}" alt="profile_pic">
+                        </div>
+                    <div class="profile_info">
+                        <p style="color: white;"><b>Welcome</b></p>
+                        <p class="profile_name"><b>Student</b></p>
+                    </div>
+                </div>
+                <ul id="sidenav">
+                    <li>
+                        <a href="/">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="title">Home</span>
+                        </a>
+                    </li>
+               
+                    <li>
+                        <a href="/dashboard">
+                            <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                            <span class="title">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/maps">
+                            <span class="icon"><i class="fas fa-layer-group"></i></span>
+                            <span class="title">Maps</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/terminal">
+                            <span class="icon"><i class="fas fa-terminal"></i></span>
+                            <span class="title">Terminal</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/tutorials">
+                            <span class="icon"><i class="fas fa-puzzle-piece"></i></span>
+                            <span class="title">Tutorial</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
-</footer>
+</div>  
+</body>
 </html>

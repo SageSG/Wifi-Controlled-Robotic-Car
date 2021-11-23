@@ -1,60 +1,75 @@
 {% extends "layout.html" %} {% block content %}
-<h1>Dashboard</h1>
+<h1><i class="bi bi-clipboard-data"></i> Dashboard</h1>
 <div class="row mb-12">
-	<div class="col-md-4 p-1 d-flex flex-column position-static">
-		<h2 style="text-align:center;">Car Connection</h2>
+	<div class="col-md-3 p-1 d-flex flex-column position-static">
 		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#73C6B6">
-			<h2 style="text-align:center;"><i class="bi bi-reception-4"></i> Connected</h2>
+			<h2 style="text-align:center;">Car Connection</h2>
+			<h3 style="text-align:center;"><i class="bi bi-reception-4"></i> <b>Connected</b></h2>
 		</div>
 	</div>
 
 
-	<div class="col-md-4 p-1 d-flex flex-column position-static">
-		<h2 style="text-align:center;">Current Speed</h2>
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#A3E4D7">
-			<h2 style="text-align:center;"><i class="bi bi-speedometer"></i> {{car_data[0].current_speed}}km/h</h2>
+	<div class="col-md-3 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#AED6F1">
+			<h2 style="text-align:center;">Current Speed</h2>
+			<h3 style="text-align:center;"><i class="bi bi-speedometer"></i> <b>{{car_data[0].current_speed}}km/h</b></h2>
 		</div>
 	</div>
 
-	<div class="col-md-4 p-1 d-flex flex-column position-static">
-		<h2 style="text-align:center;">Current Temps</h2>
+	<div class="col-md-3 p-1 d-flex flex-column position-static">
 		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#85C1E9">
-				<h2 style="text-align:center"><i class="bi bi-thermometer-half"></i> {{car_data[0].current_temps}}°C</h2>
+			<h2 style="text-align:center;">Current Temps</h2>
+			<h3 style="text-align:center"><i class="bi bi-thermometer-half"></i> <b>{{car_data[0].current_temps}}°C</b></h2>
+		</div>
+	</div>
+
+	<div class="col-md-3 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative d-flex align-items-center justify-content-center" style="height: 100px; background-color:#D4E6F1">
+			<h2 style="text-align:center;">Distance Travelled</h2>
+			<h3 style="text-align:center"><i class="bi bi-map-fill"></i><b></b></h2>
 		</div>
 	</div>
 </div>
 
 
 <div class="row mb-12">
-	<div class="col-md-6 p-1 d-flex flex-column position-static" style="background-color: white;">
-		<h2 style="text-align:center;">Temperature Graph</h2>
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 350px;">
+	<div class="col-md-6 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
+			<h4 style="text-align:center;">Temperature Graph</h4>
 			<canvas id="temp_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
 
-	<div class="col-md-6 p-1 d-flex flex-column position-static" style="background-color: white;">
-		<h2 style="text-align:center;">Rate of Line Detection</h2>
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 350px;">
-			<canvas id="line_detect_chart" width="400" height="210"></canvas>
+
+	<div class="col-md-6 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
+			<h4 style="text-align:center;">Speed Graph</h4>
+			<canvas id="speed_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
 </div>
 
 <div class="row mb-12">
-	<div class="col-md-6 p-1 d-flex flex-column position-static" style="background-color: white;">
-		<h2 style="text-align:center;">Line Detection Count</h2>
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 350px;">
+	<div class="col-md-6 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
+			<h4 style="text-align:center;">Line Detection Count</h4>
 			<canvas id="line_detect_count_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
 
-	<div class="col-md-6 p-1 d-flex flex-column position-static" style="background-color: white;">
-		<h2 style="text-align:center;">Movement Commands Radar</h2>
-		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 650px;">
-			<canvas id="command_radar_chart" width="0" height="0"></canvas>
+	<div class="col-md-6 p-1 d-flex flex-column position-static">
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 400px; background-color: white">
+			<h4 style="text-align:center;">Rate of Line Detection</h4>
+			<canvas id="line_detect_chart" width="400" height="210"></canvas>
 		</div>
 	</div>
+
+<!-- 	<div class="col-md-6 p-1 d-flex flex-column position-static">
+		<h2 style="text-align:center;">Movement Commands Radar</h2>
+		<div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 650px; background-color: white">
+			<canvas id="command_radar_chart" width="0" height="0"></canvas>
+		</div>
+	</div> -->
 </div>
 
 
@@ -79,6 +94,7 @@
 	var temp_chart_stats = JSON.parse('{{ car_data[1] | tojson | safe}}');
 	var temp_chart_labels = [];
 	var temp_chart_data = [];
+
 	for (const [key, value] of Object.entries(temp_chart_stats)) {
 		temp_chart_labels.push(key);
 		temp_chart_data.push(value);
@@ -89,7 +105,7 @@
 	    data: {
 	        labels: temp_chart_labels,
 	        datasets: [{
-	            label: '# of Votes',
+	            label: 'temp',
 	            data: temp_chart_data,
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
@@ -119,9 +135,54 @@
 	    }
 	});
 
+	// Speed graph 
+	var speed_chart_stats = JSON.parse('{{ car_data[2] | tojson | safe}}');
+	var speed_chart_labels = [];
+	var speed_chart_data = [];
+	for (const [key, value] of Object.entries(speed_chart_stats)) {
+		speed_chart_labels.push(key);
+		speed_chart_data.push(value);
+	}	
+
+	const ctx1 = document.getElementById('speed_chart').getContext('2d');
+	const myChart1 = new Chart(ctx1, {
+	    type: 'line',
+	    data: {
+	        labels: temp_chart_labels,
+	        datasets: [{
+	            label: 'speed',
+	            data: speed_chart_data,
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true,
+	                precision: 0,
+	            }
+	        }
+	    }
+	});
 
 	// Line Detection Chart 
-	var line_detect_chart_stats = JSON.parse('{{ car_data[2] | tojson | safe}}');
+	var line_detect_chart_stats = JSON.parse('{{ car_data[3] | tojson | safe}}');
 	var line_detect_chart_labels = [];
 	var line_detect_chart_data = [];
 	for (const [key, value] of Object.entries(line_detect_chart_stats)) {
@@ -129,8 +190,8 @@
 		line_detect_chart_data.push(value);
 	}	
 
-	const ctx1 = document.getElementById('line_detect_chart').getContext('2d');
-	const myChart1 = new Chart(ctx1, {
+	const ctx2 = document.getElementById('line_detect_chart').getContext('2d');
+	const myChart2 = new Chart(ctx2, {
 	    type: 'line',
 	    data: {
 	        labels: line_detect_chart_labels,
@@ -174,7 +235,7 @@
 
 
 	// Line Detect Chart Count Chart
-	var line_detect_count_chart_stats = JSON.parse('{{ car_data[3] | tojson | safe}}');
+	var line_detect_count_chart_stats = JSON.parse('{{ car_data[4] | tojson | safe}}');
 	var line_detect_count_chart_labels = [];
 	var line_detect_count_chart_data = [];
 	for (const [key, value] of Object.entries(line_detect_count_chart_stats)) {
@@ -182,8 +243,8 @@
 		line_detect_count_chart_data.push(value);
 	}	
 
-	const ctx2 = document.getElementById('line_detect_count_chart').getContext('2d');
-	const myChart2 = new Chart(ctx2, {
+	const ctx3 = document.getElementById('line_detect_count_chart').getContext('2d');
+	const myChart3 = new Chart(ctx3, {
 	    type: 'bar',
 	    data: {
 	        labels: line_detect_count_chart_labels,
@@ -222,7 +283,7 @@
 	});
 </script>
 
-<script>
+<!-- <script>
 const ctx3 = document.getElementById('command_radar_chart').getContext('2d');
 const myChart3 = new Chart(ctx3, {
     type: 'radar',
@@ -261,7 +322,7 @@ const myChart3 = new Chart(ctx3, {
         }
     }
 });
-</script>
+</script> -->
 
 <script>
     setInterval(function(){$.ajax({
@@ -278,3 +339,12 @@ const myChart3 = new Chart(ctx3, {
     })}, 1000);
 </script>
 {% endblock %}
+
+
+
+<!-- Some tests for the dashboard -->
+<!-- Ensure that data from the db can be displayed
+Ensure that data from the db are correctly displayed 
+Ensure that the charts can be displayed 
+Ensure that the charts are the intended chart displayed i.e. Line chart should display a line chart  
+Ensure that the dashboard page can load even if there is no data-->

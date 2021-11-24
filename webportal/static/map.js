@@ -1,28 +1,52 @@
+// Javascript for Customise Map page
+
+/*
+    Notes for own reference:
+    ev = event
+    Node refers to an HTML element
+*/
+
+// Set on the elements that should allow allow drops
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/*
+    Sets the data of the item being dragged to either start_tile,
+    end_tile, route_tile, or empty_tile (based on the element's ID)
+*/
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
+/* Remove tile from the map grid */
 function removeNode(node) {
         node.parentNode.removeChild(node);
       }
-      
+
+/*
+    - Customisation part of the map
+    - Drops the item into the 8x8 Map grid by cloning and appending nodes
+*/
 function drop(ev) {
       ev.preventDefault();
-      var data = ev.dataTransfer.getData("text");
-      var isLeft = 'drag3' == data || "drag4" == data;
+      var data = ev.dataTransfer.getData("text");   // Get the ID of the item to be dropped which can be either start_tile, end_tile, route_tile, or empty_tile
+      var routing_tile = 'route_tile' == data
+
+      // Clone the selected tile & set a new id on cloned tile.
       var nodeCopy = document.getElementById(data).cloneNode(true);
-      nodeCopy.id = "img" + ev.target.id;
+      nodeCopy.id = "cloned_" + data;
+
       // clean target space if needed
-      if (isLeft) {
+
+      // Tile dropped is either a route tile or empty tile
+      if (routing_tile) {
+        // Tile placed on top of another existing tile on the map
         if (ev.target.nodeName == 'IMG') {
           ev.target.parentNode.appendChild(nodeCopy);
           removeNode(ev.target);
         }
-        else 
+        else
           ev.target.appendChild(nodeCopy);
       }
       else {
@@ -35,79 +59,49 @@ function drop(ev) {
       return false;
     }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
+function saveMap() {
 
-function savemap() { 
-  var grids = [];
-  var grids_to_send = [];
+  // List that stores start point, routes, and end point
+  const mapGrid = [];
 
-  const grid1 = document.getElementById("grid_row_1");
-  const grid1_div = grid1.getElementsByTagName("div");
-  grids[0] = grid1_div
-
-  const grid2 = document.getElementById("grid_row_2");
-  const grid2_div = grid2.getElementsByTagName("div");
-  grids[1] = grid2_div
-
-  const grid3 = document.getElementById("grid_row_3");
-  const grid3_div = grid3.getElementsByTagName("div");
-  grids[2] = grid3_div
-
-  const grid4 = document.getElementById("grid_row_4");
-  const grid4_div = grid4.getElementsByTagName("div");
-  grids[3] = grid4_div
-
-  const grid5 = document.getElementById("grid_row_5");
-  const grid5_div = grid5.getElementsByTagName("div");
-  grids[4] = grid5_div
-
-  const grid6 = document.getElementById("grid_row_6");
-  const grid6_div = grid6.getElementsByTagName("div");
-  grids[5] = grid6_div
-
-  const grid7 = document.getElementById("grid_row_7");
-  const grid7_div = grid7.getElementsByTagName("div");
-  grids[6] = grid7_div
-
-  const grid8 = document.getElementById("grid_row_8");
-  const grid8_div = grid8.getElementsByTagName("div");
-  grids[7] = grid8_div
+  // Numbers that specify if the tile is empty, the starting point, ending point, or a route
+  const empty = 0;
+  const start = 1;
+  const route = 2;
+  const end = 3;
 
 
-  for (let i = 0; i <= grids.length - 1; i++) {
-    var temp = [];
-    for (let y = 0; y <= grids[i].length - 1; y++) {
-      
-      
-      // var parser = new DOMParser();
-      // var doc = parser.parseFromString(grids[i].innerHTML, "text/html");
-      // temp[y] = doc.getElementsByTagName("img")[0];
-    }
-    // grids_to_send[i] = temp;
+  // Iterate through 8 rows of the map
+  for (let r = 1; r < 9; r++) {
+
+    var row = "grid_row_" + r.toString();
+    const map_row = document.getElementById(row)
+
+      const map_column = map_row.childNodes;
+
+      var columns = [];
+
+      // Iterate through 8 columns of the rows in the map
+      for (let c = 1; c < 16; c+=2) {
+
+        // Column has either a start, route, or end tile
+        if (map_column[c].hasChildNodes()) {
+            var tile = map_column[c].firstChild.id.toString();
+            if (tile.includes("start_tile")) {
+                columns.push(start)
+            }
+            else if (tile.includes("end_tile")) {
+                columns.push(end)
+            }
+            else if (tile.includes("route_tile")) {
+                columns.push(route)
+            }
+        }
+        else {
+            columns.push(empty)
+        }
+      }
+      mapGrid[r] = columns
   }
-
-  console.log(grids_to_send);
-
-  
-
+  console.log(mapGrid)
 }
-
-
-
-    // document.getElementById("execute_btn").onclick = function () {
-    //     const ul = document.getElementById('sqnce-list');
-    //     const listItems = ul.getElementsByTagName('li');
-
-    //     // Loop through the NodeList object.
-    //     for (let i = 0; i <= listItems.length - 1; i++) {
-    //         var http = new XMLHttpRequest();
-    //         var url = 'http://127.0.0.1:5000/car/commands';
-    //         var params = 'direction=webportal&command=' + listItems[i].innerHTML;
-    //         http.open('POST', url, true);
-
-    //         //Send the proper header information along with the request
-    //         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    //         http.send(params);
-    //     }

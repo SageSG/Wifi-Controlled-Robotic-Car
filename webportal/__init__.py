@@ -7,8 +7,8 @@ app = Flask(__name__)
 api = Api(app)
 db = SQLAlchemy()
 DB_NAME = "database.db"
-from webportal.models.carstats import CarStats
-from webportal.controller.statscontroller import CarStatsControllerAPI
+# from webportal.models.carstats import CarStats
+# from webportal.controller.statscontroller import CarStatsControllerAPI
 from webportal.controller.controlscontroller import ControlsControllerAPI
 from webportal.controller.mapcontroller import MapControllerAPI
 

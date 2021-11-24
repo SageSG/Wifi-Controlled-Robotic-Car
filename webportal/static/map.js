@@ -103,5 +103,14 @@ function saveMap() {
       }
       mapGrid[r] = columns
   }
-  console.log(mapGrid)
+  // console.log(mapGrid)
+    var xhttp = new XMLHttpRequest();
+    var success;
+    xhttp.open("POST", "/map/save");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xhttp.onload = function () {
+    //   success = xhttp.statusText;
+    // };
+    xhttp.send("coordinates=" + mapGrid);
+    $("#map_modal").modal("show");
 }

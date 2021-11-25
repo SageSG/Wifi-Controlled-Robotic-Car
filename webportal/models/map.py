@@ -4,12 +4,10 @@ class Map(db.Model):
     # Columns in DB
     id = db.Column(db.Integer, primary_key=True)
     map_coordinates = db.Column(db.String)
-    # map_blob = db.Column(db.BLOB)
 
     def __init__(self, map_coordinates):
         self.map_coordinates = map_coordinates
-    # def __init__(self, map_blob):
-    #     self.map_blob = map_blob
+
 
 def insert_map(coordinates):
     map = Map(coordinates[1::])
@@ -18,4 +16,10 @@ def insert_map(coordinates):
 
 
 def get_map():
-	pass
+    # Retrieve the latest stats from the DB
+    data = db.session.query(Map).all()
+
+    # Latest entry data 
+    latest_entry = data[-1]
+
+    return data

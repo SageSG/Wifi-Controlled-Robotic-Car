@@ -26,90 +26,135 @@
 </nav>
 
 <div class="container-fluid py-4">
-    <div class="container-fluid py-4">
-        <div class="row">
-            <!-- Row 1 -->
-            <div class="col-xl-7 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Map</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <b></b>
-                                        <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
-                                    </h5>
-                                </div>
+    <div class="row">
+        <!-- Row 1 -->
+        <div class="col-xl-7 col-sm-6 mb-xl-0 mb-4">
+            <div class="card" style="background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}'); background-repeat: no-repeat;">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold" style="color: white;">Map</p>
                             </div>
+                            {% for map_list in map %}
+                                <div class="row">
+                                    {% for map_coordinates in map_list %}
+                                        {% if map_coordinates == '0' %}
+                                        <div class="div1">
+                                        </div>
+
+                                        {% elif  map_coordinates == '1' %}
+                                        <div class="div1">
+                                            <img src="{{ url_for('static', filename='/img/start.png')}}" width="40" height="40">
+                                        </div>
+
+                                        {% elif  map_coordinates == '2' %}
+                                        <div class="div1">
+                                            <img src="{{ url_for('static', filename='/img/yellow_box.png')}}" width="40" height="40">
+                                        </div>
+
+                                        {% elif  map_coordinates == '3' %}
+                                        <div class="div1">
+                                            <img src="{{ url_for('static', filename='/img/end.jpg')}}" width="40" height="40">
+                                        </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
                         </div>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="col-xl-5 col-sm-6 mb-xl-0 mb-4">
-                <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
-                    <div class="col-md-12 ">
-                        <div class=" border-bottom mb-4">
-                            <strong class="d-inline-block mb-2 text-white">Command List</strong>
-                        </div>
-                        <p class="mt-2" id="textArea"></p>
                     </div>
                 </div>
             </div>
         </div>
     
-        <!-- Row 2 -->
-        <div class="row mt-4">
-            <div class="col-lg-12 mb-lg-0 mb-4">
-                <div class="card" style="background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}'); background-repeat: no-repeat;">
-                    <div class="card-body p-3">
-                        <!-- Row 1 -->
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="d-flex flex-column h-100">
-                                    <h5 class="font-weight-bolder" style="color:white"><b>Car Command Flow</b></h5>
-                                    <p class="mb-5" style="color:white">Drag and drop to configure Commands.</p>
-                                </div>
-                            </div>
-
-                            <div class="col-2 text-end">
-                                <button type="button" class="btn btn-success " onclick="showCode()">Send Commands</button>
-                            </div>
-                            <div class="col-2 text-end">
-                                <button type="button" onclick="clearCode()" class="btn btn-danger ">Clear Commands</button>
-                            </div>
-                        </div>
-
-                        <!-- Row 2 -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="blockly-editor ">
-                                    <div id="blocklyDiv" style="height: 500px; width: 1213px;"></div>
-                                    <xml id="toolbox" style="display: none">
-                                        <block type="forward"></block>
-                                        <block type="stop"></block>
-                                        <block type="turn"></block>
-                                        <!-- <block type="print"></block> -->
-                                        <block type="repeatuntilend"></block>
-                                        <block type="controls_if"></block>
-                                        <block type="controls_repeat_ext"></block>
-                                        <block type="math_number">
-                                            <field name="NUM">123</field>
-                                        </block>
-                                        <block type="text_print"></block>
-                                    </xml>
-                                    <xml id="startBlocks" style="display: none">
-                                    </xml>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-xl-5 col-sm-6 mb-xl-0 mb-4">
+            <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
+                <div class="col-md-12 ">
+                    <div class=" border-bottom mb-4">
+                        <strong class="d-inline-block mb-2 text-white">Command List</strong>
                     </div>
-                </div> 
+                    <p class="mt-2" id="textArea"></p>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Row 2 -->
+    <div class="row mt-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+            <div class="card" style="background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}'); background-repeat: no-repeat;">
+                <div class="card-body p-3">
+                    <!-- Row 1 -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="d-flex flex-column h-100">
+                                <h5 class="font-weight-bolder" style="color:white"><b>Car Command Flow</b></h5>
+                                <p class="mb-5" style="color:white">Drag and drop to configure Commands.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-2 text-end">
+                            <button type="button" class="btn btn-success " onclick="showCode()">Send Commands</button>
+                        </div>
+                        <div class="col-2 text-end">
+                            <button type="button" onclick="clearCode()" class="btn btn-danger ">Clear Commands</button>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="blockly-editor ">
+                                <div id="blocklyDiv" style="height: 500px; width: 1213px;"></div>
+                                <xml id="toolbox" style="display: none">
+                                    <block type="forward"></block>
+                                    <block type="stop"></block>
+                                    <block type="turn"></block>
+                                    <block type="logic_boolean"></block>
+                                    <block type="controls_for">
+                                        <value name="FROM">
+                                          <block type="math_number">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                        <value name="TO">
+                                          <block type="math_number">
+                                            <field name="NUM">10</field>
+                                          </block>
+                                        </value>
+                                        <value name="BY">
+                                          <block type="math_number">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                      </block>                                   
+                                      <block type="logic_compare"></block>
+                                      <block type="logic_operation"></block>
+                                      <block type="logic_boolean"></block>
+                                      <block type="math_number">
+                                        <field name="NUM">42</field>
+                                      </block>
+
+                                    <!-- <block type="print"></block> -->
+                                    <block type="repeatuntilend"></block>
+                                    <!-- <block type="controls_if"></block> -->
+                                    <!-- <block type="controls_repeat_ext"></block> -->
+                                    <!-- <block type="math_number">
+                                        <field name="NUM">123</field>
+                                    </block>
+                                    <block type="text_print"></block> -->
+                                </xml>
+                                <xml id="startBlocks" style="display: none">
+                                </xml>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
 </div>
+
 <script>
     var workspace = Blockly.inject('blocklyDiv',
         {

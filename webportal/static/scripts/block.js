@@ -131,6 +131,54 @@ Blockly.JavaScript['print'] = function (block) {
     return code;
 };
 
+
+// ////////////////////////////////////////////////////////////////////////
+// Ported from terminal.js
+var workspace = Blockly.inject('blocklyDiv',
+{
+    toolbox: document.getElementById('toolbox'
+    ), trashcan: true
+});
+
+Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
+
+
+function illustrateCommand(){
+
+}
+
+
+
+// function showCode() {
+// // Generate code and display it.
+//     while (directionArr.length > 0) {
+//         directionArr.pop();
+//     }
+//     result = "";
+
+//     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+//     Blockly.JavaScript.addReservedWords('code');
+
+//     var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+//     directionArr.forEach(function (entry) {
+//         result = result.concat("", entry);
+//     });
+//     alert(result);
+//     result = code.concat("\n", result);
+//     document.getElementById('textArea').innerText = result;
+// }
+
+function clearCode() {
+    document.getElementById('textArea').innerText = "";
+}
+
+
+
+
+
+
+
 // Blockly.JavaScript['print'] = function(block) {
 //     // Search the text for a substring.
 //     var operator = block.getFieldValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';

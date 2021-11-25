@@ -36,30 +36,32 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold" style="color: white;">Map</p>
                             </div>
+                            {% set count = namespace(value=1) %}
                             {% for map_list in map %}
                                 <div class="row">
                                     {% for map_coordinates in map_list %}
                                         {% if map_coordinates == '0' %}
-                                        <div class="div1">
+                                        <div class="div1" id="grid{{count.value}}">
                                         </div>
 
                                         {% elif  map_coordinates == '1' %}
-                                        <div class="div1">
+                                        <div class="div1" id="grid{{count.value}}">
                                             <img src="{{ url_for('static', filename='/img/start.png')}}" width="40" height="40">
                                         </div>
 
                                         {% elif  map_coordinates == '2' %}
-                                        <div class="div1">
+                                        <div class="div1" id="grid{{count.value}}">
                                             <img src="{{ url_for('static', filename='/img/yellow_box.png')}}" width="40" height="40">
                                         </div>
 
                                         {% elif  map_coordinates == '3' %}
-                                        <div class="div1">
+                                        <div class="div1" id="grid{{count.value}}">
                                             <img src="{{ url_for('static', filename='/img/end.jpg')}}" width="40" height="40">
                                         </div>
                                         {% endif %}
+                                        {% set count.value = count.value + 1 %}
                                     {% endfor %}
-                                </div>
+                                </div>                           
                             {% endfor %}
                         </div>
                     </div>
@@ -110,7 +112,6 @@
                                     <block type="forward"></block>
                                     <block type="stop"></block>
                                     <block type="turn"></block>
-                                    <block type="logic_boolean"></block>
                                     <block type="controls_for">
                                         <value name="FROM">
                                           <block type="math_number">
@@ -135,8 +136,12 @@
                                         <field name="NUM">42</field>
                                       </block>
 
+                        
+                                    <block type="controls_if"></block>
+                                    <block type="controls_whileUntil"></block>
+            
                                     <!-- <block type="print"></block> -->
-                                    <block type="repeatuntilend"></block>
+                                    <!-- <block type="repeatuntilend"></block> -->
                                     <!-- <block type="controls_if"></block> -->
                                     <!-- <block type="controls_repeat_ext"></block> -->
                                     <!-- <block type="math_number">
@@ -155,6 +160,44 @@
     </div>
 </div>
 
+<!-- Modal popup for Success -->
+<div id="game_won_modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Game Won!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Map Successfully Created!</p>
+                <p class="text-secondary"><small>Click on "continue" to proceed to the terminal page to issue the car commands!</small></p>
+            </div>
+            <div class="modal-footer">
+            	<a class="btn btn-primary" href="#" role="button"> Exit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal popup for Failure -->
+<div id="game_over_modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Game Over!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Map Successfully Created!</p>
+                <p class="text-secondary"><small>Click on "continue" to proceed to the terminal page to issue the car commands!</small></p>
+            </div>
+            <div class="modal-footer">
+            	<a class="btn btn-primary" href="#" role="button"> Exit</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var workspace = Blockly.inject('blocklyDiv',
         {
@@ -162,8 +205,48 @@
             ), trashcan: true
         });
 
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
+    // One function 
+    var map = {{ map|safe }};
+    var counter = 1;
+    var start = 0;
+    var end = 0;
+    const path = [];
+    const all_paths = [];
 
+    // Check for the start flag 
+    for (let i = 0; i < map.length; i++) {
+        if (map[i].includes("1")){
+            index = map[i].indexOf("1") + counter;
+            start = index;
+            all_paths.push(start);
+            break;
+        }
+        counter = counter + 8;
+    }
+
+    // Check for the tiles flag 
+    counter = 1; 
+    for (let i = 0; i < map.length; i++) {
+        if (map[i].includes("2")){
+            index = map[i].indexOf("2") + counter;
+            path.push(index);
+        }
+        counter = counter + 8;
+    }
+    all_paths.push(path);
+
+    // Check for the end flag 
+    counter = 1; 
+    for (let i = 0; i < map.length; i++) {
+        if (map[i].includes("3")){
+            index = map[i].indexOf("3") + counter;
+            end = index;
+            all_paths.push(end);
+        }
+        counter = counter + 8;
+    }   
+
+    // 2nd Function 
     function showCode() {
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -176,33 +259,99 @@
 
         var code = Blockly.JavaScript.workspaceToCode(workspace);
 
-        directionArr.forEach(function (entry) {
-            result = result.concat("", entry);
-        });
-        alert(result);
+        // directionArr.forEach(function (entry) {
+        //     result = result.concat("", entry);
+        // });
+        // alert(result);
+    
         result = code.concat("\n", result);
         document.getElementById('textArea').innerText = result;
-    }
 
-    function clearCode() {
-        document.getElementById('textArea').innerText = "";
-    }
+        
+        // Parse the commands 
+        const commands = code.split("\n");
+        var car_index = start;
+        document.getElementById("grid" + car_index).style.background = "blue"; 
+        for (let i = 0; i < commands.length; i++){        
+            if (commands[i] == "Motor_Left();"){
+                car_index = car_index - 1; 
+            }
 
-    document.getElementById("execute_btn").onclick = function () {
-        const ul = document.getElementById('sqnce-list');
-        const listItems = ul.getElementsByTagName('li');
+            else if (commands[i] == "Motor_Right();"){
+                car_index = car_index + 1; 
+            }
 
-        // Loop through the NodeList object.
-        for (let i = 0; i <= listItems.length - 1; i++) {
-            var http = new XMLHttpRequest();
-            var url = 'http://127.0.0.1:5000/car/commands';
-            var params = 'direction=webportal&command=' + listItems[i].innerHTML;
-            http.open('POST', url, true);
+            else if (commands[i] == "Motor_Start();"){
+                car_index = car_index + 8; 
+            }  
+            
+           
 
-            //Send the proper header information along with the request
-            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            http.send(params);
+            if (all_paths.indexOf(car_index) == -1){
+                
+                // $("#game_over_modal").modal("show");
+                // return;
+            }
+            document.getElementById("grid" + car_index).style.background = "blue";    
+
+
+            // alert(all_paths.indexOf(car_index) === -1);
         }
+        $("#game_won_modal").modal("show");
     }
+
+
+        
+
+
+
+
+
+
+
+        // alert(map);
+
+    // Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
+
+    // function showCode() {
+    //     // Generate code and display it.
+    //     while (directionArr.length > 0) {
+    //         directionArr.pop();
+    //     }
+    //     result = "";
+
+    //     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    //     Blockly.JavaScript.addReservedWords('code');
+
+    //     var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+    //     directionArr.forEach(function (entry) {
+    //         result = result.concat("", entry);
+    //     });
+    //     alert(result);
+    //     result = code.concat("\n", result);
+    //     document.getElementById('textArea').innerText = result;
+    // }
+
+    // function clearCode() {
+    //     document.getElementById('textArea').innerText = "";
+    // }
+
+    // document.getElementById("execute_btn").onclick = function () {
+    //     const ul = document.getElementById('sqnce-list');
+    //     const listItems = ul.getElementsByTagName('li');
+
+    //     // Loop through the NodeList object.
+    //     for (let i = 0; i <= listItems.length - 1; i++) {
+    //         var http = new XMLHttpRequest();
+    //         var url = 'http://127.0.0.1:5000/car/commands';
+    //         var params = 'direction=webportal&command=' + listItems[i].innerHTML;
+    //         http.open('POST', url, true);
+
+    //         //Send the proper header information along with the request
+    //         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    //         http.send(params);
+    //     }
+    // }
 </script>
 {% endblock %}

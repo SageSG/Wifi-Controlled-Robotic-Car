@@ -12,11 +12,14 @@
 #include <stdio.h>
 #include <string.h>
 
+//#include "wifi.h"
+#include "motor/motor.h"
+#include "ultrasonic/ultrasonic.h"
+
 // TX: 3.2
-//RX: 3.3
+// RX: 3.3
 // RST: 6.1
 // EN: 3.3v
-
 
 // Baud:        115200
 // Data Size:   8
@@ -24,19 +27,24 @@
 // Stop Bit:    1
 
 int count;
+//const char *username = "Xperia5II";
+//const char *password = "mango12345";
+const char *username = "AndroidAP542c";
+const char *password = "vgar7960";
 
-const char *username = "Xperia5II";
-const char *password = "mango12345";
-//const char *username = "AndroidAP542c";
-//const char *password = "vgar7960";
-
-const char *url = "192.168.40.247";
-char cmdString[20] = "";
+const char *url = "192.168.131.247";
+volatile char cmdString[20] = "";
 
 const char *PATTERN1 = "\"command\": \"";
 const char *PATTERN2 = "\"";
 //char HTTP_Request[] = "GET /car/commands HTTP/1.1\r\n\r\n";
 char HTTP_Request[] = "GET /car/test HTTP/1.1\r\n\r\n";
+
+volatile static int secCounter = 0;
+bool obstacle = false;
+//int timer = 0;
+//float rpm = 0.0;
+//float rotations = 0.0;
 
 eUSCI_UART_ConfigV1 UART0Config = {
         EUSCI_A_UART_CLOCKSOURCE_SMCLK, 13, 0, 37,
@@ -128,7 +136,7 @@ void initWifi()
         while (1)
             ;
     }
-    MSPrintf(EUSCI_A0_BASE, "AT+CIPSTART='TCP','192.168.40.247',80\n\r");
+    MSPrintf(EUSCI_A0_BASE, "AT+CIPSTART='TCP','192.168.131.247',80\n\r");
 
     float ultrasonicReading = 0.0;
     float temperatureReading = 10.0;
@@ -190,9 +198,12 @@ void initWifi()
 
     MSPrintf(EUSCI_A0_BASE,
              "Data sent: %s to %s\r\n\r\nESP8266 Data Received: %s\r\n",
-             HTTP_Request, "192.168.40.247", ESP8266_Data);
-
+             HTTP_Request, "192.168.131.247", ESP8266_Data);
     getData(ESP8266_Data);
+//    printf("\nLevel1: %s", getData(ESP8266_Data));
+//    printf("\nGet function: %s", getCmdString());
+    printf("\nString: %s", cmdString);
+    runString();
 //            printf("%s\n", result);
 
 //            while(1)
@@ -214,9 +225,33 @@ void initWifi()
 }
 ;
 
-bool getData(char *s)
+void counter()
 {
+    //        ===============================================================================
+    TIMER32_1->LOAD = 3000000; /* set the reload value */
+    //    MAP_CS_setReferenceOscillatorFrequency(CS_REFO_128KHZ);
 
+    /* no prescaler, one-shot mode, disable interrupt, 32-bit timer. */
+    TIMER32_1->CONTROL = 0xC3;
+    //    MAP_Timer32_initModule(TIMER32_BASE, TIMER32_PRESCALER_1, TIMER32_32BIT,
+    //                           TIMER32_FREE_RUN_MODE);
+    while ((TIMER32_1->RIS & 1) == 0)
+        ; /* wait until the RAW_IFG is set */
+    TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+    ////        P2->OUT ^= 4; /* toggle blue LED */
+    ////        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN0);
+    TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+    //        ===============================================================================
+}
+
+char getCmdString()
+{
+//    printf("\nWithin Function %s\n", cmdString);
+    return cmdString;
+}
+
+char getData(char *s)
+{
     char *target = NULL;
     char *start, *end;
 
@@ -232,7 +267,7 @@ bool getData(char *s)
     }
 
     if (target)
-        printf("%s\n", target);
+        printf("Target: %s\n", target);
 //    char test[] = target;
 //    printf("%s", test);
 //        strcat(cmdString, target);
@@ -240,10 +275,100 @@ bool getData(char *s)
 //        printf(cmdString);
 //        printf('hedecc');
 
-//        cmdString = target;
+//    cmdString = target;
+    int i = 0; //start at 0
+    do
+    {
+        cmdString[i] = target[i]; //assign s[i] to the string literal index i
+    }
+    while (cmdString[i++]);
+//    printf("HEREEE: %s", cmdString);
     free(target);
 
-    return 0;
-//    return cmdString;
+//    return 0;
+    return cmdString;
 }
 ;
+
+void runString()
+{
+//    motor_start();
+    printf("\nIMM INNNNN");
+    printf("\nString: %s", cmdString);
+    size_t length = strlen(cmdString);
+    int i = 0;
+//    printf("Hiiii?");
+    for (; i < length && obstacle == false; i++)
+    {
+//        while ((TIMER32_1->RIS & 1) == 0)
+//            ; /* wait until the RAW_IFG is set */
+//        TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+
+        printf("\nDIstance: %.2f", getHCSR04Distance());
+        printf("\n%c", cmdString[i]); /* Print each character of the string. */
+//        printf("hellooo?;");
+        switch (cmdString[i])
+        {
+        case '0':
+            printf("\nMotor_Stop();");
+            motor_stop();
+            break;
+        case '1':
+            printf("\nMotor_Start();");
+            motor_start();
+            while (secCounter < 20)
+            {
+//                rotations = ((getLeft() + getRight()) / 20) / 2;
+//                rpm = ((float) rotations / (float) timer) * 60.00;
+//                timer++;
+//                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//                //        printf("%d\n", timer);
+//                printf("\nrpm: %.2f", rpm);
+                if ((getHCSR04Distance() < 15.0))
+                {
+                    printf("\nMotor_Stop();");
+                    motor_stop();
+                    obstacle = true;
+                }
+//                rpm = 0;
+                counter();
+                secCounter += 1;
+            }
+            secCounter = 0;
+            break;
+        case '2':
+            printf("\nMotor_Left();");
+            motor_left();
+            while (secCounter < 20)
+            {
+                if ((getHCSR04Distance() < 15.0))
+                {
+                    printf("\nMotor_Stop();");
+                    motor_stop();
+                    obstacle = true;
+                }
+                counter();
+                secCounter += 1;
+            }
+            secCounter = 0;
+            break;
+        case '3':
+            printf("\nMotor_Right();");
+            motor_right();
+            while (secCounter < 20)
+            {
+                if ((getHCSR04Distance() < 15.0))
+                {
+                    printf("\nMotor_Stop();");
+                    motor_stop();
+                    obstacle = true;
+                }
+                counter();
+                secCounter += 1;
+            }
+            secCounter = 0;
+            break;
+        }
+    }
+    printf("\n--String End--");
+}

@@ -60,6 +60,8 @@ wifi.obj: C:/Users/Jaspzx/Documents/w11/Project4/ESP8266.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h
+wifi.obj: ../motor/motor.h
+wifi.obj: ../ultrasonic/ultrasonic.h
 
 ../wifi.c:
 
@@ -180,4 +182,8 @@ C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h:
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h:
+
+../motor/motor.h:
+
+../ultrasonic/ultrasonic.h:
 

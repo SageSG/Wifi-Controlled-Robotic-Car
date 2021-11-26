@@ -113,6 +113,7 @@ PDE_DEPS__QUOTED :=
 SUBDIRS := \
 . \
 ccs \
+encoder \
 motor \
 ultrasonic \
 

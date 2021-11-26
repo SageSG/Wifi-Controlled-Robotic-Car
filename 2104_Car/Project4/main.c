@@ -58,41 +58,71 @@
 
 #include "motor/motor.h"
 #include "ultrasonic/ultrasonic.h"
+#include "encoder/encoder.h"
+//#include "wifi.h"
 
-bool obstacle = false;
-int timer = 0;
-float rpm = 0.0;
-float rotations = 0.0;
-
+//bool obstacle = false;
+//int timer = 0;
+//float rpm = 0.0;
+//float rotations = 0.0;
 //char commandsM[20] = "231230";
-volatile static int secCounter = 0;
+//volatile static int secCounter = 0;
+
+//int timer = 0;
+//float rpm = 0.0;
+//float rotations = 0.0;
 
 int main(void)
 {
     /* Stop Watchdog  */
     MAP_WDT_A_holdTimer();
 
-//    init_HCSR04();
-//    initMotor();
+    init_HCSR04();
+    initMotor();
+    initEncoder();
 //    motor_start();
     initWifi();
+
+//    getData(ESP8266_Data);
 
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN6);
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN7);
     Interrupt_enableInterrupt(INT_PORT5);
 
-//    runString(getData());
+//    while (1)
+//    {
+//        printf("\nObstacle Distance: %.2f", getHCSR04Distance());
+//        if ((getHCSR04Distance() < 15.0))
+//        {
+//            printf("\nMotor_Stop();");
+//            motor_stop();
+////                    obstacle = true;
+//        }
+//    }
 
-    while (1)
-    {
-        printf("\nObstacle Distance: %.2f", getHCSR04Distance());
-        if ((getHCSR04Distance() < 15.0))
-        {
-            printf("\nMotor_Stop();");
-            motor_stop();
-//                    obstacle = true;
-        }
-    }
+//    while (1)
+//    {
+//        ////        Delay(3000);
+////        printf("helloo");
+////        printf("\nDistance: %f", getHCSR04Distance());
+//        while ((TIMER32_1->RIS & 1) == 0)
+//            ; /* wait until the RAW_IFG is set */
+//        TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+//        //
+////        printf("\nLeft: %s", getLeft());
+////        printf("\nRight: %s", getRight());
+//        rotations = ((getLeft() + getRight()) / 20) / 2;
+//        //
+//        rpm = ((float) rotations / (float) timer) * 60.00;
+//        timer++;
+//        TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//
+//        //        printf("%d\n", timer);
+//        printf("\nrpm: %.2f", rpm);
+//        //                printf("rotations: %d, timer: %d\n", rotations, timer);
+//        //        PCM_gotoLPM0();
+//        rpm = 0;
+//    }
 }
 
 void PORT5_IRQHandler(void)
@@ -112,98 +142,9 @@ void PORT5_IRQHandler(void)
     {
         printf("\n--LINE Detected--");
         motor_stop();
+//        printf(getCmdString());
 //        obstacle = true;
     }
-
 //    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
 //    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
-
-}
-
-void runString(char *commandsM)
-{
-//    motor_start();
-    printf(commandsM);
-    printf("Oneee");
-    size_t length = strlen(commandsM);
-    int i = 0;
-    printf("Hiiii?");
-    for (; i < length && obstacle == false; i++)
-    {
-//        printf("\nDIstance: %.2f", getHCSR04Distance());
-        printf("%c\n", commandsM[i]); /* Print each character of the string. */
-//        printf("hellooo?;");
-        switch (commandsM[i])
-        {
-        case '0':
-//            printf("\nMotor_Stop();");
-            motor_stop();
-            while (secCounter < 5)
-            {
-//                printf("%d", secCounter);
-//                printf("\nD2: %.2f", getHCSR04Distance());
-//                checkObstacle();
-                counter();
-                secCounter += 1;
-            }
-            secCounter = 0;
-            //            printf("stop Car");
-            //            Motor_Stop();
-            //            Delay(5000);
-            break;
-        case '1':
-            printf("\nMotor_Start();");
-            motor_start();
-            while (secCounter < 5)
-            {
-//                printf("\nD2: %.2f", getHCSR04Distance());
-//                checkObstacle();
-//                if (checkObstacle() == true)
-//                {
-//                    i = length;
-//                }
-//                printf("%d", secCounter);
-                counter();
-                secCounter += 1;
-            }
-            secCounter = 0;
-            //            printf("Start CAr");
-            //            Motor_Start();
-            //            Delay(5000);
-            break;
-        case '2':
-            printf("\nMotor_Left();");
-            motor_left();
-            while (secCounter < 5)
-            {
-//                printf("%d", secCounter);
-//                printf("\nD2: %.2f", getHCSR04Distance());
-//                checkObstacle();
-                counter();
-                secCounter += 1;
-            }
-            secCounter = 0;
-            //            printf("Left");
-            //            Motor_Left();
-            //            Delay(5000);
-            break;
-        case '3':
-            printf("\nMotor_Right();");
-            motor_right();
-            while (secCounter < 5)
-            {
-//                printf("%d", secCounter);
-//                printf("\nD2: %.2f", getHCSR04Distance());
-//                checkObstacle();
-                counter();
-                secCounter += 1;
-            }
-            secCounter = 0;
-            //            printf("Right");
-            //            Motor_Right();
-            //            Delay(5000);
-            break;
-        }
-    }
-    printf("\n--String End--");
 }

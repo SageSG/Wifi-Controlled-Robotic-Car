@@ -59,7 +59,7 @@
 #include "motor/motor.h"
 #include "ultrasonic/ultrasonic.h"
 #include "encoder/encoder.h"
-//#include "wifi.h"
+//#include "wifi/wifi.h"
 
 //bool obstacle = false;
 //int timer = 0;
@@ -80,14 +80,14 @@ int main(void)
     init_HCSR04();
     initMotor();
     initEncoder();
-//    motor_start();
-    initWifi();
-
-//    getData(ESP8266_Data);
 
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN6);
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN7);
     Interrupt_enableInterrupt(INT_PORT5);
+
+    initWifi();
+
+//    getData(ESP8266_Data);
 
 //    while (1)
 //    {

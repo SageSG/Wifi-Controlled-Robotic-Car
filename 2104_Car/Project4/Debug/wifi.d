@@ -52,14 +52,16 @@ wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/
 wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/wdt_a.h
 wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/sysctl.h
 wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/flash.h
-wifi.obj: C:/Users/Jaspzx/Documents/w11/Project4/UART_Driver.h
+wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/UART_Driver.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdio.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdarg.h
-wifi.obj: C:/Users/Jaspzx/Documents/w11/Project4/MSPIO.h
-wifi.obj: C:/Users/Jaspzx/Documents/w11/Project4/ESP8266.h
+wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/MSPIO.h
+wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/ESP8266.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h
+wifi.obj: ../wifi.h
+wifi.obj: ../motor/motor.h
 wifi.obj: ../motor/motor.h
 wifi.obj: ../ultrasonic/ultrasonic.h
 
@@ -167,21 +169,25 @@ C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/
 
 C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/flash.h:
 
-C:/Users/Jaspzx/Documents/w11/Project4/UART_Driver.h:
+C:/Users/Jaspzx/Downloads/Project4/Project4/UART_Driver.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdio.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdarg.h:
 
-C:/Users/Jaspzx/Documents/w11/Project4/MSPIO.h:
+C:/Users/Jaspzx/Downloads/Project4/Project4/MSPIO.h:
 
-C:/Users/Jaspzx/Documents/w11/Project4/ESP8266.h:
+C:/Users/Jaspzx/Downloads/Project4/Project4/ESP8266.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h:
+
+../wifi.h:
+
+../motor/motor.h:
 
 ../motor/motor.h:
 

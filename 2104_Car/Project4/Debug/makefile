@@ -15,11 +15,11 @@ ORDERED_OBJS += \
 "./UART_Driver.obj" \
 "./main.obj" \
 "./system_msp432p401r.obj" \
-"./wifi.obj" \
 "./ccs/startup_msp432p401r_ccs.obj" \
 "./encoder/encoder.obj" \
 "./motor/motor.obj" \
 "./ultrasonic/ultrasonic.obj" \
+"./wifi/wifi.obj" \
 "../msp432p401r.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"ti/display/lib/display.aem4f" \
@@ -42,11 +42,13 @@ RMDIR := RMDIR /S/Q
 -include encoder/subdir_vars.mk
 -include motor/subdir_vars.mk
 -include ultrasonic/subdir_vars.mk
+-include wifi/subdir_vars.mk
 -include subdir_rules.mk
 -include ccs/subdir_rules.mk
 -include encoder/subdir_rules.mk
 -include motor/subdir_rules.mk
 -include ultrasonic/subdir_rules.mk
+-include wifi/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -177,8 +179,8 @@ Project4.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "ESP8266.obj" "MSPIO.obj" "UART_Driver.obj" "main.obj" "system_msp432p401r.obj" "wifi.obj" "ccs\startup_msp432p401r_ccs.obj" "encoder\encoder.obj" "motor\motor.obj" "ultrasonic\ultrasonic.obj" 
-	-$(RM) "ESP8266.d" "MSPIO.d" "UART_Driver.d" "main.d" "system_msp432p401r.d" "wifi.d" "ccs\startup_msp432p401r_ccs.d" "encoder\encoder.d" "motor\motor.d" "ultrasonic\ultrasonic.d" 
+	-$(RM) "ESP8266.obj" "MSPIO.obj" "UART_Driver.obj" "main.obj" "system_msp432p401r.obj" "ccs\startup_msp432p401r_ccs.obj" "encoder\encoder.obj" "motor\motor.obj" "ultrasonic\ultrasonic.obj" "wifi\wifi.obj" 
+	-$(RM) "ESP8266.d" "MSPIO.d" "UART_Driver.d" "main.d" "system_msp432p401r.d" "ccs\startup_msp432p401r_ccs.d" "encoder\encoder.d" "motor\motor.d" "ultrasonic\ultrasonic.d" "wifi\wifi.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

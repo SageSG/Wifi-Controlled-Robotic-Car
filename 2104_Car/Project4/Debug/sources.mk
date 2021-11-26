@@ -116,4 +116,5 @@ ccs \
 encoder \
 motor \
 ultrasonic \
+wifi \
 

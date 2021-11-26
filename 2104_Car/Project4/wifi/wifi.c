@@ -12,8 +12,8 @@
 #include <stdio.h>
 #include <string.h>
 
-//#include "wifi.h"
-#include "motor/motor.h"
+#include "wifi.h"
+#include "../motor/motor.h"
 #include "ultrasonic/ultrasonic.h"
 
 // TX: 3.2
@@ -26,22 +26,24 @@
 // Parity:      None
 // Stop Bit:    1
 
-int count;
-//const char *username = "Xperia5II";
-//const char *password = "mango12345";
-const char *username = "AndroidAP542c";
-const char *password = "vgar7960";
-
-const char *url = "192.168.131.247";
-volatile char cmdString[20] = "";
-
-const char *PATTERN1 = "\"command\": \"";
-const char *PATTERN2 = "\"";
-//char HTTP_Request[] = "GET /car/commands HTTP/1.1\r\n\r\n";
-char HTTP_Request[] = "GET /car/test HTTP/1.1\r\n\r\n";
-
-volatile static int secCounter = 0;
-bool obstacle = false;
+//int count;
+////const char *username = "Xperia5II";
+////const char *password = "mango12345";
+//const char *username = "Linksys21487";
+//const char *password = "axmpdgh5pr";
+////const char *username = "AndroidAP542c";
+////const char *password = "vgar7960";
+//
+//const char *url = "192.168.10.139";
+//volatile char cmdString[20] = "";
+//
+//const char *PATTERN1 = "\"command\": \"";
+//const char *PATTERN2 = "\"";
+////char HTTP_Request[] = "GET /car/commands HTTP/1.1\r\n\r\n";
+//char HTTP_Request[] = "GET /car/test HTTP/1.1\r\n\r\n";
+//
+//volatile static int secCounter = 0;
+//bool obstacle = false;
 //int timer = 0;
 //float rpm = 0.0;
 //float rotations = 0.0;
@@ -61,14 +63,6 @@ eUSCI_UART_ConfigV1 UART2Config = {
         EUSCI_A_UART_ONE_STOP_BIT,
         EUSCI_A_UART_MODE,
         EUSCI_A_UART_OVERSAMPLING_BAUDRATE_GENERATION };
-
-static void Delay(uint32_t loop)
-{
-    volatile uint32_t i;
-
-    for (i = 0; i < loop; i++)
-        ;
-}
 
 void initWifi()
 {
@@ -136,7 +130,7 @@ void initWifi()
         while (1)
             ;
     }
-    MSPrintf(EUSCI_A0_BASE, "AT+CIPSTART='TCP','192.168.131.247',80\n\r");
+    MSPrintf(EUSCI_A0_BASE, "AT+CIPSTART='TCP','192.168.10.139',80\n\r");
 
     float ultrasonicReading = 0.0;
     float temperatureReading = 10.0;
@@ -198,7 +192,7 @@ void initWifi()
 
     MSPrintf(EUSCI_A0_BASE,
              "Data sent: %s to %s\r\n\r\nESP8266 Data Received: %s\r\n",
-             HTTP_Request, "192.168.131.247", ESP8266_Data);
+             HTTP_Request, "192.168.10.139", ESP8266_Data);
     getData(ESP8266_Data);
 //    printf("\nLevel1: %s", getData(ESP8266_Data));
 //    printf("\nGet function: %s", getCmdString());
@@ -275,7 +269,6 @@ char getData(char *s)
 //        printf(cmdString);
 //        printf('hedecc');
 
-//    cmdString = target;
     int i = 0; //start at 0
     do
     {
@@ -290,19 +283,28 @@ char getData(char *s)
 }
 ;
 
+void checkObstacle()
+{
+    if ((getHCSR04Distance() < 15.0))
+    {
+        printf("\nMotor_Stop();");
+        motor_stop();
+        obstacle = true;
+    }
+}
+
 void runString()
 {
-//    motor_start();
-    printf("\nIMM INNNNN");
+//    printf("\nIMM INNNNN");
     printf("\nString: %s", cmdString);
     size_t length = strlen(cmdString);
     int i = 0;
 //    printf("Hiiii?");
     for (; i < length && obstacle == false; i++)
     {
-//        while ((TIMER32_1->RIS & 1) == 0)
-//            ; /* wait until the RAW_IFG is set */
-//        TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
+        while ((TIMER32_1->RIS & 1) == 0)
+            ; /* wait until the RAW_IFG is set */
+        TIMER32_1->INTCLR = 0; /* clear raw interrupt flag */
 
         printf("\nDIstance: %.2f", getHCSR04Distance());
         printf("\n%c", cmdString[i]); /* Print each character of the string. */
@@ -312,25 +314,21 @@ void runString()
         case '0':
             printf("\nMotor_Stop();");
             motor_stop();
+            obstacle = true;
             break;
         case '1':
             printf("\nMotor_Start();");
             motor_start();
             while (secCounter < 20)
             {
-//                rotations = ((getLeft() + getRight()) / 20) / 2;
-//                rpm = ((float) rotations / (float) timer) * 60.00;
-//                timer++;
-//                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
-//                //        printf("%d\n", timer);
-//                printf("\nrpm: %.2f", rpm);
-                if ((getHCSR04Distance() < 15.0))
-                {
-                    printf("\nMotor_Stop();");
-                    motor_stop();
-                    obstacle = true;
-                }
-//                rpm = 0;
+                rotations = ((getLeft() + getRight()) / 20) / 2;
+                rpm = ((float) rotations / (float) timer) * 60.00;
+                timer++;
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//                printf("%d\n", timer);
+                printf("\nrpm: %.2f", rpm);
+                checkObstacle();
+                rpm = 0;
                 counter();
                 secCounter += 1;
             }
@@ -341,12 +339,14 @@ void runString()
             motor_left();
             while (secCounter < 20)
             {
-                if ((getHCSR04Distance() < 15.0))
-                {
-                    printf("\nMotor_Stop();");
-                    motor_stop();
-                    obstacle = true;
-                }
+                rotations = ((getLeft() + getRight()) / 20) / 2;
+                rpm = ((float) rotations / (float) timer) * 60.00;
+                timer++;
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//                printf("%d\n", timer);
+                printf("\nrpm: %.2f", rpm);
+                checkObstacle();
+                rpm = 0;
                 counter();
                 secCounter += 1;
             }
@@ -357,12 +357,14 @@ void runString()
             motor_right();
             while (secCounter < 20)
             {
-                if ((getHCSR04Distance() < 15.0))
-                {
-                    printf("\nMotor_Stop();");
-                    motor_stop();
-                    obstacle = true;
-                }
+                rotations = ((getLeft() + getRight()) / 20) / 2;
+                rpm = ((float) rotations / (float) timer) * 60.00;
+                timer++;
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//                printf("%d\n", timer);
+                printf("\nrpm: %.2f", rpm);
+                checkObstacle();
+                rpm = 0;
                 counter();
                 secCounter += 1;
             }

@@ -110,7 +110,6 @@
                                 <div id="blocklyDiv" style="height: 500px; width: 1213px;"></div>
                                 <xml id="toolbox" style="display: none">
                                     <block type="forward"></block>
-                                    <block type="stop"></block>
                                     <block type="turn"></block>
                                     <block type="controls_for">
                                         <value name="FROM">
@@ -164,16 +163,16 @@
 <div id="game_won_modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Game Won!</h5>
+            <div class="modal-header" style="background-color: green;">
+                <h5 class="modal-title" style="color: white"><i class="fas fa-trophy"></i> Game Won!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Map Successfully Created!</p>
-                <p class="text-secondary"><small>Click on "continue" to proceed to the terminal page to issue the car commands!</small></p>
+                <p>The car has successfully traversed its path!</p>
             </div>
             <div class="modal-footer">
-            	<a class="btn btn-primary" href="#" role="button"> Exit</a>
+            	<a class="btn btn-primary" href="#" role="button"> Start a new Game</a>
+                <a class="btn btn-secondary" href="#" role="button"> View Statistics</a>
             </div>
         </div>
     </div>
@@ -183,16 +182,16 @@
 <div id="game_over_modal" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Game Over!</h5>
+            <div class="modal-header" style="background-color: red;">
+                <h5 class="modal-title" style="color: white"><i class="fas fa-skull"></i> Game Over!</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Map Successfully Created!</p>
-                <p class="text-secondary"><small>Click on "continue" to proceed to the terminal page to issue the car commands!</small></p>
+                <p>The car has failed to traverse its path!</p>
             </div>
             <div class="modal-footer">
-            	<a class="btn btn-primary" href="#" role="button"> Exit</a>
+            	<a class="btn btn-primary" href="#" role="button"> Start a new Game</a>
+                <a class="btn btn-secondary" href="#" role="button"> View Statistics</a>
             </div>
         </div>
     </div>
@@ -211,14 +210,14 @@
     var start = 0;
     var end = 0;
     const path = [];
-    const all_paths = [];
+    // const all_paths = [];
 
     // Check for the start flag 
     for (let i = 0; i < map.length; i++) {
         if (map[i].includes("1")){
             index = map[i].indexOf("1") + counter;
             start = index;
-            all_paths.push(start);
+            // all_paths.push(start);
             break;
         }
         counter = counter + 8;
@@ -227,13 +226,16 @@
     // Check for the tiles flag 
     counter = 1; 
     for (let i = 0; i < map.length; i++) {
-        if (map[i].includes("2")){
-            index = map[i].indexOf("2") + counter;
-            path.push(index);
+        for (let y = 0; y < map[i].length; y++){
+            // console.log(map[i][y]);
+            if (map[i][y] == "2"){
+                index = y + counter;
+                path.push(index);
+            }
         }
         counter = counter + 8;
     }
-    all_paths.push(path);
+    // all_paths.push(path);
 
     // Check for the end flag 
     counter = 1; 
@@ -241,7 +243,8 @@
         if (map[i].includes("3")){
             index = map[i].indexOf("3") + counter;
             end = index;
-            all_paths.push(end);
+            path.push(index);
+            break;
         }
         counter = counter + 8;
     }   
@@ -267,12 +270,15 @@
         result = code.concat("\n", result);
         document.getElementById('textArea').innerText = result;
 
-        
         // Parse the commands 
         const commands = code.split("\n");
         var car_index = start;
-        document.getElementById("grid" + car_index).style.background = "blue"; 
-        for (let i = 0; i < commands.length; i++){        
+        // var car_index_counter = 0;
+        const car_path = [];
+        const chain_commands = []; 
+        document.getElementById("grid" + car_index).style.background = "green"; 
+
+        for (let i = 0; i < commands.length; i++){     
             if (commands[i] == "Motor_Left();"){
                 car_index = car_index - 1; 
             }
@@ -285,18 +291,103 @@
                 car_index = car_index + 8; 
             }  
             
-           
+            // Comment this out 
+            else if (commands[i].includes("for")){
+                start = commands[i].substring(9, 10);
+                end = commands[i].substring(17, 19);
+                if (end.includes(";")){
+                    end = commands[i].substring(17, 18);
+                }
 
-            if (all_paths.indexOf(car_index) == -1){
+                var lastline = false;
+                i = i + 1; 
+                while (lastline == false){
+                    if (commands[i] == "}"){
+                        lastline = true;
+                    }
+
+                    else{
+                        chain_commands.push(commands[i]);
+                    }
+                    i = i + 1;;
+                }
                 
-                // $("#game_over_modal").modal("show");
-                // return;
+                for (let a = start; a < end; a++){
+                    
+
+                    // for (let b = 0; b < chain_commands.length; b++){
+                    
+                    //     if (chain_commands[b] == "  Motor_Left();"){
+                    //         car_index = car_index - 1; 
+                    //     }
+
+                    //     else if (chain_commands[b] == "Motor_Right();"){
+                    //         car_index = car_index + 1; 
+                    //     }
+
+                    //     else if (chain_commands[b] == "Motor_Start();"){
+                    //         car_index = car_index + 8; 
+                    //     }                      
+                    
+                    //     // Check to see if the car has exited the yellow boundary 
+                    //     // if (path.indexOf(car_index) === -1){
+                    //     //     alert("yes");
+                    //     //     if (car_index % 8 == 1){
+                    //     //         $("#game_over_modal").modal("show");
+                    //     //         return;
+                    //     //     }
+                    //     //     document.getElementById("grid" + car_index).style.background = "red";    
+                    //     //     $("#game_over_modal").modal("show");
+                    //     //     return;
+                    //     // }
+                    //     document.getElementById("grid" + car_index).style.background = "green";  
+
+                    //     // Update the car's movement values 
+                    //     car_index_counter = car_index_counter + 1; 
+                    //     car_path.push(car_index);
+                    // }
+                }
             }
-            document.getElementById("grid" + car_index).style.background = "blue";    
+            // 
+            
 
 
-            // alert(all_paths.indexOf(car_index) === -1);
+
+
+            else if (commands[i].includes("if")){
+                
+            }
+
+            else {
+                continue;
+            }
+
+
+            // // Check to see if the car has exited the yellow boundary 
+            if (path.indexOf(car_index) == -1){
+                if (car_index % 8 == 1){
+                    $("#game_over_modal").modal("show");
+                    return;
+                }
+                // document.getElementById("grid" + car_index).style.background = "red";    
+                $("#game_over_modal").modal("show");
+                return;
+            }
+
+            document.getElementById("grid" + car_index).style.background = "green";  
+
+
+            // Update the car's movement values 
+            // car_index_counter = car_index_counter + 1; 
+            car_path.push(car_index);
         }
+
+        // Check to see if the car has reached the point 
+        if (car_path.indexOf(end) == -1){
+            document.getElementById("grid" + car_index).style.background = "red";    
+            $("#game_over_modal").modal("show");
+            return;
+        }        
         $("#game_won_modal").modal("show");
     }
 

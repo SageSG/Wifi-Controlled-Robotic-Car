@@ -26,15 +26,15 @@
 </nav>
 
 <div class="container-fluid py-4">
-    <div class="row">
+    <div class="row mb-3">
         <!-- Row 1 -->
-        <div class="col-xl-7 col-sm-6 mb-xl-0 mb-4">
+        <div class="col-xl-5 col-sm-4 mb-xl-0 mb-3">
             <div class="card" style="background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}'); background-repeat: no-repeat;">
-                <div class="card-body p-3">
+                <div class="card-body pb-4">
                     <div class="row">
                         <div class="col-12">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold" style="color: white;">Map</p>
+                                <p class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;">Map</p>
                             </div>
                             {% set count = namespace(value=1) %}
                             {% for map_list in map %}
@@ -68,38 +68,20 @@
                 </div>
             </div>
         </div>
-    
-        <div class="col-xl-5 col-sm-6 mb-xl-0 mb-4">
-            <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
-                <div class="col-md-12 ">
-                    <div class=" border-bottom mb-4">
-                        <strong class="d-inline-block mb-2 text-white">Command List</strong>
-                    </div>
-                    <p class="mt-2" id="textArea"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="row mt-4">
-        <div class="col-lg-12 mb-lg-0 mb-4">
+        <div class="col-lg-5 mb-lg-0 mb-xl-0 mb-3">
             <div class="card" style="background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}'); background-repeat: no-repeat;">
-                <div class="card-body p-3">
+                <div class="card-body ">
                     <!-- Row 1 -->
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-8">
                             <div class="d-flex flex-column h-100">
                                 <h5 class="font-weight-bolder" style="color:white"><b>Car Command Flow</b></h5>
-                                <p class="mb-5" style="color:white">Drag and drop to configure Commands.</p>
+                                <p class="mb-2" style="color:white">Drag and drop to configure Commands.</p>
                             </div>
                         </div>
-
-                        <div class="col-2 text-end">
-                            <button type="button" class="btn btn-success " onclick="showCode()">Send Commands</button>
-                        </div>
-                        <div class="col-2 text-end">
-                            <button type="button" onclick="clearCode()" class="btn btn-danger ">Clear Commands</button>
+                        <div class="col-4 d-grid gap-1 d-md-flex justify-content-md-end mb-1">
+                            <button type="button" onclick="clearCode()" class="btn btn-danger btn-sm me-1">Clear Commands</button>
+                            <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send Commands</button>
                         </div>
                     </div>
 
@@ -107,8 +89,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="blockly-editor ">
-                                <div id="blocklyDiv" style="height: 500px; width: 1213px;"></div>
+                                <div id="blocklyDiv" style="height: 485px; width: 100%;"></div>
                                 <xml id="toolbox" style="display: none">
+                                    
                                     <block type="forward"></block>
                                     <block type="turn"></block>
                                     <block type="controls_for">
@@ -155,6 +138,16 @@
                     </div>
                 </div>
             </div> 
+        </div>  
+        <div class="col-xl-2 col-sm-2 mb-xl-0 mb-3">
+            <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
+                <div class="col-md-12 ">
+                    <div class=" border-bottom mb-3">
+                        <strong class="d-inline-block mb-2 text-white">Command List</strong>
+                    </div>
+                    <p class="mt-2" id="textArea"></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -201,7 +194,9 @@
     var workspace = Blockly.inject('blocklyDiv',
         {
             toolbox: document.getElementById('toolbox'
-            ), trashcan: true
+            ), trashcan: true,
+                horizontalLayout: true, 
+                collapse : true
         });
 
     // One function 

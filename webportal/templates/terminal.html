@@ -207,8 +207,8 @@
     // One function 
     var map = {{ map|safe }};
     var counter = 1;
-    var start = 0;
-    var end = 0;
+    var path_start = 0;
+    var path_end = 0;
     const path = [];
     // const all_paths = [];
 
@@ -216,8 +216,8 @@
     for (let i = 0; i < map.length; i++) {
         if (map[i].includes("1")){
             index = map[i].indexOf("1") + counter;
-            start = index;
-            // all_paths.push(start);
+            path_start = index;
+            path.push(path_start);
             break;
         }
         counter = counter + 8;
@@ -242,8 +242,8 @@
     for (let i = 0; i < map.length; i++) {
         if (map[i].includes("3")){
             index = map[i].indexOf("3") + counter;
-            end = index;
-            path.push(index);
+            path_end = index;
+            path.push(path_end);
             break;
         }
         counter = counter + 8;
@@ -272,26 +272,32 @@
 
         // Parse the commands 
         const commands = code.split("\n");
-        var car_index = start;
+        var car_index = path_start;
         // var car_index_counter = 0;
         const car_path = [];
         const chain_commands = []; 
         document.getElementById("grid" + car_index).style.background = "green"; 
+        
 
-        for (let i = 0; i < commands.length; i++){     
+        
+
+        for (let i = 0; i != commands.length - 1; i++){   
             if (commands[i] == "Motor_Left();"){
                 car_index = car_index - 1; 
+                car_path.push(car_index);
             }
 
             else if (commands[i] == "Motor_Right();"){
                 car_index = car_index + 1; 
+                car_path.push(car_index);
             }
 
             else if (commands[i] == "Motor_Start();"){
                 car_index = car_index + 8; 
+                car_path.push(car_index);
             }  
             
-            // Comment this out 
+
             else if (commands[i].includes("for")){
                 start = commands[i].substring(9, 10);
                 end = commands[i].substring(17, 19);
@@ -300,60 +306,56 @@
                 }
 
                 var lastline = false;
-                i = i + 1; 
                 while (lastline == false){
                     if (commands[i] == "}"){
+                        i = i - 1;
                         lastline = true;
                     }
 
                     else{
                         chain_commands.push(commands[i]);
                     }
-                    i = i + 1;;
+                    i = i + 1;
                 }
                 
+                // Process the for LOOP
                 for (let a = start; a < end; a++){
-                    
+                    for (let b = 0; b < chain_commands.length; b++){
+                        
+                        if (chain_commands[b] == "  Motor_Left();"){
+                            car_index = car_index - 1; 
+                            car_path.push(car_index);
+                        }
 
-                    // for (let b = 0; b < chain_commands.length; b++){
-                    
-                    //     if (chain_commands[b] == "  Motor_Left();"){
-                    //         car_index = car_index - 1; 
-                    //     }
+                        else if (chain_commands[b] == "  Motor_Right();"){
+                            car_index = car_index + 1; 
+                            car_path.push(car_index);
+                        }
 
-                    //     else if (chain_commands[b] == "Motor_Right();"){
-                    //         car_index = car_index + 1; 
-                    //     }
+                        else if (chain_commands[b] == "  Motor_Start();"){
+                            car_index = car_index + 8; 
+                            car_path.push(car_index);
+                        }                      
+    
+                        alert(chain_commands[b]);
+                        // Check to see if the car has exited the yellow boundary 
+                        if (path.indexOf(car_index) === -1){
+                            alert("yes");
+                            if (car_index % 8 == 1){
+                                $("#game_over_modal").modal("show");
+                                return;
+                            }
+                            document.getElementById("grid" + car_index).style.background = "red";    
+                            $("#game_over_modal").modal("show");
+                            return;
+                        }
+                        document.getElementById("grid" + car_index).style.background = "green";  
 
-                    //     else if (chain_commands[b] == "Motor_Start();"){
-                    //         car_index = car_index + 8; 
-                    //     }                      
-                    
-                    //     // Check to see if the car has exited the yellow boundary 
-                    //     // if (path.indexOf(car_index) === -1){
-                    //     //     alert("yes");
-                    //     //     if (car_index % 8 == 1){
-                    //     //         $("#game_over_modal").modal("show");
-                    //     //         return;
-                    //     //     }
-                    //     //     document.getElementById("grid" + car_index).style.background = "red";    
-                    //     //     $("#game_over_modal").modal("show");
-                    //     //     return;
-                    //     // }
-                    //     document.getElementById("grid" + car_index).style.background = "green";  
-
-                    //     // Update the car's movement values 
-                    //     car_index_counter = car_index_counter + 1; 
-                    //     car_path.push(car_index);
-                    // }
+                    }
                 }
             }
-            // 
-            
 
-
-
-
+        
             else if (commands[i].includes("if")){
                 
             }
@@ -361,8 +363,8 @@
             else {
                 continue;
             }
-
-
+           
+            
             // // Check to see if the car has exited the yellow boundary 
             if (path.indexOf(car_index) == -1){
                 if (car_index % 8 == 1){
@@ -375,16 +377,12 @@
             }
 
             document.getElementById("grid" + car_index).style.background = "green";  
-
-
-            // Update the car's movement values 
-            // car_index_counter = car_index_counter + 1; 
-            car_path.push(car_index);
         }
 
+
         // Check to see if the car has reached the point 
-        if (car_path.indexOf(end) == -1){
-            document.getElementById("grid" + car_index).style.background = "red";    
+        if (car_index != path_end){
+            // document.getElementById("grid" + car_index).style.background = "red";    
             $("#game_over_modal").modal("show");
             return;
         }        

@@ -46,7 +46,7 @@
 
                                         {% elif  map_coordinates == '1' %}
                                         <div class="div1" id="grid{{count.value}}">
-                                            <img src="{{ url_for('static', filename='/img/start.png')}}" width="40" height="40">
+                                            <img src="{{ url_for('static', filename='/img/car.png')}}" width="40" height="40">
                                         </div>
 
                                         {% elif  map_coordinates == '2' %}
@@ -200,16 +200,20 @@
         });
 
     // One function 
-    var map = {{ map|safe }};
-    var counter = 1;
-    var path_start = 0;
-    var path_end = 0;
-    const path = [];
+    var map = {{ map|safe }};  // Get the map from Python 
+    var counter = 1;            // Counter is used to facilitate 
+    var path_start = 0;         // Start of the map path 
+    var path_end = 0;           // End of the map path
+    const path = [];            // List that contains the map path
 
-    var car_index = 0;
-    const car_path = [];
-    var chain_commands = []; 
-    var i = 0;
+    var car_index = 0;          // Where the Car traveresed 
+    const car_path = [];        // Path the car traveresed 
+    var chain_commands = [];    // For FOR Loop 
+    var i = 0;                  // 
+    var car_face_downwards = true;
+    var car_face_upwards = false;
+    var car_face_left = false;
+    var car_face_right = false;  
 
     // Check for the start flag 
     for (let i = 0; i < map.length; i++) {
@@ -249,22 +253,21 @@
     }   
 
 
-
+    // Function to check if the car has exited the yellow boundary 
     function boundaryChecks(car_index){
-       // Check to see if the car has exited the yellow boundary 
        if (path.indexOf(car_index) == -1){
-            if (car_index % 8 != 0){
-                document.getElementById("grid" + car_index - 1).style.background = "red"; 
-                document.getElementById("grid" + car_index).style.background = "grey";
-                $("#game_over_modal").modal("show");
-                return true;
+            try{
+                document.getElementById("grid" + car_index).style.background = "red";    
+            } catch {
+                // pass 
             }
-            document.getElementById("grid" + car_index).style.background = "red";    
             $("#game_over_modal").modal("show");
             return true;
         }
     }
 
+
+    //  Function to process a FOR loop 
     function processLoop(start, end, car_index){
         for (let a = start; a < end; a++){
             for (let b = 0; b < chain_commands.length; b++){
@@ -284,14 +287,16 @@
                     car_path.push(car_index);
                 }                      
 
-                // else if (chain_commands[b].includes("for")){
-                //     processLoop(start, end, car_index);
-                // }         
+                else if (chain_commands[b].includes("for")){
+                    alert("yas");
+                }
+                document.getElementById("grid" + car_index).style.background = "green"; 
+                 
 
 
 
 
-                alert(chain_commands[b]);
+                // alert(chain_commands[b]);
                 // Check to see if the car has exited the yellow boundary 
                 // if (path.indexOf(car_index) === -1){
                 //     alert("yes");
@@ -311,26 +316,135 @@
     }
      
 
+    // Function to process the car index if the car turns left 
+    function turnLeft(car_index){
+        if (car_face_downwards == true){
+            car_index += 1;
+            car_face_right = true;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+
+        else if (car_face_upwards == true){
+            car_index -= 1;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = true;
+        }
+
+        else if (car_face_left == true){
+            car_index += 8;
+            car_face_right = false;
+            car_face_downwards = true;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+
+        else if (car_face_right == true){
+            car_index -= 8;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = true;
+            car_face_left = false;           
+        }
+        return car_index;
+    }
 
 
-    
-    // 2nd Function 
+    // Function to process the car index if the car turns right 
+    function turnRight(car_index){
+        if (car_face_downwards == true){
+            car_index -= 1;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = true;
+
+        }
+
+        else if (car_face_upwards == true){
+            car_index += 1;
+            car_face_right = true;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+
+        else if (car_face_left == true){
+            car_index -= 8;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = true;
+            car_face_left = false;
+        }
+
+        else if (car_face_right == true){
+            car_index += 8;
+            car_face_right = false;
+            car_face_downwards = true;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+        return car_index; 
+    }
+
+
+    // Function to process the car index if the car moves forward 
+    function moveForward(car_index){
+        if (car_face_downwards == true){
+            car_index += 8;
+            car_face_right = false;
+            car_face_downwards = true;
+            car_face_upwards = false;
+            car_face_left = false;           
+        }
+
+        else if (car_face_upwards == true){
+            car_index -= 8;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = true;
+            car_face_left = false;
+        }
+
+        else if (car_face_left == true){
+            car_index -= 1;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = true;
+        }
+
+        else if (car_face_right == true){
+            car_index += 1;
+            car_face_right = true;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+        return car_index; 
+    }
+
+
+    // Function to check the commands obtained from the "Command List" textarea from the webpage.
     function codeChecks(command, commands, path, car_index){
         // Check 
         if (command == "Motor_Left();"){
-            car_index = car_index - 1; 
+            car_index = turnLeft(car_index); 
             car_path.push(car_index);
         }
 
         // Check 
         else if (command == "Motor_Right();"){
-            car_index = car_index + 1; 
+            car_index = turnRight(car_index); 
             car_path.push(car_index);
         }
 
         // Check
         else if (command == "Motor_Start();"){
-            car_index = car_index + 8; 
+            car_index = moveForward(car_index); 
             car_path.push(car_index);
         }  
         
@@ -356,15 +470,16 @@
             }
             car_index = processLoop(start, end, car_index);
         }
-        document.getElementById("grid" + car_index).style.background = "green";  
+        try{
+            document.getElementById("grid" + car_index).style.background = "green";  
+        } catch(error){
+            // pass 
+        }
         return car_index;
     }
 
 
-
-
-
-    // 3rd function 
+    // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode(){
         var car_index = 0;
         // Generate code and display it.
@@ -387,8 +502,8 @@
 
         // Execute the commands 
         while (i != commands.length - 1){
-            car_index = codeChecks(commands[i], commands, path, car_index);
             alert(car_index);
+            car_index = codeChecks(commands[i], commands, path, car_index);
             game_over = boundaryChecks(car_index);
 
             if (game_over == true){
@@ -406,9 +521,5 @@
         }        
         $("#game_won_modal").modal("show");
     }
-
- 
-
-
 </script>
 {% endblock %}

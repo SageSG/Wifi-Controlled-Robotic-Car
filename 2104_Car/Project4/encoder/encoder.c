@@ -59,7 +59,7 @@ int getRotationRight()
 
 void initEncoder()
 {
-    printf("\nIm hereee: %d");
+//    printf("\nIm hereee");
 
     GPIO_setAsInputPin(GPIO_PORT_P3, GPIO_PIN6);
     GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P3, GPIO_PIN6);

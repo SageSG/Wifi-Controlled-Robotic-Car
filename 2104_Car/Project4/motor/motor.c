@@ -63,11 +63,11 @@ void motor_stop(void)
 void motor_start(void)
 {
     P2->OUT = BIT1;     // ON GREEN
-    pwmConfig.dutyCycle = 4000;
+    pwmConfig.dutyCycle = 7700;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
-    pwmConfig2.dutyCycle = 4000;
+    pwmConfig2.dutyCycle = 8000;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig2);
-    P2->OUT = BIT0;     // ON RED
+//    P2->OUT = BIT0;     // ON RED
 }
 
 void motor_left(void)
@@ -75,7 +75,7 @@ void motor_left(void)
     P2->OUT = ~2;
     pwmConfig.dutyCycle = 0;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
-    pwmConfig2.dutyCycle = 4000;
+    pwmConfig2.dutyCycle = 8000;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig2);
 //    P2->OUT = BIT0;     // ON RED
 }
@@ -83,7 +83,7 @@ void motor_left(void)
 void motor_right(void)
 {
     P2->OUT = ~1;
-    pwmConfig.dutyCycle = 4000;
+    pwmConfig.dutyCycle = 8000;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
     pwmConfig2.dutyCycle = 0;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig2);

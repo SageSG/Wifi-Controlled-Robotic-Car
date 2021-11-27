@@ -115,6 +115,7 @@ SUBDIRS := \
 ccs \
 encoder \
 motor \
+temperature \
 ultrasonic \
 wifi \
 

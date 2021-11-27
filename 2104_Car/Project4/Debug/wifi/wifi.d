@@ -64,6 +64,7 @@ wifi/wifi.obj: ../wifi/wifi.h
 wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/motor/motor.h
 wifi/wifi.obj: ../motor/motor.h
 wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/ultrasonic/ultrasonic.h
+wifi/wifi.obj: ../temperature/temperature.h
 
 ../wifi/wifi.c:
 
@@ -192,4 +193,6 @@ C:/Users/Jaspzx/Downloads/Project4/Project4/motor/motor.h:
 ../motor/motor.h:
 
 C:/Users/Jaspzx/Downloads/Project4/Project4/ultrasonic/ultrasonic.h:
+
+../temperature/temperature.h:
 

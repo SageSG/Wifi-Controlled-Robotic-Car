@@ -15,16 +15,21 @@
 #include "wifi.h"
 #include "../motor/motor.h"
 #include "ultrasonic/ultrasonic.h"
+#include "../temperature/temperature.h"
 
-// TX: 3.2
-// RX: 3.3
-// RST: 6.1
-// EN: 3.3v
+//==========================================
+
+// TX:      3.2
+// RX:      3.3
+// RST:     6.1
+// EN:      3.3v
 
 // Baud:        115200
 // Data Size:   8
 // Parity:      None
 // Stop Bit:    1
+
+//==========================================
 
 //int count;
 ////const char *username = "Xperia5II";
@@ -67,6 +72,7 @@ eUSCI_UART_ConfigV1 UART2Config = {
 void initWifi()
 {
     MAP_WDT_A_holdTimer();
+//    MSPrintf(EUSCI_A0_BASE, "Setting Wifi.\n\r");
 
     /*Ensure MSP432 is Running at 24 MHz*/
     FlashCtl_setWaitState(FLASH_BANK0, 2);
@@ -103,16 +109,21 @@ void initWifi()
 
     /*Pointer to ESP8266 global buffer*/
     char *ESP8266_Data = ESP8266_GetBuffer();
+    MSPrintf(EUSCI_A0_BASE, "1.\n\r");
 
-    if (!ChangeMode())
-    {
-        while (1)
-            ;
-    }
+//    if (!ChangeMode())
+//    {
+//        MSPrintf(EUSCI_A0_BASE, "H2\n\r");
+//        while (1)
+//            ;
+//    }
+
     MSPrintf(EUSCI_A0_BASE, "Set WiFi Mode\n\r");
 
     if (!ConnectToAP(username, password))
     {
+        MSPrintf(EUSCI_A0_BASE, "2.\n\r");
+
         while (1)
             ;
     }
@@ -196,7 +207,7 @@ void initWifi()
     getData(ESP8266_Data);
 //    printf("\nLevel1: %s", getData(ESP8266_Data));
 //    printf("\nGet function: %s", getCmdString());
-    printf("\nString: %s", cmdString);
+//    printf("\nString: %s", cmdString);
     runString();
 //            printf("%s\n", result);
 
@@ -309,6 +320,7 @@ void runString()
         printf("\nDIstance: %.2f", getHCSR04Distance());
         printf("\n%c", cmdString[i]); /* Print each character of the string. */
 //        printf("hellooo?;");
+//        uart_println("Temperature(degC): %f", tempC);
         switch (cmdString[i])
         {
         case '0':
@@ -319,7 +331,7 @@ void runString()
         case '1':
             printf("\nMotor_Start();");
             motor_start();
-            while (secCounter < 20)
+            while (secCounter < 10)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -337,7 +349,7 @@ void runString()
         case '2':
             printf("\nMotor_Left();");
             motor_left();
-            while (secCounter < 20)
+            while (secCounter < 4)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -355,7 +367,7 @@ void runString()
         case '3':
             printf("\nMotor_Right();");
             motor_right();
-            while (secCounter < 20)
+            while (secCounter < 4)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;

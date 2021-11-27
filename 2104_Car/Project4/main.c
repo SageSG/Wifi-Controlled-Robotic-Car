@@ -59,6 +59,7 @@
 #include "motor/motor.h"
 #include "ultrasonic/ultrasonic.h"
 #include "encoder/encoder.h"
+#include "temperature/temperature.h"
 //#include "wifi/wifi.h"
 
 //bool obstacle = false;
@@ -77,26 +78,43 @@ int main(void)
     /* Stop Watchdog  */
     MAP_WDT_A_holdTimer();
 
+    //    /* Configure P2.0 and set it to LOW */
+    GPIO_setAsOutputPin(GPIO_PORT_P2, GPIO_PIN0 | GPIO_PIN1 | GPIO_PIN2);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P2, GPIO_PIN0 | GPIO_PIN1 | GPIO_PIN2);
+
     init_HCSR04();
     initMotor();
     initEncoder();
 
+//    initTemp();
+
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN6);
     GPIO_enableInterrupt(GPIO_PORT_P5, GPIO_PIN7);
+
+//    GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, GPIO_PIN1);
+//    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN1);
+//    GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, GPIO_PIN4);
+//    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN4);
+    Interrupt_enableInterrupt(INT_PORT1);
     Interrupt_enableInterrupt(INT_PORT5);
 
     initWifi();
-
-//    getData(ESP8266_Data);
+//    motor_start();
+    while (1)
+    {
+//        initWifi();
+//        PCM_gotoLPM0();
+    }
 
 //    while (1)
 //    {
+//        printf("ready.");
 //        printf("\nObstacle Distance: %.2f", getHCSR04Distance());
 //        if ((getHCSR04Distance() < 15.0))
 //        {
 //            printf("\nMotor_Stop();");
 //            motor_stop();
-////                    obstacle = true;
+//                    obstacle = true;
 //        }
 //    }
 
@@ -137,8 +155,8 @@ void PORT5_IRQHandler(void)
     GPIO_clearInterruptFlag(GPIO_PORT_P5, statusRight);
     GPIO_clearInterruptFlag(GPIO_PORT_P5, statusUltra);
 
-    if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 0
-            && GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 0)
+    if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 1
+            && GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 1)
     {
         printf("\n--LINE Detected--");
         motor_stop();
@@ -147,4 +165,29 @@ void PORT5_IRQHandler(void)
     }
 //    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
 //    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
+}
+
+void PORT1_IRQHandler(void)
+{
+    uint32_t statusStart = MAP_GPIO_getEnabledInterruptStatus(
+    GPIO_PORT_P1) & BIT1;
+
+    uint32_t statusStop = MAP_GPIO_getEnabledInterruptStatus(
+    GPIO_PORT_P1) & BIT4;
+//    printf("\n--Hi?--");
+
+    if (statusStart & GPIO_PIN1)
+    {
+        printf("\n--111--");
+        motor_start();
+//        initWifi();
+    }
+    if (statusStop & GPIO_PIN4)
+    {
+        printf("\n--000--");
+        motor_stop();
+    }
+
+    GPIO_clearInterruptFlag(GPIO_PORT_P1, statusStart);
+    GPIO_clearInterruptFlag(GPIO_PORT_P1, statusStop);
 }

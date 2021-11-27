@@ -6,21 +6,21 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../encoder/encoder.c 
+../temperature/temperature.c 
 
 C_DEPS += \
-./encoder/encoder.d 
+./temperature/temperature.d 
 
 OBJS += \
-./encoder/encoder.obj 
+./temperature/temperature.obj 
 
 OBJS__QUOTED += \
-"encoder\encoder.obj" 
+"temperature\temperature.obj" 
 
 C_DEPS__QUOTED += \
-"encoder\encoder.d" 
+"temperature\temperature.d" 
 
 C_SRCS__QUOTED += \
-"../encoder/encoder.c" 
+"../temperature/temperature.c" 
 
 

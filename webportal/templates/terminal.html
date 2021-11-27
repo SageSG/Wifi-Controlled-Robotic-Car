@@ -13,20 +13,36 @@
 <script src="../static/scripts/sound_blocks.js"></script> -->
 <!-- <script src="scripts/workspace.js"></script>
 <script src="scripts/main.js"></script> -->
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
-    <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm text-dark" aria-current="page">Pages</li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Terminal</li>
-            </ol>
-           <h6 class="font-weight-bolder mb-0"><b>Terminal</b></h6>
-        </nav>
-    </div>
-</nav>
-
+<!-- Row 1 -->
 <div class="container-fluid py-4">
-    <div class="row mb-3">
+    <div class="row">
+        <div class="col-xl-12 col-sm-12 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="numbers">
+                                <h5 class="font-weight-bolder mb-0">
+                                    <b>Playing the game</b>
+                                </h5>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">The player drags and drops the blocks in the "Car Command Flow" column to create a sequence of car movement commands.</p>
+                                <br>
+                                <p><b>Brief Game Rules</b></p>
+                                <p>If the car movement falls outside of the path demarked by the yellow boxes, the player loses the gamee.</p>
+                            </div>
+                        </div>
+                        <div class="col-2 text-end">
+                            <a class="btn btn-dark" href="#" role="button"><i class="fas fa-plus"></i> View Tutorial</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Row 2 -->
+    <div class="row mt-4">
         <!-- Row 1 -->
         <div class="col-xl-5 col-sm-4 mb-xl-0 mb-3">
             <div class="card" style="background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}'); background-repeat: no-repeat;">
@@ -34,7 +50,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="numbers">
-                                <p class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;">Map</p>
+                                <p class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;"><b>Game Map</b></p>
                             </div>
                             {% set count = namespace(value=1) %}
                             {% for map_list in map %}
@@ -75,13 +91,19 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="d-flex flex-column h-100">
-                                <h5 class="font-weight-bolder" style="color:white"><b>Car Command Flow</b></h5>
+                                <p class="font-weight-bolder" style="color:white"><b>Car Commands Flow</b></p>
                                 <p class="mb-2" style="color:white">Drag and drop to configure Commands.</p>
                             </div>
                         </div>
-                        <div class="col-4 d-grid gap-1 d-md-flex justify-content-md-end mb-1">
-                            <button type="button" onclick="clearCode()" class="btn btn-danger btn-sm me-1">Clear Commands</button>
-                            <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send Commands</button>
+                        <div class="col-2 d-grid gap-1 justify-content-md-end mb-1">
+                            <div>
+                                <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send</button>
+                            </div>
+                        </div>
+                        <div class="col-2 d-grid gap-1 justify-content-md-end mb-1">
+                            <div>
+                                <button type="button" onclick="clearCode()" class="btn btn-danger btn-sm me-1">Clear</button>
+                            </div>
                         </div>
                     </div>
 
@@ -96,27 +118,27 @@
                                     <block type="turn"></block>
                                     <block type="controls_for">
                                         <value name="FROM">
-                                          <block type="math_number">
+                                            <block type="math_number">
                                             <field name="NUM">1</field>
-                                          </block>
+                                            </block>
                                         </value>
                                         <value name="TO">
-                                          <block type="math_number">
+                                            <block type="math_number">
                                             <field name="NUM">10</field>
-                                          </block>
+                                            </block>
                                         </value>
                                         <value name="BY">
-                                          <block type="math_number">
+                                            <block type="math_number">
                                             <field name="NUM">1</field>
-                                          </block>
+                                            </block>
                                         </value>
-                                      </block>                                   
-                                      <block type="logic_compare"></block>
-                                      <block type="logic_operation"></block>
-                                      <block type="logic_boolean"></block>
-                                      <block type="math_number">
+                                        </block>                                   
+                                        <block type="logic_compare"></block>
+                                        <block type="logic_operation"></block>
+                                        <block type="logic_boolean"></block>
+                                        <block type="math_number">
                                         <field name="NUM">42</field>
-                                      </block>
+                                        </block>
 
                         
                                     <block type="controls_if"></block>
@@ -273,17 +295,17 @@
             for (let b = 0; b < chain_commands.length; b++){
                 
                 if (chain_commands[b] == "  Motor_Left();"){
-                    car_index = car_index - 1; 
+                    car_index = turnLeft(car_index); 
                     car_path.push(car_index);
                 }
 
                 else if (chain_commands[b] == "  Motor_Right();"){
-                    car_index = car_index + 1; 
+                    car_index = turnRight(car_index); 
                     car_path.push(car_index);
                 }
 
                 else if (chain_commands[b] == "  Motor_Start();"){
-                    car_index = car_index + 8; 
+                    car_index = moveForward(car_index); 
                     car_path.push(car_index);
                 }                      
 

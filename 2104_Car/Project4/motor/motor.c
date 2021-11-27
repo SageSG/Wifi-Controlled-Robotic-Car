@@ -53,6 +53,7 @@ void initMotor(void)
 
 void motor_stop(void)
 {
+    printf("\nmotor_stop();");
     pwmConfig.dutyCycle = 0;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
     pwmConfig2.dutyCycle = 0;

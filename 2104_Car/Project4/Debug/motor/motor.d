@@ -1,7 +1,7 @@
 # FIXED
 
 motor/motor.obj: ../motor/motor.c
-motor/motor.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/motor/motor.h
+motor/motor.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/motor/motor.h
 motor/motor.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/driverlib.h
 motor/motor.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/adc14.h
 motor/motor.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdint.h
@@ -60,7 +60,7 @@ motor/motor.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/
 
 ../motor/motor.c:
 
-C:/Users/Jaspzx/Downloads/Project4/Project4/motor/motor.h:
+C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/motor/motor.h:
 
 C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/driverlib.h:
 

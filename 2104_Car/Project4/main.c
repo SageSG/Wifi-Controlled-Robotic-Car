@@ -95,27 +95,29 @@ int main(void)
 //    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN1);
 //    GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, GPIO_PIN4);
 //    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN4);
-    Interrupt_enableInterrupt(INT_PORT1);
-    Interrupt_enableInterrupt(INT_PORT5);
+//    Interrupt_enableInterrupt(INT_PORT1);
 
     initWifi();
+
+//    Interrupt_enableInterrupt(INT_PORT5);
+
 //    motor_start();
-    while (1)
-    {
-//        initWifi();
+//    while (1)
+//    {
+////        initWifi();
 //        PCM_gotoLPM0();
-    }
+//    }
 
 //    while (1)
 //    {
-//        printf("ready.");
+////        printf("ready.");
 //        printf("\nObstacle Distance: %.2f", getHCSR04Distance());
-//        if ((getHCSR04Distance() < 15.0))
-//        {
-//            printf("\nMotor_Stop();");
-//            motor_stop();
-//                    obstacle = true;
-//        }
+////        if ((getHCSR04Distance() < 15.0))
+////        {
+////            printf("\nMotor_Stop();");
+////            motor_stop();
+////                    obstacle = true;
+////        }
 //    }
 
 //    while (1)
@@ -147,13 +149,13 @@ void PORT5_IRQHandler(void)
 {
     uint32_t statusLeft = 0;
     uint32_t statusRight = 0;
-    uint32_t statusUltra = 0;
+//    uint32_t statusUltra = 0;
     statusLeft = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT6;
     statusRight = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT7;
-    statusUltra = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT2;
+//    statusUltra = GPIO_getEnabledInterruptStatus(GPIO_PORT_P5) & BIT2;
     GPIO_clearInterruptFlag(GPIO_PORT_P5, statusLeft);
     GPIO_clearInterruptFlag(GPIO_PORT_P5, statusRight);
-    GPIO_clearInterruptFlag(GPIO_PORT_P5, statusUltra);
+//    GPIO_clearInterruptFlag(GPIO_PORT_P5, statusUltra);
 
     if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 1
             && GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 1)
@@ -166,28 +168,28 @@ void PORT5_IRQHandler(void)
 //    SCB->SCR &= ~SCB_SCR_SLEEPONEXIT_Msk; // Disable SLEEPON EXIT
 //    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
 }
-
-void PORT1_IRQHandler(void)
-{
-    uint32_t statusStart = MAP_GPIO_getEnabledInterruptStatus(
-    GPIO_PORT_P1) & BIT1;
-
-    uint32_t statusStop = MAP_GPIO_getEnabledInterruptStatus(
-    GPIO_PORT_P1) & BIT4;
-//    printf("\n--Hi?--");
-
-    if (statusStart & GPIO_PIN1)
-    {
-        printf("\n--111--");
-        motor_start();
-//        initWifi();
-    }
-    if (statusStop & GPIO_PIN4)
-    {
-        printf("\n--000--");
-        motor_stop();
-    }
-
-    GPIO_clearInterruptFlag(GPIO_PORT_P1, statusStart);
-    GPIO_clearInterruptFlag(GPIO_PORT_P1, statusStop);
-}
+//
+//void PORT1_IRQHandler(void)
+//{
+//    uint32_t statusStart = MAP_GPIO_getEnabledInterruptStatus(
+//    GPIO_PORT_P1) & BIT1;
+//
+//    uint32_t statusStop = MAP_GPIO_getEnabledInterruptStatus(
+//    GPIO_PORT_P1) & BIT4;
+////    printf("\n--Hi?--");
+//
+//    if (statusStart & GPIO_PIN1)
+//    {
+//        printf("\n--111--");
+//        motor_start();
+////        initWifi();
+//    }
+//    if (statusStop & GPIO_PIN4)
+//    {
+//        printf("\n--000--");
+//        motor_stop();
+//    }
+//
+//    GPIO_clearInterruptFlag(GPIO_PORT_P1, statusStart);
+//    GPIO_clearInterruptFlag(GPIO_PORT_P1, statusStop);
+//}

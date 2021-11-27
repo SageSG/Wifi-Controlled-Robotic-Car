@@ -52,18 +52,18 @@ wifi/wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432
 wifi/wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/wdt_a.h
 wifi/wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/sysctl.h
 wifi/wifi.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/flash.h
-wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/UART_Driver.h
+wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/UART_Driver.h
 wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdio.h
 wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdarg.h
-wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/MSPIO.h
-wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/ESP8266.h
+wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/MSPIO.h
+wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ESP8266.h
 wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h
 wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h
 wifi/wifi.obj: ../wifi/wifi.h
-wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/motor/motor.h
+wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/motor/motor.h
 wifi/wifi.obj: ../motor/motor.h
-wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4/Project4/ultrasonic/ultrasonic.h
+wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ultrasonic/ultrasonic.h
 wifi/wifi.obj: ../temperature/temperature.h
 
 ../wifi/wifi.c:
@@ -170,15 +170,15 @@ C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/
 
 C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/flash.h:
 
-C:/Users/Jaspzx/Downloads/Project4/Project4/UART_Driver.h:
+C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/UART_Driver.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdio.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdarg.h:
 
-C:/Users/Jaspzx/Downloads/Project4/Project4/MSPIO.h:
+C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/MSPIO.h:
 
-C:/Users/Jaspzx/Downloads/Project4/Project4/ESP8266.h:
+C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ESP8266.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h:
 
@@ -188,11 +188,11 @@ C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h:
 
 ../wifi/wifi.h:
 
-C:/Users/Jaspzx/Downloads/Project4/Project4/motor/motor.h:
+C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/motor/motor.h:
 
 ../motor/motor.h:
 
-C:/Users/Jaspzx/Downloads/Project4/Project4/ultrasonic/ultrasonic.h:
+C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ultrasonic/ultrasonic.h:
 
 ../temperature/temperature.h:
 

@@ -97,6 +97,7 @@ void initWifi()
 
     /*Reset GPIO of the ESP8266*/
     GPIO_setAsOutputPin(GPIO_PORT_P6, GPIO_PIN1);
+//    Interrupt_enableInterrupt(INT_PORT5);
 
     MAP_Interrupt_enableMaster();
 
@@ -205,9 +206,11 @@ void initWifi()
              "Data sent: %s to %s\r\n\r\nESP8266 Data Received: %s\r\n",
              HTTP_Request, "192.168.10.139", ESP8266_Data);
     getData(ESP8266_Data);
+
 //    printf("\nLevel1: %s", getData(ESP8266_Data));
 //    printf("\nGet function: %s", getCmdString());
 //    printf("\nString: %s", cmdString);
+//    Interrupt_enableInterrupt(INT_PORT5);
     runString();
 //            printf("%s\n", result);
 
@@ -288,9 +291,9 @@ char getData(char *s)
     while (cmdString[i++]);
 //    printf("HEREEE: %s", cmdString);
     free(target);
-
-//    return 0;
-    return cmdString;
+//    runString();
+    return 0;
+//    return cmdString;
 }
 ;
 
@@ -298,7 +301,7 @@ void checkObstacle()
 {
     if ((getHCSR04Distance() < 15.0))
     {
-        printf("\nMotor_Stop();");
+        printf("\nOBSTACLEEEE;");
         motor_stop();
         obstacle = true;
     }
@@ -349,7 +352,7 @@ void runString()
         case '2':
             printf("\nMotor_Left();");
             motor_left();
-            while (secCounter < 4)
+            while (secCounter < 7)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -367,7 +370,7 @@ void runString()
         case '3':
             printf("\nMotor_Right();");
             motor_right();
-            while (secCounter < 4)
+            while (secCounter < 7)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;

@@ -205,7 +205,11 @@
     var path_start = 0;
     var path_end = 0;
     const path = [];
-    // const all_paths = [];
+
+    var car_index = 0;
+    const car_path = [];
+    var chain_commands = []; 
+    var i = 0;
 
     // Check for the start flag 
     for (let i = 0; i < map.length; i++) {
@@ -244,198 +248,167 @@
         counter = counter + 8;
     }   
 
+
+
+    function boundaryChecks(car_index){
+       // Check to see if the car has exited the yellow boundary 
+       if (path.indexOf(car_index) == -1){
+            if (car_index % 8 != 0){
+                document.getElementById("grid" + car_index - 1).style.background = "red"; 
+                document.getElementById("grid" + car_index).style.background = "grey";
+                $("#game_over_modal").modal("show");
+                return true;
+            }
+            document.getElementById("grid" + car_index).style.background = "red";    
+            $("#game_over_modal").modal("show");
+            return true;
+        }
+    }
+
+    function processLoop(start, end, car_index){
+        for (let a = start; a < end; a++){
+            for (let b = 0; b < chain_commands.length; b++){
+                
+                if (chain_commands[b] == "  Motor_Left();"){
+                    car_index = car_index - 1; 
+                    car_path.push(car_index);
+                }
+
+                else if (chain_commands[b] == "  Motor_Right();"){
+                    car_index = car_index + 1; 
+                    car_path.push(car_index);
+                }
+
+                else if (chain_commands[b] == "  Motor_Start();"){
+                    car_index = car_index + 8; 
+                    car_path.push(car_index);
+                }                      
+
+                // else if (chain_commands[b].includes("for")){
+                //     processLoop(start, end, car_index);
+                // }         
+
+
+
+
+                alert(chain_commands[b]);
+                // Check to see if the car has exited the yellow boundary 
+                // if (path.indexOf(car_index) === -1){
+                //     alert("yes");
+                //     if (car_index % 8 == 1){
+                //         $("#game_over_modal").modal("show");
+                //         return;
+                //     }
+                //     document.getElementById("grid" + car_index).style.background = "red";    
+                //     $("#game_over_modal").modal("show");
+                //     return;
+                // }
+                document.getElementById("grid" + car_index).style.background = "green";  
+            }
+        }
+        chain_commands = [];
+        return car_index;
+    }
+     
+
+
+
+    
     // 2nd Function 
-    function showCode() {
+    function codeChecks(command, commands, path, car_index){
+        // Check 
+        if (command == "Motor_Left();"){
+            car_index = car_index - 1; 
+            car_path.push(car_index);
+        }
+
+        // Check 
+        else if (command == "Motor_Right();"){
+            car_index = car_index + 1; 
+            car_path.push(car_index);
+        }
+
+        // Check
+        else if (command == "Motor_Start();"){
+            car_index = car_index + 8; 
+            car_path.push(car_index);
+        }  
+        
+        // Check 
+        else if (command.includes("for")){
+            start = command.substring(9, 10);
+            end = command.substring(17, 19);
+            if (end.includes(";")){
+                end = command.substring(17, 18);
+            }
+
+            var lastline = false;
+            while (lastline == false){
+                if (commands[i] == "}"){
+                    i = i - 1;
+                    lastline = true;
+                }
+                
+                else{
+                    chain_commands.push(commands[i]);
+                }
+                i = i + 1;
+            }
+            car_index = processLoop(start, end, car_index);
+        }
+        document.getElementById("grid" + car_index).style.background = "green";  
+        return car_index;
+    }
+
+
+
+
+
+    // 3rd function 
+    function showCode(){
+        var car_index = 0;
         // Generate code and display it.
         while (directionArr.length > 0) {
             directionArr.pop();
         }
         result = "";
-
         Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
         Blockly.JavaScript.addReservedWords('code');
-
         var code = Blockly.JavaScript.workspaceToCode(workspace);
-
-        // directionArr.forEach(function (entry) {
-        //     result = result.concat("", entry);
-        // });
-        // alert(result);
-    
         result = code.concat("\n", result);
         document.getElementById('textArea').innerText = result;
 
-        // Parse the commands 
+        var game_over = false; 
+
+        // Parse the commands gotten from the 'textArea'
         const commands = code.split("\n");
         var car_index = path_start;
-        // var car_index_counter = 0;
-        const car_path = [];
-        const chain_commands = []; 
-        document.getElementById("grid" + car_index).style.background = "green"; 
-        
+        document.getElementById("grid" + car_index).style.background = "green";         
 
-        
+        // Execute the commands 
+        while (i != commands.length - 1){
+            car_index = codeChecks(commands[i], commands, path, car_index);
+            alert(car_index);
+            game_over = boundaryChecks(car_index);
 
-        for (let i = 0; i != commands.length - 1; i++){   
-            if (commands[i] == "Motor_Left();"){
-                car_index = car_index - 1; 
-                car_path.push(car_index);
+            if (game_over == true){
+                break;
             }
-
-            else if (commands[i] == "Motor_Right();"){
-                car_index = car_index + 1; 
-                car_path.push(car_index);
-            }
-
-            else if (commands[i] == "Motor_Start();"){
-                car_index = car_index + 8; 
-                car_path.push(car_index);
-            }  
-            
-
-            else if (commands[i].includes("for")){
-                start = commands[i].substring(9, 10);
-                end = commands[i].substring(17, 19);
-                if (end.includes(";")){
-                    end = commands[i].substring(17, 18);
-                }
-
-                var lastline = false;
-                while (lastline == false){
-                    if (commands[i] == "}"){
-                        i = i - 1;
-                        lastline = true;
-                    }
-
-                    else{
-                        chain_commands.push(commands[i]);
-                    }
-                    i = i + 1;
-                }
-                
-                // Process the for LOOP
-                for (let a = start; a < end; a++){
-                    for (let b = 0; b < chain_commands.length; b++){
-                        
-                        if (chain_commands[b] == "  Motor_Left();"){
-                            car_index = car_index - 1; 
-                            car_path.push(car_index);
-                        }
-
-                        else if (chain_commands[b] == "  Motor_Right();"){
-                            car_index = car_index + 1; 
-                            car_path.push(car_index);
-                        }
-
-                        else if (chain_commands[b] == "  Motor_Start();"){
-                            car_index = car_index + 8; 
-                            car_path.push(car_index);
-                        }                      
-    
-                        alert(chain_commands[b]);
-                        // Check to see if the car has exited the yellow boundary 
-                        if (path.indexOf(car_index) === -1){
-                            alert("yes");
-                            if (car_index % 8 == 1){
-                                $("#game_over_modal").modal("show");
-                                return;
-                            }
-                            document.getElementById("grid" + car_index).style.background = "red";    
-                            $("#game_over_modal").modal("show");
-                            return;
-                        }
-                        document.getElementById("grid" + car_index).style.background = "green";  
-
-                    }
-                }
-            }
-
-        
-            else if (commands[i].includes("if")){
-                
-            }
-
-            else {
-                continue;
-            }
-           
-            
-            // // Check to see if the car has exited the yellow boundary 
-            if (path.indexOf(car_index) == -1){
-                if (car_index % 8 == 1){
-                    $("#game_over_modal").modal("show");
-                    return;
-                }
-                // document.getElementById("grid" + car_index).style.background = "red";    
-                $("#game_over_modal").modal("show");
-                return;
-            }
-
-            document.getElementById("grid" + car_index).style.background = "green";  
+            i++; 
         }
-
-
-        // Check to see if the car has reached the point 
+        
+        alert('hi');
+        // Check to see if the car has reached the end point 
         if (car_index != path_end){
-            // document.getElementById("grid" + car_index).style.background = "red";    
+            document.getElementById("grid" + car_index).style.background = "red";    
             $("#game_over_modal").modal("show");
             return;
         }        
         $("#game_won_modal").modal("show");
     }
 
-
-        
-
+ 
 
 
-
-
-
-
-        // alert(map);
-
-    // Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
-
-    // function showCode() {
-    //     // Generate code and display it.
-    //     while (directionArr.length > 0) {
-    //         directionArr.pop();
-    //     }
-    //     result = "";
-
-    //     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-    //     Blockly.JavaScript.addReservedWords('code');
-
-    //     var code = Blockly.JavaScript.workspaceToCode(workspace);
-
-    //     directionArr.forEach(function (entry) {
-    //         result = result.concat("", entry);
-    //     });
-    //     alert(result);
-    //     result = code.concat("\n", result);
-    //     document.getElementById('textArea').innerText = result;
-    // }
-
-    // function clearCode() {
-    //     document.getElementById('textArea').innerText = "";
-    // }
-
-    // document.getElementById("execute_btn").onclick = function () {
-    //     const ul = document.getElementById('sqnce-list');
-    //     const listItems = ul.getElementsByTagName('li');
-
-    //     // Loop through the NodeList object.
-    //     for (let i = 0; i <= listItems.length - 1; i++) {
-    //         var http = new XMLHttpRequest();
-    //         var url = 'http://127.0.0.1:5000/car/commands';
-    //         var params = 'direction=webportal&command=' + listItems[i].innerHTML;
-    //         http.open('POST', url, true);
-
-    //         //Send the proper header information along with the request
-    //         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    //         http.send(params);
-    //     }
-    // }
 </script>
 {% endblock %}

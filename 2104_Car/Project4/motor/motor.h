@@ -13,7 +13,14 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
+//int up = 8000;
+//int down =
+
 static void Delay(uint32_t loop);
+
+void adjustLeft();
+
+void adjustRight();
 
 void initMotor(void);
 

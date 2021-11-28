@@ -14,6 +14,7 @@
 #include <string.h>
 
 #include "motor/motor.h"
+#include "../temperature/temperature.h"
 
 #ifndef WIFI_H_
 #define WIFI_H_
@@ -41,6 +42,9 @@ bool obstacle = false;
 int timer = 0;
 float rpm = 0.0;
 float rotations = 0.0;
+
+float rpmL = 0.0;
+float rpmR = 0.0;
 
 void initWifi();
 

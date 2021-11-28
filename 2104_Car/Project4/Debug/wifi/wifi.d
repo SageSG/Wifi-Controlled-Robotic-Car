@@ -62,9 +62,9 @@ wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xl
 wifi/wifi.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h
 wifi/wifi.obj: ../wifi/wifi.h
 wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/motor/motor.h
+wifi/wifi.obj: ../temperature/temperature.h
 wifi/wifi.obj: ../motor/motor.h
 wifi/wifi.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ultrasonic/ultrasonic.h
-wifi/wifi.obj: ../temperature/temperature.h
 
 ../wifi/wifi.c:
 
@@ -190,9 +190,9 @@ C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h:
 
 C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/motor/motor.h:
 
+../temperature/temperature.h:
+
 ../motor/motor.h:
 
 C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ultrasonic/ultrasonic.h:
-
-../temperature/temperature.h:
 

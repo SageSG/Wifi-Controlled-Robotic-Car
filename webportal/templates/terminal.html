@@ -13,249 +13,534 @@
 <script src="../static/scripts/sound_blocks.js"></script> -->
 <!-- <script src="scripts/workspace.js"></script>
 <script src="scripts/main.js"></script> -->
-
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h1">CONTROL Terminal</h1>
-    <a class="btn btn-primary btn-lg" data-bs-toggle="collapse" href="#collapseLevels" role="button"
-        aria-expanded="false" aria-controls="collapseLevels">
-        Levels / Maps
-    </a>
-</div>
-
-<div class="collapse mb-3" id="collapseLevels">
-    <div class="card card-body">
-        <ul class="list-group list-group-horizontal border-0">
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level1" value=""
-                checked>
-            <label class="list-group-item py-3" for="level1">
-                1. Moving Forward
-                <span class="d-block small opacity-50">Level 1</span>
-            </label>
-
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level2" value="">
-            <label class="list-group-item py-3" for="level2">
-                2. Turning
-                <span class="d-block small opacity-50">Level 2</span>
-            </label>
-
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level3" value="">
-            <label class="list-group-item py-3" for="level3">
-                3. For-Loop
-                <span class="d-block small opacity-50">Level 3</span>
-            </label>
-
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level4" value="">
-            <label class="list-group-item py-3" for="level4">
-                4. If-Else Loop
-                <span class="d-block small opacity-50">This option is disabled</span>
-            </label>
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level5" value="">
-            <label class="list-group-item py-3" for="level5">
-                5. Hello
-                <span class="d-block small opacity-50">Something level here.</span>
-            </label>
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level6" value="">
-            <label class="list-group-item py-3" for="level6">
-                6. Hello on the other side.
-                <span class="d-block small opacity-50">Something level here.</span>
-            </label>
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level7" value="">
-            <label class="list-group-item py-3" for="level7">
-                7. Insert text here.
-                <span class="d-block small opacity-50">Something Something.</span>
-            </label>
-            <input class="list-group-item-check" type="radio" name="listGroupCheckableRadios" id="level8" value="">
-            <label class="list-group-item py-3" for="level8">
-                8. HellooOO.
-                <span class="d-block small opacity-50">hELLO.</span>
-            </label>
-        </ul>
-    </div>
-</div>
-
-<div class="row mb-2">
-    <div class="col-md-12">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
-            style="height: 520px;">
-            <div class="col-md-8 p-1 d-flex flex-column position-static"><svg class="bd-placeholder-img" width="auto"
-                    height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: MAP"
-                    preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <title>Map</title>
-                    <rect width="100%" height="100%" fill="#EDEDED" />
-                    <text x="50%" y="50%" fill="black" dy=".1em">Map</text>
-                </svg>
-            </div>
-            <div class="col-md-4 border-1 bg-light p-1">
-                <div class="col-md-12 d-flex flex-column position-static ps-2 pt-2">
-                    <strong class="d-inline-block mb-2 text-primary">Queued</strong>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm ">
-                            <thead>
-                                <tr>
-                                    <th scope="col ">#</th>
-                                    <th scope="col ">Command</th>
-                                    <th scope="col ">Header</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Forward</td>
-                                    <td>data</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Left</td>
-                                    <td>irrelevant</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Right</td>
-                                    <td>rich</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Right</td>
-                                    <td>random</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Left</td>
-                                    <td>irrelevant</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Back</td>
-                                    <td>rich</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Left</td>
-                                    <td>placeholder</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>Right</td>
-                                    <td>placeholder</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>Left</td>
-                                    <td>irrelevant</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>Left</td>
-                                    <td>illustrative</td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Back</td>
-                                    <td>tabular</td>
-                                </tr>
-                            </tbody>
-                        </table>
+<!-- Row 1 -->
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-xl-12 col-sm-12 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="numbers">
+                                <h5 class="font-weight-bolder mb-0">
+                                    <b>Playing the game</b>
+                                </h5>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">The player drags and drops the blocks in the "Car Command Flow" column to create a sequence of car movement commands.</p>
+                                <br>
+                                <p><b>Brief Game Rules</b></p>
+                                <p>If the car movement falls outside of the path demarked by the yellow boxes, the player loses the gamee.</p>
+                            </div>
+                        </div>
+                        <div class="col-2 text-end">
+                            <a class="btn btn-dark" href="#" role="button"><i class="fas fa-plus"></i> View Tutorial</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row mb-5">
-    <div class="col-sm-8" style="height: 600px;">
-        <div class="card h-100 position-relative d-flex flex-row">
-            <div class="card-body">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-3">
-                    <strong class="d-inline-block text-dark mb-2">Drag and drop to configure Commands.</strong>
-                    <div class="btn-group me-1 float-end" role="group">
-                        <button type="button" onclick="clearCode()" class="btn btn-danger ">Clear Commands</button>
-                        <button type="button" class="btn btn-success " onclick="showCode()">Send Commands</button>
+
+
+    <!-- Row 2 -->
+    <div class="row mt-4">
+        <!-- Row 1 -->
+        <div class="col-xl-5 col-sm-4 mb-xl-0 mb-3">
+            <div class="card" style="background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}'); background-repeat: no-repeat;">
+                <div class="card-body pb-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="numbers">
+                                <p class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;"><b>Game Map</b></p>
+                            </div>
+                            {% set count = namespace(value=1) %}
+                            {% for map_list in map %}
+                                <div class="row">
+                                    {% for map_coordinates in map_list %}
+                                        {% if map_coordinates == '0' %}
+                                        <div class="div1" id="grid{{count.value}}">
+                                        </div>
+
+                                        {% elif  map_coordinates == '1' %}
+                                        <div class="div1" id="grid{{count.value}}">
+                                            <img src="{{ url_for('static', filename='/img/car.png')}}" width="40" height="40">
+                                        </div>
+
+                                        {% elif  map_coordinates == '2' %}
+                                        <div class="div1" id="grid{{count.value}}">
+                                            <img src="{{ url_for('static', filename='/img/yellow_box.png')}}" width="40" height="40">
+                                        </div>
+
+                                        {% elif  map_coordinates == '3' %}
+                                        <div class="div1" id="grid{{count.value}}">
+                                            <img src="{{ url_for('static', filename='/img/end.jpg')}}" width="40" height="40">
+                                        </div>
+                                        {% endif %}
+                                        {% set count.value = count.value + 1 %}
+                                    {% endfor %}
+                                </div>                           
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-                <div class="blockly-editor ">
-                    <div id="blocklyDiv" style="height: 500px; width: 820px;"></div>
-                    <xml id="toolbox" style="display: none">
-                        <block type="forward"></block>
-                        <block type="turn"></block>
-                        <block type="print"></block>
-                        <block type="repeatuntilend"></block>
-                        <block type="controls_if"></block>
-                        <block type="controls_repeat_ext"></block>
-                        <block type="math_number">
-                            <field name="NUM">123</field>
-                        </block>
-                        <block type="text_print"></block>
-                    </xml>
-                    <xml id="startBlocks" style="display: none">
-                    </xml>
-                </div>
             </div>
         </div>
-    </div>
-    <div class="col-sm-4 ">
-        <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
-            <div class="col-md-12 ">
-                <div class=" border-bottom mb-4">
-                    <strong class="d-inline-block mb-2 text-white">Command List</strong>
+        <div class="col-lg-5 mb-lg-0 mb-xl-0 mb-3">
+            <div class="card" style="background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}'); background-repeat: no-repeat;">
+                <div class="card-body ">
+                    <!-- Row 1 -->
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="d-flex flex-column h-100">
+                                <p class="font-weight-bolder" style="color:white"><b>Car Commands Flow</b></p>
+                                <p class="mb-2" style="color:white">Drag and drop to configure Commands.</p>
+                            </div>
+                        </div>
+                        <div class="col-2 d-grid gap-1 justify-content-md-end mb-1">
+                            <div>
+                                <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send</button>
+                            </div>
+                        </div>
+                        <div class="col-2 d-grid gap-1 justify-content-md-end mb-1">
+                            <div>
+                                <button type="button" onclick="clearCode()" class="btn btn-danger btn-sm me-1">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="blockly-editor ">
+                                <div id="blocklyDiv" style="height: 485px; width: 100%;"></div>
+                                <xml id="toolbox" style="display: none">
+                                    
+                                    <block type="forward"></block>
+                                    <block type="turn"></block>
+                                    <block type="controls_for">
+                                        <value name="FROM">
+                                            <block type="math_number">
+                                            <field name="NUM">1</field>
+                                            </block>
+                                        </value>
+                                        <value name="TO">
+                                            <block type="math_number">
+                                            <field name="NUM">10</field>
+                                            </block>
+                                        </value>
+                                        <value name="BY">
+                                            <block type="math_number">
+                                            <field name="NUM">1</field>
+                                            </block>
+                                        </value>
+                                        </block>                                   
+                                        <block type="logic_compare"></block>
+                                        <block type="logic_operation"></block>
+                                        <block type="logic_boolean"></block>
+                                        <block type="math_number">
+                                        <field name="NUM">42</field>
+                                        </block>
+
+                        
+                                    <block type="controls_if"></block>
+                                    <block type="controls_whileUntil"></block>
+            
+                                    <!-- <block type="print"></block> -->
+                                    <!-- <block type="repeatuntilend"></block> -->
+                                    <!-- <block type="controls_if"></block> -->
+                                    <!-- <block type="controls_repeat_ext"></block> -->
+                                    <!-- <block type="math_number">
+                                        <field name="NUM">123</field>
+                                    </block>
+                                    <block type="text_print"></block> -->
+                                </xml>
+                                <xml id="startBlocks" style="display: none">
+                                </xml>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- <ul id="sqnce-list"></ul> -->
-                <p class="mt-2" id="textArea">
-                </p>
+            </div> 
+        </div>  
+        <div class="col-xl-2 col-sm-2 mb-xl-0 mb-3">
+            <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
+                <div class="col-md-12 ">
+                    <div class=" border-bottom mb-3">
+                        <strong class="d-inline-block mb-2 text-white">Command List</strong>
+                    </div>
+                    <p class="mt-2" id="textArea"></p>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal popup for Success -->
+<div id="game_won_modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: green;">
+                <h5 class="modal-title" style="color: white"><i class="fas fa-trophy"></i> Game Won!</h5>
+            </div>
+            <div class="modal-body">
+                <p>The car has successfully traversed its path!</p>
+            </div>
+            <div class="modal-footer">
+            	<a class="btn btn-primary" href="/" role="button"> Return to Home Page</a>
+                <a class="btn btn-secondary" href="/dashboard" role="button"> View Statistics</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal popup for Failure -->
+<div id="game_over_modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: red;">
+                <h5 class="modal-title" style="color: white"><i class="fas fa-skull"></i> Game Over!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>The car has failed to traverse its path!</p>
+            </div>
+            <div class="modal-footer">
+            	<a class="btn btn-primary" href="#" role="button"> Start a new Game</a>
+                <a class="btn btn-secondary" href="#" role="button"> View Statistics</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var workspace = Blockly.inject('blocklyDiv',
         {
             toolbox: document.getElementById('toolbox'
-            ), trashcan: true
+            ), trashcan: true,
+                horizontalLayout: true, 
+                collapse : true
         });
 
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
-    function showCode() {
+    // One function 
+    var map = {{ map|safe }};  // Get the map from Python 
+    var counter = 1;            // Counter is used to facilitate 
+    var path_start = 0;         // Start of the map path 
+    var path_end = 0;           // End of the map path
+    const path = [];            // List that contains the map path
+
+    var car_index = 0;          // Where the Car traveresed 
+    const car_path = [];        // Path the car traveresed 
+    var chain_commands = [];    // For FOR Loop 
+    var i = 0;                  // 
+    var car_face_downwards = true;
+    var car_face_upwards = false;
+    var car_face_left = false;
+    var car_face_right = false;  
+
+    // Check for the start flag 
+    for (let i = 0; i < map.length; i++) {
+        if (map[i].includes("1")){
+            index = map[i].indexOf("1") + counter;
+            path_start = index;
+            path.push(path_start);
+            break;
+        }
+        counter = counter + 8;
+    }
+
+    // Check for the tiles flag 
+    counter = 1; 
+    for (let i = 0; i < map.length; i++) {
+        for (let y = 0; y < map[i].length; y++){
+            // console.log(map[i][y]);
+            if (map[i][y] == "2"){
+                index = y + counter;
+                path.push(index);
+            }
+        }
+        counter = counter + 8;
+    }
+    // all_paths.push(path);
+
+    // Check for the end flag 
+    counter = 1; 
+    for (let i = 0; i < map.length; i++) {
+        if (map[i].includes("3")){
+            index = map[i].indexOf("3") + counter;
+            path_end = index;
+            path.push(path_end);
+            break;
+        }
+        counter = counter + 8;
+    }   
+
+
+    // Function to check if the car has exited the yellow boundary 
+    function boundaryChecks(car_index){
+       if (path.indexOf(car_index) == -1){
+            try{
+                document.getElementById("grid" + car_index).style.background = "red";    
+            } catch {
+                // pass 
+            }
+            $("#game_over_modal").modal("show");
+            return true;
+        }
+    }
+
+
+    //  Function to process a FOR loop 
+    function processLoop(start, end, car_index){
+        for (let a = start; a < end; a++){
+            for (let b = 0; b < chain_commands.length; b++){
+                
+                if (chain_commands[b] == "  Motor_Left();"){
+                    car_index = turnLeft(car_index); 
+                    car_path.push(car_index);
+                }
+
+                else if (chain_commands[b] == "  Motor_Right();"){
+                    car_index = turnRight(car_index); 
+                    car_path.push(car_index);
+                }
+
+                else if (chain_commands[b] == "  Motor_Start();"){
+                    car_index = moveForward(car_index); 
+                    car_path.push(car_index);
+                }                      
+
+                else if (chain_commands[b].includes("for")){
+                    alert("yas");
+                }
+                document.getElementById("grid" + car_index).style.background = "green"; 
+                 
+
+
+
+
+                // alert(chain_commands[b]);
+                // Check to see if the car has exited the yellow boundary 
+                // if (path.indexOf(car_index) === -1){
+                //     alert("yes");
+                //     if (car_index % 8 == 1){
+                //         $("#game_over_modal").modal("show");
+                //         return;
+                //     }
+                //     document.getElementById("grid" + car_index).style.background = "red";    
+                //     $("#game_over_modal").modal("show");
+                //     return;
+                // }
+                document.getElementById("grid" + car_index).style.background = "green";  
+            }
+        }
+        chain_commands = [];
+        return car_index;
+    }
+     
+
+    // Function to process the car index if the car turns left 
+    function turnLeft(car_index){
+        if (car_face_downwards == true){
+            car_index += 1;
+            car_face_right = true;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+
+        else if (car_face_upwards == true){
+            car_index -= 1;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = true;
+        }
+
+        else if (car_face_left == true){
+            car_index += 8;
+            car_face_right = false;
+            car_face_downwards = true;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+
+        else if (car_face_right == true){
+            car_index -= 8;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = true;
+            car_face_left = false;           
+        }
+        return car_index;
+    }
+
+
+    // Function to process the car index if the car turns right 
+    function turnRight(car_index){
+        if (car_face_downwards == true){
+            car_index -= 1;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = true;
+
+        }
+
+        else if (car_face_upwards == true){
+            car_index += 1;
+            car_face_right = true;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+
+        else if (car_face_left == true){
+            car_index -= 8;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = true;
+            car_face_left = false;
+        }
+
+        else if (car_face_right == true){
+            car_index += 8;
+            car_face_right = false;
+            car_face_downwards = true;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+        return car_index; 
+    }
+
+
+    // Function to process the car index if the car moves forward 
+    function moveForward(car_index){
+        if (car_face_downwards == true){
+            car_index += 8;
+            car_face_right = false;
+            car_face_downwards = true;
+            car_face_upwards = false;
+            car_face_left = false;           
+        }
+
+        else if (car_face_upwards == true){
+            car_index -= 8;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = true;
+            car_face_left = false;
+        }
+
+        else if (car_face_left == true){
+            car_index -= 1;
+            car_face_right = false;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = true;
+        }
+
+        else if (car_face_right == true){
+            car_index += 1;
+            car_face_right = true;
+            car_face_downwards = false;
+            car_face_upwards = false;
+            car_face_left = false;
+        }
+        return car_index; 
+    }
+
+
+    // Function to check the commands obtained from the "Command List" textarea from the webpage.
+    function codeChecks(command, commands, path, car_index){
+        // Check 
+        if (command == "Motor_Left();"){
+            car_index = turnLeft(car_index); 
+            car_path.push(car_index);
+        }
+
+        // Check 
+        else if (command == "Motor_Right();"){
+            car_index = turnRight(car_index); 
+            car_path.push(car_index);
+        }
+
+        // Check
+        else if (command == "Motor_Start();"){
+            car_index = moveForward(car_index); 
+            car_path.push(car_index);
+        }  
+        
+        // Check 
+        else if (command.includes("for")){
+            start = command.substring(9, 10);
+            end = command.substring(17, 19);
+            if (end.includes(";")){
+                end = command.substring(17, 18);
+            }
+
+            var lastline = false;
+            while (lastline == false){
+                if (commands[i] == "}"){
+                    i = i - 1;
+                    lastline = true;
+                }
+                
+                else{
+                    chain_commands.push(commands[i]);
+                }
+                i = i + 1;
+            }
+            car_index = processLoop(start, end, car_index);
+        }
+        try{
+            document.getElementById("grid" + car_index).style.background = "green";  
+        } catch(error){
+            // pass 
+        }
+        return car_index;
+    }
+
+
+    // Function to parse and execute the commands on the "Command List" textarea from the webpage.
+    function showCode(){
+        var car_index = 0;
         // Generate code and display it.
+        while (directionArr.length > 0) {
+            directionArr.pop();
+        }
+        result = "";
         Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
         Blockly.JavaScript.addReservedWords('code');
-
         var code = Blockly.JavaScript.workspaceToCode(workspace);
-        // alert(code);
-        document.getElementById('textArea').innerText = code;
-    }
+        result = code.concat("\n", result);
+        document.getElementById('textArea').innerText = result;
 
-    function clearCode() {
-        document.getElementById('textArea').innerText = "";
-    }
+        var game_over = false; 
 
-    // function runCode() {
-    //     // Generate JavaScript code and run it.
-    //     window.LoopTrap = 1000;
-    //     Blockly.JavaScript.INFINITE_LOOP_TRAP =
-    //         'if (--window.LoopTrap == 0) throw "Infinite loop.";\n';
-    //     var code = Blockly.JavaScript.workspaceToCode(workspace);
-    //     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-    //     try {
-    //         eval(code);
-    //     } catch (e) {
-    //         alert(e);
-    //     }
-    // }
+        // Parse the commands gotten from the 'textArea'
+        const commands = code.split("\n");
+        var car_index = path_start;
+        document.getElementById("grid" + car_index).style.background = "green";         
 
-    document.getElementById("execute_btn").onclick = function () {
-        const ul = document.getElementById('sqnce-list');
-        const listItems = ul.getElementsByTagName('li');
+        // Execute the commands 
+        while (i != commands.length - 1){
+            alert(car_index);
+            car_index = codeChecks(commands[i], commands, path, car_index);
+            game_over = boundaryChecks(car_index);
 
-        // Loop through the NodeList object.
-        for (let i = 0; i <= listItems.length - 1; i++) {
-            var http = new XMLHttpRequest();
-            var url = 'http://127.0.0.1:5000/car/commands';
-            var params = 'direction=webportal&command=' + listItems[i].innerHTML;
-            http.open('POST', url, true);
-
-            //Send the proper header information along with the request
-            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            http.send(params);
+            if (game_over == true){
+                break;
+            }
+            i++; 
         }
+        
+        alert('hi');
+        // Check to see if the car has reached the end point 
+        if (car_index != path_end){
+            document.getElementById("grid" + car_index).style.background = "red";    
+            $("#game_over_modal").modal("show");
+            return;
+        }        
+        $("#game_won_modal").modal("show");
     }
 </script>
 {% endblock %}

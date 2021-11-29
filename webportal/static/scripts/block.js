@@ -56,7 +56,8 @@ Blockly.Blocks['turn'] = {
     init: function () {
         this.appendDummyInput()
             .appendField("Turn")
-            .appendField(new Blockly.FieldDropdown([["Left 90°", "Motor_Left();\n"], ["Right 90°", "Motor_Right();\n"]]), "NAME");
+            .appendField(new Blockly.FieldDropdown([["Left", "Motor_Left();\n"], ["Right", "Motor_Right();\n"]]), "NAME")
+            .appendField("and Move Forward");
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour(330);
@@ -130,6 +131,54 @@ Blockly.JavaScript['print'] = function (block) {
     var code = 'uprintf();\n';
     return code;
 };
+
+
+// ////////////////////////////////////////////////////////////////////////
+// Ported from terminal.js
+var workspace = Blockly.inject('blocklyDiv',
+{
+    toolbox: document.getElementById('toolbox'
+    ), trashcan: true
+});
+
+Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
+
+
+function illustrateCommand(){
+
+}
+
+
+
+// function showCode() {
+// // Generate code and display it.
+//     while (directionArr.length > 0) {
+//         directionArr.pop();
+//     }
+//     result = "";
+
+//     Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+//     Blockly.JavaScript.addReservedWords('code');
+
+//     var code = Blockly.JavaScript.workspaceToCode(workspace);
+
+//     directionArr.forEach(function (entry) {
+//         result = result.concat("", entry);
+//     });
+//     alert(result);
+//     result = code.concat("\n", result);
+//     document.getElementById('textArea').innerText = result;
+// }
+
+function clearCode() {
+    document.getElementById('textArea').innerText = "";
+}
+
+
+
+
+
+
 
 // Blockly.JavaScript['print'] = function(block) {
 //     // Search the text for a substring.

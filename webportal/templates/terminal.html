@@ -116,13 +116,16 @@
                             <div>
                                 <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send</button>
                             </div>
+                            
                         </div>
                         <div class="col-1 d-grid p-0 mb-1">
                             <div>
                                 <button type="button" onclick="resetGame()"
                                     class="btn btn-danger btn-sm me-1">Clear</button>
                             </div>
+                            
                         </div>
+                        
                     </div>
 
                     <!-- Row 2 -->
@@ -186,6 +189,7 @@
                 <div class="col-md-12 ">
                     <div class=" border-bottom mb-3">
                         <strong class="d-inline-block mb-2 text-white">Command List</strong>
+                        <div id="totalCommands">No. of Blocks Used: 0</div>
                     </div>
                     <p class="mt-2" id="textArea"></p>
                 </div>
@@ -250,6 +254,10 @@
     const car_path = [];        // Path the car traveresed 
     var i = 0;                  // 
 
+    setInterval(function(){ 
+        numberofblockly = parseInt(workspace.getAllBlocks(false).length)
+        document.getElementById('totalCommands').innerText = 'No. of Blocks Used: '+numberofblockly.toString();
+     }, 500);
 
     var car_face_downwards = false;
     var car_face_upwards = true;

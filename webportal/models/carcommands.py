@@ -28,6 +28,18 @@ def get_command_stats():
 	print(data)
 
 
+def reset_command():
+	# Delete all entires in the database 
+	num_rows_deleted = db.session.query(CarCommands).delete()
+	db.session.commit() 
+
+
+def delete_command():
+	data = db.session.query(CarCommands).first()
+	db.session.query(CarCommands).filter(CarCommands.id==data.id).delete()
+	db.session.commit()
+	return {"command": data.command}
+	
 def reset():
 	# Delete all entires in the database 
 	num_rows_deleted = db.session.query(CarCommands).delete()

@@ -605,7 +605,6 @@
                 }
             }
         }
-        console.log(map)
 
         var randint = Math.floor(Math.random() * listofroute.length);
 
@@ -646,6 +645,8 @@
             // diagonal bottom right side
             map[listofroute[randint][0]-1][listofroute[randint][1]+1] = '2'
         }
+
+        console.log(map)
 
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
                     <div class="row">\

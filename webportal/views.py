@@ -19,8 +19,11 @@ def maps():
 
 @views.route("/dashboard")
 def dashboard():
-    car_data = get_car_stats()
-    command_data = get_command_stats()
+    try:
+        car_data = get_car_stats()
+    except IndexError:
+        car_data = [] 
+    # command_data = get_command_stats()
     return render_template('dashboard.html', title="Dashboard", car_data=car_data)
 
 

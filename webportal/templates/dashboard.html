@@ -1,5 +1,5 @@
-{% extends "layout.html" %} 
-{% block content %}
+{% extends "layout.html" %} {% block content %}
+{% if car_data is defined and car_data|length > 0 %}
 <div class="container-fluid py-4">
 	<div class="row">
 		<!-- Row 1 -->
@@ -191,7 +191,7 @@
 	     	</div>
      	</div>
 	</div>
-
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.esm.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.esm.min.js"></script>
@@ -427,12 +427,11 @@
 	});
 </script>
 
-
-<script>
-	setTimeout(function() {
-	  location.reload();
-	}, 30000);
-</script>
+{% else %}
+<div class="alert alert-danger" role="alert">
+	<i class="fas fa-exclamation-triangle"></i> Error! There are no data to be displayed in the dashboard! 
+</div>
+{% endif %}
 {% endblock %}
 
 

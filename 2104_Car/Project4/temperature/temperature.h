@@ -20,11 +20,27 @@ uint32_t cal85;
 float calDifference;
 float tempC;
 float tempF;
-int16_t conRes;
 
-inline void uart_println(const char* str, ...);
+inline void uart_println(const char* str, ...)
+{
+    static char print_buffer[256];
+    va_list lst;
+    va_start(lst, str);
+    vsnprintf(print_buffer, 256, str, lst);
+    str = print_buffer;
+    while (*str)
+    {
+        while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
+        UCA0TXBUF = *str;
+        str++;
+    }
+    while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
+    UCA0TXBUF = '\r';
+    while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
+    UCA0TXBUF = '\n';
+}
 
-void initTemp(void);
+int initTemp(void);
 
 
 #endif /* TEMPERATURE_TEMPERATURE_H_ */

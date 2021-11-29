@@ -13,6 +13,19 @@
 <script src="../static/scripts/sound_blocks.js"></script> -->
 <!-- <script src="scripts/workspace.js"></script>
 <script src="scripts/main.js"></script> -->
+
+<style>
+    .bgMap {
+        background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}');
+        background-repeat: no-repeat;
+    }
+
+    .bgProg {
+        background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}');
+        background-repeat: no-repeat;
+    }
+</style>
+
 <!-- Row 1 -->
 <div class="container-fluid py-4">
     <div class="row">
@@ -25,10 +38,13 @@
                                 <h5 class="font-weight-bolder mb-0">
                                     <b>Playing the game</b>
                                 </h5>
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">The player drags and drops the blocks in the "Car Command Flow" column to create a sequence of car movement commands.</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">The player drags and drops the
+                                    blocks in the "Car Command Flow" column to create a sequence of car movement
+                                    commands.</p>
                                 <br>
                                 <p><b>Brief Game Rules</b></p>
-                                <p>If the car movement falls outside of the path demarked by the yellow boxes, the player loses the gamee.</p>
+                                <p>If the car movement falls outside of the path demarked by the yellow boxes, the
+                                    player loses the gamee.</p>
                             </div>
                         </div>
                         <div class="col-2 text-end">
@@ -39,70 +55,72 @@
             </div>
         </div>
     </div>
-
-
     <!-- Row 2 -->
     <div class="row mt-4">
         <!-- Row 1 -->
-        <div class="col-xl-5 col-sm-4 mb-xl-0 mb-3">
-            <div class="card" style="background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}'); background-repeat: no-repeat;">
+        <div class="col-xl-5 col-sm-4 mb-xl-0 mb-3 pe-0">
+            <div id="createMap" class="card bgMap">
                 <div class="card-body pb-4">
                     <div class="row">
                         <div class="col-12">
-                            <div class="numbers">
-                                <p class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;"><b>Game Map</b></p>
+                            <div id="changeTitle" class="numbers">
+                                <p class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;">
+                                    <b>Game Map</b>
+                                </p>
                             </div>
                             {% set count = namespace(value=1) %}
                             {% for map_list in map %}
-                                <div class="row">
-                                    {% for map_coordinates in map_list %}
-                                        {% if map_coordinates == '0' %}
-                                        <div class="div1" id="grid{{count.value}}">
-                                        </div>
+                            <div class="row">
+                                {% for map_coordinates in map_list %}
+                                {% if map_coordinates == '0' %}
+                                <div class="div1" id="grid{{count.value}}">
+                                </div>
 
-                                        {% elif  map_coordinates == '1' %}
-                                        <div class="div1" id="grid{{count.value}}">
-                                            <img src="{{ url_for('static', filename='/img/car.png')}}" width="40" height="40">
-                                        </div>
+                                {% elif map_coordinates == '1' %}
+                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">
+                                    <img id="carImg" src="{{ url_for('static', filename='/img/carimg.png')}}" width="40"
+                                        height="40">
+                                </div>
 
-                                        {% elif  map_coordinates == '2' %}
-                                        <div class="div1" id="grid{{count.value}}">
-                                            <img src="{{ url_for('static', filename='/img/yellow_box.png')}}" width="40" height="40">
-                                        </div>
+                                {% elif map_coordinates == '2' %}
+                                <div class="div1" id="grid{{count.value}}" style="background:yellow;">
+                                    <!-- <img src="{{ url_for('static', filename='/img/yellow_box.png')}}" width="40" height="40"> -->
+                                </div>
 
-                                        {% elif  map_coordinates == '3' %}
-                                        <div class="div1" id="grid{{count.value}}">
-                                            <img src="{{ url_for('static', filename='/img/end.jpg')}}" width="40" height="40">
-                                        </div>
-                                        {% endif %}
-                                        {% set count.value = count.value + 1 %}
-                                    {% endfor %}
-                                </div>                           
+                                {% elif map_coordinates == '3' %}
+                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">
+                                    <img src="{{ url_for('static', filename='/img/end.jpg')}}" width="40" height="40">
+                                </div>
+                                {% endif %}
+                                {% set count.value = count.value + 1 %}
+                                {% endfor %}
+                            </div>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-5 mb-lg-0 mb-xl-0 mb-3">
-            <div class="card" style="background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}'); background-repeat: no-repeat;">
+        <div class="col-lg-5 mb-lg-0 mb-xl-0 mb-3 pe-0">
+            <div class="card bgProg">
                 <div class="card-body ">
                     <!-- Row 1 -->
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-9">
                             <div class="d-flex flex-column h-100">
                                 <p class="font-weight-bolder" style="color:white"><b>Car Commands Flow</b></p>
                                 <p class="mb-2" style="color:white">Drag and drop to configure Commands.</p>
                             </div>
                         </div>
-                        <div class="col-2 d-grid gap-1 justify-content-md-end mb-1">
+                        <div class="col-1 d-grid gap-1 justify-content-md-end mb-1">
                             <div>
                                 <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send</button>
                             </div>
                         </div>
-                        <div class="col-2 d-grid gap-1 justify-content-md-end mb-1">
+                        <div class="col-1 d-grid p-0 mb-1">
                             <div>
-                                <button type="button" onclick="clearCode()" class="btn btn-danger btn-sm me-1">Clear</button>
+                                <button type="button" onclick="resetGame()"
+                                    class="btn btn-danger btn-sm me-1">Clear</button>
                             </div>
                         </div>
                     </div>
@@ -111,39 +129,41 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="blockly-editor ">
-                                <div id="blocklyDiv" style="height: 485px; width: 100%;"></div>
-                                <xml id="toolbox" style="display: none">
-                                    
-                                    <block type="forward"></block>
-                                    <block type="turn"></block>
-                                    <block type="controls_for">
-                                        <value name="FROM">
-                                            <block type="math_number">
-                                            <field name="NUM">1</field>
-                                            </block>
-                                        </value>
-                                        <value name="TO">
-                                            <block type="math_number">
-                                            <field name="NUM">10</field>
-                                            </block>
-                                        </value>
-                                        <value name="BY">
-                                            <block type="math_number">
-                                            <field name="NUM">1</field>
-                                            </block>
-                                        </value>
-                                        </block>                                   
-                                        <block type="logic_compare"></block>
-                                        <block type="logic_operation"></block>
+                                <div id="blocklyDiv" style="height: 500px; width: 100%;"></div>
+                                <xml id="toolbox" style="display: none;">
+                                    <category name="Movement" colour="%{BKY_COLOUR_HUE}">
+                                        <block type="forward"></block>
+                                        <block type="turn"></block>
+                                    </category>
+                                    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+                                        <block type="controls_for">
+                                            <value name="FROM">
+                                                <block type="math_number">
+                                                    <field name="NUM">1</field>
+                                                </block>
+                                            </value>
+                                            <value name="TO">
+                                                <block type="math_number">
+                                                    <field name="NUM">10</field>
+                                                </block>
+                                            </value>
+                                            <value name="BY">
+                                                <block type="math_number">
+                                                    <field name="NUM">1</field>
+                                                </block>
+                                            </value>
+                                        </block>
                                         <block type="logic_boolean"></block>
                                         <block type="math_number">
-                                        <field name="NUM">42</field>
+                                            <field name="NUM">42</field>
                                         </block>
-
-                        
-                                    <block type="controls_if"></block>
-                                    <block type="controls_whileUntil"></block>
-            
+                                        <block type="controls_if"></block>
+                                        <block type="controls_whileUntil"></block>
+                                        <block type="logic_compare"></block>
+                                        <block type="logic_operation"></block>
+                                    </category>
+                                    <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
+                                    </category>
                                     <!-- <block type="print"></block> -->
                                     <!-- <block type="repeatuntilend"></block> -->
                                     <!-- <block type="controls_if"></block> -->
@@ -159,8 +179,8 @@
                         </div>
                     </div>
                 </div>
-            </div> 
-        </div>  
+            </div>
+        </div>
         <div class="col-xl-2 col-sm-2 mb-xl-0 mb-3">
             <div class="p-2 p-md-4 mb-4 text-white rounded bg-secondary h-100">
                 <div class="col-md-12 ">
@@ -183,10 +203,10 @@
             </div>
             <div class="modal-body">
                 <p>The car has successfully traversed its path!</p>
+                <a style="margin:auto;" class="btn btn-primary" href="/dashboard" role="button">View data at Dashboard</a>
             </div>
             <div class="modal-footer">
-            	<a class="btn btn-primary" href="/" role="button"> Return to Home Page</a>
-                <a class="btn btn-secondary" href="/dashboard" role="button"> View Statistics</a>
+                <btn style="margin:auto;" class="btn btn-primary" data-bs-dismiss="modal" onclick="generateBomb();" role="button">Proceed to Challenging Stage</btn>
             </div>
         </div>
     </div>
@@ -198,14 +218,13 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: red;">
                 <h5 class="modal-title" style="color: white"><i class="fas fa-skull"></i> Game Over!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"  onclick="resetGame();"></button>
             </div>
             <div class="modal-body">
                 <p>The car has failed to traverse its path!</p>
             </div>
             <div class="modal-footer">
-            	<a class="btn btn-primary" href="#" role="button"> Start a new Game</a>
-                <a class="btn btn-secondary" href="#" role="button"> View Statistics</a>
+                <a class="btn btn-primary" data-bs-dismiss="modal" onclick="resetGame();" role="button"> Replay the Game</a>
             </div>
         </div>
     </div>
@@ -216,12 +235,12 @@
         {
             toolbox: document.getElementById('toolbox'
             ), trashcan: true,
-                horizontalLayout: true, 
-                collapse : true
+            horizontalLayout: true,
+            collapse: true
         });
 
     // One function 
-    var map = {{ map|safe }};  // Get the map from Python 
+    var map = {{ map| safe }};  // Get the map from Python 
     var counter = 1;            // Counter is used to facilitate 
     var path_start = 0;         // Start of the map path 
     var path_end = 0;           // End of the map path
@@ -229,16 +248,17 @@
 
     var car_index = 0;          // Where the Car traveresed 
     const car_path = [];        // Path the car traveresed 
-    var chain_commands = [];    // For FOR Loop 
     var i = 0;                  // 
-    var car_face_downwards = true;
-    var car_face_upwards = false;
+
+
+    var car_face_downwards = false;
+    var car_face_upwards = true;
     var car_face_left = false;
-    var car_face_right = false;  
+    var car_face_right = false;
 
     // Check for the start flag 
     for (let i = 0; i < map.length; i++) {
-        if (map[i].includes("1")){
+        if (map[i].includes("1")) {
             index = map[i].indexOf("1") + counter;
             path_start = index;
             path.push(path_start);
@@ -248,261 +268,246 @@
     }
 
     // Check for the tiles flag 
-    counter = 1; 
+    counter = 1;
     for (let i = 0; i < map.length; i++) {
-        for (let y = 0; y < map[i].length; y++){
+        for (let y = 0; y < map[i].length; y++) {
             // console.log(map[i][y]);
-            if (map[i][y] == "2"){
+            if (map[i][y] == "2") {
                 index = y + counter;
                 path.push(index);
             }
         }
         counter = counter + 8;
     }
-    // all_paths.push(path);
 
     // Check for the end flag 
-    counter = 1; 
+    counter = 1;
     for (let i = 0; i < map.length; i++) {
-        if (map[i].includes("3")){
+        if (map[i].includes("3")) {
             index = map[i].indexOf("3") + counter;
             path_end = index;
             path.push(path_end);
             break;
         }
         counter = counter + 8;
-    }   
-
-
-    // Function to check if the car has exited the yellow boundary 
-    function boundaryChecks(car_index){
-       if (path.indexOf(car_index) == -1){
-            try{
-                document.getElementById("grid" + car_index).style.background = "red";    
-            } catch {
-                // pass 
-            }
-            $("#game_over_modal").modal("show");
-            return true;
-        }
     }
-
-
-    //  Function to process a FOR loop 
-    function processLoop(start, end, car_index){
-        for (let a = start; a < end; a++){
-            for (let b = 0; b < chain_commands.length; b++){
-                
-                if (chain_commands[b] == "  Motor_Left();"){
-                    car_index = turnLeft(car_index); 
-                    car_path.push(car_index);
-                }
-
-                else if (chain_commands[b] == "  Motor_Right();"){
-                    car_index = turnRight(car_index); 
-                    car_path.push(car_index);
-                }
-
-                else if (chain_commands[b] == "  Motor_Start();"){
-                    car_index = moveForward(car_index); 
-                    car_path.push(car_index);
-                }                      
-
-                else if (chain_commands[b].includes("for")){
-                    alert("yas");
-                }
-                document.getElementById("grid" + car_index).style.background = "green"; 
-                 
-
-
-
-
-                // alert(chain_commands[b]);
-                // Check to see if the car has exited the yellow boundary 
-                // if (path.indexOf(car_index) === -1){
-                //     alert("yes");
-                //     if (car_index % 8 == 1){
-                //         $("#game_over_modal").modal("show");
-                //         return;
-                //     }
-                //     document.getElementById("grid" + car_index).style.background = "red";    
-                //     $("#game_over_modal").modal("show");
-                //     return;
-                // }
-                document.getElementById("grid" + car_index).style.background = "green";  
-            }
-        }
-        chain_commands = [];
-        return car_index;
-    }
-     
 
     // Function to process the car index if the car turns left 
-    function turnLeft(car_index){
-        if (car_face_downwards == true){
+    function turnLeft(car_index) {
+        if (car_face_downwards == true) {
             car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
             car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        else if (car_face_upwards == true){
+        else if (car_face_upwards == true) {
             car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
             car_face_left = true;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        else if (car_face_left == true){
+        else if (car_face_left == true) {
             car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
             car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        else if (car_face_right == true){
+        else if (car_face_right == true) {
             car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
-            car_face_left = false;           
+            car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
         return car_index;
     }
 
 
     // Function to process the car index if the car turns right 
-    function turnRight(car_index){
-        if (car_face_downwards == true){
+    function turnRight(car_index) {
+        if (car_face_downwards == true) {
             car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
             car_face_left = true;
-
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        else if (car_face_upwards == true){
+        else if (car_face_upwards == true) {
             car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
             car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        else if (car_face_left == true){
+        else if (car_face_left == true) {
             car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
             car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        else if (car_face_right == true){
+        else if (car_face_right == true) {
             car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
             car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
-        return car_index; 
+        return car_index;
     }
-
 
     // Function to process the car index if the car moves forward 
-    function moveForward(car_index){
-        if (car_face_downwards == true){
+    function moveForward(car_index) {
+        if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
-            car_face_left = false;           
+            car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
+            }
         }
-
-        else if (car_face_upwards == true){
+        else if (car_face_upwards == true) {
             car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
             car_face_left = false;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';;
+            } catch (error) {
+                console.log(error)
+            }
         }
-
-        else if (car_face_left == true){
+        else if (car_face_left == true) {
             car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
             car_face_left = true;
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';;
+            } catch (error) {
+                console.log(error)
+            }
         }
-
-        else if (car_face_right == true){
+        else if (car_face_right == true) {
             car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
             car_face_left = false;
-        }
-        return car_index; 
-    }
-
-
-    // Function to check the commands obtained from the "Command List" textarea from the webpage.
-    function codeChecks(command, commands, path, car_index){
-        // Check 
-        if (command == "Motor_Left();"){
-            car_index = turnLeft(car_index); 
-            car_path.push(car_index);
-        }
-
-        // Check 
-        else if (command == "Motor_Right();"){
-            car_index = turnRight(car_index); 
-            car_path.push(car_index);
-        }
-
-        // Check
-        else if (command == "Motor_Start();"){
-            car_index = moveForward(car_index); 
-            car_path.push(car_index);
-        }  
-        
-        // Check 
-        else if (command.includes("for")){
-            start = command.substring(9, 10);
-            end = command.substring(17, 19);
-            if (end.includes(";")){
-                end = command.substring(17, 18);
+            try {
+                document.getElementById("grid" + car_index).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+            } catch (error) {
+                console.log(error)
             }
-
-            var lastline = false;
-            while (lastline == false){
-                if (commands[i] == "}"){
-                    i = i - 1;
-                    lastline = true;
-                }
-                
-                else{
-                    chain_commands.push(commands[i]);
-                }
-                i = i + 1;
-            }
-            car_index = processLoop(start, end, car_index);
-        }
-        try{
-            document.getElementById("grid" + car_index).style.background = "green";  
-        } catch(error){
-            // pass 
         }
         return car_index;
     }
 
 
+    // Move the car left
+    function Motor_Left() {
+        car_index = turnLeft(car_index);
+        if (!checkRoute(car_index)) {
+            game_over = true
+        }
+        car_path.push(car_index);
+    }
+
+    // Move the car right 
+    function Motor_Right() {
+        car_index = turnRight(car_index);
+        if (!checkRoute(car_index)) {
+            game_over = true
+        }
+        car_path.push(car_index);
+    }
+
+    // Move the car forward
+    function Motor_Start() {
+        car_index = moveForward(car_index);
+        if (!checkRoute(car_index)) {
+            game_over = true
+        }
+        car_path.push(car_index);
+    }
+
+    function checkRoute(gridnum) {
+        let x = 0
+        let y = 0
+        x = Math.floor(gridnum / 8)
+        y = (gridnum - ((x) * 8)) - 1
+        if (map[x][y] == 2) {
+            document.getElementById("grid" + gridnum).style.backgroundColor = "green"
+            return true
+        } else if (map[x][y] == 3) {
+            document.getElementById("grid" + gridnum).style.backgroundColor = "green"
+            return true
+        }
+        else {
+            document.getElementById("grid" + gridnum).style.backgroundColor = "red"
+            return false
+        }
+
+    }
+    var game_over = false;
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
-    function showCode(){
-        var car_index = 0;
+    function showCode() {
+        console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
             directionArr.pop();
@@ -514,33 +519,117 @@
         result = code.concat("\n", result);
         document.getElementById('textArea').innerText = result;
 
-        var game_over = false; 
+
 
         // Parse the commands gotten from the 'textArea'
         const commands = code.split("\n");
-        var car_index = path_start;
-        document.getElementById("grid" + car_index).style.background = "green";         
+        car_index = path_start;
 
-        // Execute the commands 
-        while (i != commands.length - 1){
-            alert(car_index);
-            car_index = codeChecks(commands[i], commands, path, car_index);
-            game_over = boundaryChecks(car_index);
+        //Run the command list using eval function
+        eval(code);
 
-            if (game_over == true){
-                break;
-            }
-            i++; 
-        }
-        
-        alert('hi');
         // Check to see if the car has reached the end point 
-        if (car_index != path_end){
-            document.getElementById("grid" + car_index).style.background = "red";    
+        if (car_index == path_end) {
+            document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
+            $("#game_won_modal").modal("show");
+            return;
+        }
+        else {
+            try {
+                document.getElementById("grid" + car_index).style.background = "red";
+            } catch (err) {
+                console.log(err)
+            }
+            $("#game_over_modal").modal({backdrop: 'static', keyboard: false})
             $("#game_over_modal").modal("show");
             return;
-        }        
-        $("#game_won_modal").modal("show");
+        }
+
+    }
+
+    function resetGame() {
+        clearCode();
+        document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
+                    <div class="row">\
+                        <div class="col-12">\
+                            <div class="numbers">\
+                                <p id="changeTitle" class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;">\
+                                    <b>Game Map</b>\
+                                </p>\
+                            </div>\
+                            {% set count = namespace(value=1) %}\
+                            {% for map_list in map %}\
+                            <div class="row">\
+                                {% for map_coordinates in map_list %}\
+                                {% if map_coordinates == "0" %}\
+                                <div class="div1" id="grid{{count.value}}">\
+                                </div>\
+                                {% elif map_coordinates == "1" %}\
+                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">\
+                                    <img id="carImg" src="{{ url_for("static", filename="/img/carimg.png")}}" width="40"\
+                                        height="40">\
+                                </div>\
+                                {% elif map_coordinates == "2" %}\
+                                <div class="div1" id="grid{{count.value}}" style="background:yellow;">\
+                                </div>\
+                                {% elif map_coordinates == "3" %}\
+                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">\
+                                    <img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">\
+                                </div>\
+                                {% endif %}\
+                                {% set count.value = count.value + 1 %}\
+                                {% endfor %}\
+                            </div>\
+                            {% endfor %}\
+                        </div>\
+                    </div>\
+                </div>';
+        workspace.clear()
+    }
+
+    function generateBomb() {
+
+        map = [
+            [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0]]
+        console.log(map)
+        // let x = 0
+        // let y = 0
+        // x = Math.floor(gridnum / 8)
+        // y = (gridnum - ((x) * 8)) - 1
+        // if (map[x][y] == 2) {
+        //     document.getElementById("grid" + gridnum).style.backgroundColor = "green"
+        //     return true
+        // }
+        resetGame()
+        document.getElementById("changeTitle").innerHTML = '<div style="color:red; font-weight:bold;"> Game Map (Challenge Mode) </div>'
+        
+
+
     }
 </script>
+
+<style>
+    .faceup {
+        transform: rotate(0deg);
+    }
+
+    .faceleft {
+        transform: rotate(-90deg);
+    }
+
+    .faceright {
+        transform: rotate(90deg);
+    }
+
+    .facedown {
+        transform: rotate(180deg);
+    }
+</style>
 {% endblock %}

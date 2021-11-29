@@ -589,8 +589,10 @@
 
     function generateBomb() {
 
+        let listofroute = []
+
         map = [
-            [0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0],
@@ -599,6 +601,43 @@
         [0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0]]
         console.log(map)
+
+        document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
+                    <div class="row">\
+                        <div class="col-12">\
+                            <div class="numbers">\
+                                <p id="changeTitle" class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;">\
+                                    <b>Game Map</b>\
+                                </p>\
+                            </div>\
+                            {% set count = namespace(value=1) %}\
+                            {% for map_list in map %}\
+                            <div class="row">\
+                                {% for map_coordinates in map_list %}\
+                                {% if map_coordinates == "0" %}\
+                                <div class="div1" id="grid{{count.value}}">\
+                                </div>\
+                                {% elif map_coordinates == "1" %}\
+                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">\
+                                    <img id="carImg" src="{{ url_for("static", filename="/img/carimg.png")}}" width="40"\
+                                        height="40">\
+                                </div>\
+                                {% elif map_coordinates == "2" %}\
+                                <div class="div1" id="grid{{count.value}}" style="background:yellow;">\
+                                </div>\
+                                {% elif map_coordinates == "3" %}\
+                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">\
+                                    <img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">\
+                                </div>\
+                                {% endif %}\
+                                {% set count.value = count.value + 1 %}\
+                                {% endfor %}\
+                            </div>\
+                            {% endfor %}\
+                        </div>\
+                    </div>\
+                </div>';
+
         // let x = 0
         // let y = 0
         // x = Math.floor(gridnum / 8)
@@ -607,7 +646,8 @@
         //     document.getElementById("grid" + gridnum).style.backgroundColor = "green"
         //     return true
         // }
-        resetGame()
+        clearCode();
+        workspace.clear()
         document.getElementById("changeTitle").innerHTML = '<div style="color:red; font-weight:bold;"> Game Map (Challenge Mode) </div>'
         
 

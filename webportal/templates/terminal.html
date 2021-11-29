@@ -116,16 +116,16 @@
                             <div>
                                 <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send</button>
                             </div>
-                            
+
                         </div>
                         <div class="col-1 d-grid p-0 mb-1">
                             <div>
                                 <button type="button" onclick="resetGame()"
                                     class="btn btn-danger btn-sm me-1">Clear</button>
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
 
                     <!-- Row 2 -->
@@ -207,10 +207,12 @@
             </div>
             <div class="modal-body">
                 <p>The car has successfully traversed its path!</p>
-                <a style="margin:auto;" class="btn btn-primary" href="/dashboard" role="button">View data at Dashboard</a>
+                <a style="margin:auto;" class="btn btn-primary" href="/dashboard" role="button">View data at
+                    Dashboard</a>
             </div>
             <div class="modal-footer">
-                <btn style="margin:auto;" class="btn btn-primary" data-bs-dismiss="modal" onclick="generateBomb();" role="button">Proceed to Challenging Stage</btn>
+                <btn style="margin:auto;" class="btn btn-primary" data-bs-dismiss="modal" onclick="generateBomb();"
+                    role="button">Proceed to Challenging Stage</btn>
             </div>
         </div>
     </div>
@@ -222,13 +224,14 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: red;">
                 <h5 class="modal-title" style="color: white"><i class="fas fa-skull"></i> Game Over!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"  onclick="resetGame();"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetGame();"></button>
             </div>
             <div class="modal-body">
                 <p>The car has failed to traverse its path!</p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" data-bs-dismiss="modal" onclick="resetGame();" role="button"> Replay the Game</a>
+                <a class="btn btn-primary" data-bs-dismiss="modal" onclick="resetGame();" role="button"> Replay the
+                    Game</a>
             </div>
         </div>
     </div>
@@ -254,10 +257,10 @@
     const car_path = [];        // Path the car traveresed 
     var i = 0;                  // 
 
-    setInterval(function(){ 
+    setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
-        document.getElementById('totalCommands').innerText = 'No. of Blocks Used: '+numberofblockly.toString();
-     }, 500);
+        document.getElementById('totalCommands').innerText = 'No. of Blocks Used: ' + numberofblockly.toString();
+    }, 500);
 
     var car_face_downwards = false;
     var car_face_upwards = true;
@@ -539,7 +542,7 @@
         // Check to see if the car has reached the end point 
         if (car_index == path_end) {
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
-            $("#game_won_modal").modal({backdrop: 'static', keyboard: false})
+            $("#game_won_modal").modal({ backdrop: 'static', keyboard: false })
             $("#game_won_modal").modal("show");
             return;
         }
@@ -549,7 +552,7 @@
             } catch (err) {
                 console.log(err)
             }
-            $("#game_over_modal").modal({backdrop: 'static', keyboard: false})
+            $("#game_over_modal").modal({ backdrop: 'static', keyboard: false })
             $("#game_over_modal").modal("show");
             return;
         }
@@ -601,15 +604,19 @@
     }
 
     function generateBomb() {
+        car_face_downwards = false;
+        car_face_upwards = true;
+        car_face_left = false;
+        car_face_right = false;
         workspace.clear()
         clearCode();
 
         let listofroute = []
 
-        for (let x = 0; x < map.length; x++){
-            for(let y = 0; y <map.length; y++){
-                if(map[x][y] == 2){
-                    listofroute.push([x,y])
+        for (let x = 0; x < map.length; x++) {
+            for (let y = 0; y < map.length; y++) {
+                if (map[x][y] == 2) {
+                    listofroute.push([x, y])
                 }
             }
         }
@@ -618,79 +625,81 @@
 
         map[listofroute[randint][0]][listofroute[randint][1]] = '4'
 
-        console.log (listofroute[randint]) 
+        for (let x = 1; x < 65; x++) {
+            document.getElementById('grid' + x.toString()).style.background = "grey"
+            document.getElementById('grid' + x.toString()).removeChild(document.getElementById('grid' + x.toString()).firstChild)
+        }
 
-        var newroute = []
-        if (map[listofroute[randint][0]][listofroute[randint][1]-1] == '0'){
+        console.log(listofroute[randint])
+
+        for (let x = 0; x < listofroute.length; x ++){
+            let oldroutes = (parseInt(listofroute[x][0]) * 8) + (parseInt([listofroute[x][1]]) + 1)
+            document.getElementById('grid' + oldroutes.toString()).style.background = "yellow"
+        }
+
+        var bomb = (parseInt(listofroute[randint][0]) * 8) + (parseInt([listofroute[randint][1]]) + 1)
+        var imgBomb = '<img src="{{ url_for("static", filename="/img/bomb.png")}}" width="40" height="40">'
+        document.getElementById('grid' + bomb.toString()).innerHTML = imgBomb
+        document.getElementById('grid' + bomb.toString()).style.background = "black"
+        
+
+        if (map[listofroute[randint][0]][listofroute[randint][1] - 1] == '0') {
             // left side
-            map[listofroute[randint][0]][listofroute[randint][1]-1] = '2'
+            map[listofroute[randint][0]][listofroute[randint][1] - 1] = '2'
+            let value = (parseInt(listofroute[randint][0]) * 8) + (parseInt([listofroute[randint][1] - 1]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]][listofroute[randint][1]+1] == '0'){
+        if (map[listofroute[randint][0]][listofroute[randint][1] + 1] == '0') {
             // right side
-            map[listofroute[randint][0]][listofroute[randint][1]+1] = '2'
+            map[listofroute[randint][0]][listofroute[randint][1] + 1] = '2'
+            let value = (parseInt(listofroute[randint][0]) * 8) + (parseInt([listofroute[randint][1] + 1]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]-1][listofroute[randint][1]] == '0'){
+        if (map[listofroute[randint][0] - 1][listofroute[randint][1]] == '0') {
             // top side
-            map[listofroute[randint][0]-1][listofroute[randint][1]] = '2'
+            map[listofroute[randint][0] - 1][listofroute[randint][1]] = '2'
+            let value = (parseInt(listofroute[randint][0] - 1) * 8) + (parseInt([listofroute[randint][1]]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]+1][listofroute[randint][1]] == '0'){
+        if (map[listofroute[randint][0] + 1][listofroute[randint][1]] == '0') {
             // bottom side
-            map[listofroute[randint][0]+1][listofroute[randint][1]] = '2'
+            map[listofroute[randint][0] + 1][listofroute[randint][1]] = '2'
+            let value = (parseInt(listofroute[randint][0] + 1) * 8) + (parseInt([listofroute[randint][1]]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]-1][listofroute[randint][1]-1] == '0'){
+        if (map[listofroute[randint][0] - 1][listofroute[randint][1] - 1] == '0') {
             // diagonal top left side
-            map[listofroute[randint][0]-1][listofroute[randint][1]-1] = '2'
+            map[listofroute[randint][0] - 1][listofroute[randint][1] - 1] = '2'
+
+            let value = (parseInt(listofroute[randint][0] - 1) * 8) + (parseInt([listofroute[randint][1] -1]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]+1][listofroute[randint][1]+1] == '0'){
+        if (map[listofroute[randint][0] + 1][listofroute[randint][1] + 1] == '0') {
             // diagonal top right side
-            map[listofroute[randint][0]+1][listofroute[randint][1]+1] = '2'
+            map[listofroute[randint][0] + 1][listofroute[randint][1] + 1] = '2'
+
+            let value = (parseInt(listofroute[randint][0] + 1) * 8) + (parseInt([listofroute[randint][1] + 1]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]+1][listofroute[randint][1]-1] == '0'){
+        if (map[listofroute[randint][0] + 1][listofroute[randint][1] - 1] == '0') {
             // diagonal bottom left side
-            map[listofroute[randint][0]+1][listofroute[randint][1]-1] = '2'
+            map[listofroute[randint][0] + 1][listofroute[randint][1] - 1] = '2'
+            let value = (parseInt(listofroute[randint][0] + 1) * 8) + (parseInt([listofroute[randint][1]-1]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
-        if (map[listofroute[randint][0]-1][listofroute[randint][1]+1] == '0'){
+        if (map[listofroute[randint][0] - 1][listofroute[randint][1] + 1] == '0') {
             // diagonal bottom right side
-            map[listofroute[randint][0]-1][listofroute[randint][1]+1] = '2'
+            map[listofroute[randint][0] - 1][listofroute[randint][1] + 1] = '2'
+            let value = (parseInt(listofroute[randint][0] - 1) * 8) + (parseInt([listofroute[randint][1]+1]) + 1)
+            document.getElementById('grid' + value).style.background = "yellow"
         }
 
         console.log(map)
 
-        document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
-                    <div class="row">\
-                        <div class="col-12">\
-                            <div class="numbers">\
-                                <p id="changeTitle" class="text-sm mb-3 text-capitalize font-weight-bold" style="color: white;">\
-                                    <b>Game Map</b>\
-                                </p>\
-                            </div>\
-                            {% set count = namespace(value=1) %}\
-                            {% for map_list in map %}\
-                            <div class="row">\
-                                {% for map_coordinates in map_list %}\
-                                {% if map_coordinates == "0" %}\
-                                <div class="div1" id="grid{{count.value}}">\
-                                </div>\
-                                {% elif map_coordinates == "1" %}\
-                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">\
-                                    <img id="carImg" src="{{ url_for("static", filename="/img/carimg.png")}}" width="40"\
-                                        height="40">\
-                                </div>\
-                                {% elif map_coordinates == "2" %}\
-                                <div class="div1" id="grid{{count.value}}" style="background:yellow;">\
-                                </div>\
-                                {% elif map_coordinates == "3" %}\
-                                <div class="div1" id="grid{{count.value}}" style="background:lightblue;">\
-                                    <img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">\
-                                </div>\
-                                {% endif %}\
-                                {% set count.value = count.value + 1 %}\
-                                {% endfor %}\
-                            </div>\
-                            {% endfor %}\
-                        </div>\
-                    </div>\
-                </div>';
+        document.getElementById('grid' + path_start).style.background = "lightblue"
+        document.getElementById('grid' + path_end).style.background = "lightblue"
+        var imgEnd = '<img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">'
+        document.getElementById('grid' + path_end).innerHTML = imgEnd
 
         document.getElementById("changeTitle").innerHTML = '<div style="color:red; font-weight:bold;"> Game Map (Challenge Mode) </div>'
     }

@@ -33,7 +33,7 @@ def terminal():
 
     n = 8 
     data = get_map()
-    map_rows = list(divide_chunks(data[0].map_coordinates.split(","), n))
+    map_rows = list(divide_chunks(data.map_coordinates.split(","), n))
     print(map_rows)
     return render_template('terminal.html', title="Terminal", map=map_rows)
 

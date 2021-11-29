@@ -18,8 +18,8 @@ def insert_map(coordinates):
 def get_map():
     # Retrieve the latest stats from the DB
     data = db.session.query(Map).all()
-
+    
     # Latest entry data 
     latest_entry = data[-1]
 
-    return data
+    return latest_entry

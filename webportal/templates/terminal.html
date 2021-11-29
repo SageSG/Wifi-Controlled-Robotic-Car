@@ -531,6 +531,7 @@
         // Check to see if the car has reached the end point 
         if (car_index == path_end) {
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
+            $("#game_won_modal").modal({backdrop: 'static', keyboard: false})
             $("#game_won_modal").modal("show");
             return;
         }
@@ -548,6 +549,10 @@
     }
 
     function resetGame() {
+        car_face_downwards = false;
+        car_face_upwards = true;
+        car_face_left = false;
+        car_face_right = false;
         clearCode();
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
                     <div class="row">\
@@ -591,15 +596,55 @@
 
         let listofroute = []
 
-        map = [
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0]]
+        for (let x = 0; x < map.length; x++){
+            for(let y = 0; y <map.length; y++){
+                if(map[x][y] == 2){
+                    listofroute.push([x,y])
+                }
+            }
+        }
+        console.log(map)
+
+        var randint = Math.floor(Math.random() * listofroute.length);
+
+        map[listofroute[randint][0]][listofroute[randint][1]] = '4'
+
+        console.log (listofroute[randint]) 
+
+        var newroute = []
+        if (map[listofroute[randint][0]][listofroute[randint][1]-1] == '0'){
+            // left side
+            map[listofroute[randint][0]][listofroute[randint][1]-1] = '2'
+        }
+        if (map[listofroute[randint][0]][listofroute[randint][1]+1] == '0'){
+            // right side
+            map[listofroute[randint][0]][listofroute[randint][1]+1] = '2'
+        }
+        if (map[listofroute[randint][0]-1][listofroute[randint][1]] == '0'){
+            // top side
+            map[listofroute[randint][0]-1][listofroute[randint][1]] = '2'
+        }
+        if (map[listofroute[randint][0]+1][listofroute[randint][1]] == '0'){
+            // bottom side
+            map[listofroute[randint][0]+1][listofroute[randint][1]] = '2'
+        }
+        if (map[listofroute[randint][0]-1][listofroute[randint][1]-1] == '0'){
+            // diagonal top left side
+            map[listofroute[randint][0]-1][listofroute[randint][1]-1] = '2'
+        }
+        if (map[listofroute[randint][0]+1][listofroute[randint][1]+1] == '0'){
+            // diagonal top right side
+            map[listofroute[randint][0]+1][listofroute[randint][1]+1] = '2'
+        }
+        if (map[listofroute[randint][0]+1][listofroute[randint][1]-1] == '0'){
+            // diagonal bottom left side
+            map[listofroute[randint][0]+1][listofroute[randint][1]-1] = '2'
+        }
+        if (map[listofroute[randint][0]-1][listofroute[randint][1]+1] == '0'){
+            // diagonal bottom right side
+            map[listofroute[randint][0]-1][listofroute[randint][1]+1] = '2'
+        }
+
         console.log(map)
 
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\

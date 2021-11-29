@@ -24,25 +24,10 @@ TIMER_A_CLOCKSOURCE_SMCLK,
 
 void initMotor(void)
 {
-    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
-    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
-    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN2);
-    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN0);
     GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P2, GPIO_PIN4,
     GPIO_PRIMARY_MODULE_FUNCTION);
-//    GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, GPIO_PIN1);
-//    GPIO_clearInterruptFlag(GPIO_PORT_P1, GPIO_PIN1);
-//    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN1);
-
-    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
-    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
-    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN4);
-    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN5);
     GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P2, GPIO_PIN5,
     GPIO_PRIMARY_MODULE_FUNCTION);
-//    GPIO_setAsInputPinWithPullUpResistor(GPIO_PORT_P1, GPIO_PIN4);
-//    GPIO_clearInterruptFlag(GPIO_PORT_P1, GPIO_PIN4);
-//    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN4);
 
 //    pwmConfig.dutyCycle = 2000;
 //    pwmConfig2.dutyCycle = 2000;
@@ -53,6 +38,15 @@ void initMotor(void)
 
 void motor_stop(void)
 {
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN0);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN5);
     printf("\nmotor_stop();");
     pwmConfig.dutyCycle = 0;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
@@ -63,16 +57,56 @@ void motor_stop(void)
 
 void motor_start(void)
 {
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN0);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN5);
+
     P2->OUT = BIT1;     // ON GREEN
-    pwmConfig.dutyCycle = 7725;         // LEFT
+    pwmConfig.dutyCycle = 7825;         // LEFT
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
     pwmConfig2.dutyCycle = 8000;        //Right
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig2);
 //    P2->OUT = BIT0;     // ON RED
 }
 
+void motor_back(void)
+{
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN2);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN4);
+
+    P2->OUT = ~1;
+    pwmConfig.dutyCycle = 7725;
+    Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
+    pwmConfig2.dutyCycle = 8000;
+    Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig2);
+    P2->OUT = BIT0;     // ON RED
+}
+
 void motor_left(void)
 {
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN0);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN5);
+
     P2->OUT = ~2;
     pwmConfig.dutyCycle = 0;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
@@ -83,6 +117,16 @@ void motor_left(void)
 
 void motor_right(void)
 {
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN0);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN5);
+
     P2->OUT = ~1;
     pwmConfig.dutyCycle = 8000;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
@@ -91,14 +135,34 @@ void motor_right(void)
 //    P2->OUT = BIT0;     // ON RED
 }
 
-void motor_back(void)
+void oneEighty()
 {
+    motor_stop();
+    motor_back();
+    printf("oneeighty()");
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN2);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN0);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN4);
+    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_PIN5);
+    GPIO_setOutputHighOnPin(GPIO_PORT_P4, GPIO_PIN4);
+    printf("here()");
     P2->OUT = ~1;
-    pwmConfig.dutyCycle = -8000;
+    pwmConfig.dutyCycle = 8000;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig);
-    pwmConfig2.dutyCycle = -8000;
+    pwmConfig2.dutyCycle = 8000;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfig2);
-//    P2->OUT = BIT0;     // ON RED
+    //    P2->OUT = BIT0;     // ON RED
+    while (secCounterM < 2)
+    {
+        TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+        secCounterM += 1;
+    }
+    motor_stop();
+    secCounterM = 0;
 }
 
 void adjustLeft()

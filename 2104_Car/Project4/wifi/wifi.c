@@ -254,12 +254,12 @@ void counter()
     TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
     //        ===============================================================================
 }
-
-char getCmdString()
-{
-//    printf("\nWithin Function %s\n", cmdString);
-    return cmdString;
-}
+//
+//char getCmdString()
+//{
+////    printf("\nWithin Function %s\n", cmdString);
+//    return cmdString;
+//}
 
 char getData(char *s)
 {
@@ -308,10 +308,13 @@ void checkObstacle()
     {
         GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN0);
         printf("\nOBSTACLEEEE;");
-        motor_stop();
+//        motor_stop();
+        oneEighty();
         obstacle = true;
     }
 }
+
+
 
 void runString()
 {
@@ -420,7 +423,7 @@ void runString()
             }
             secCounter = 0;
             break;
-        case '5':
+        case '9':
             printf("\nMotor_back();");
             motor_back();
             while (secCounter < 10)

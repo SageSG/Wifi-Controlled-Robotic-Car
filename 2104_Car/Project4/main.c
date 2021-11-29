@@ -98,7 +98,7 @@ int main(void)
 //    GPIO_enableInterrupt(GPIO_PORT_P1, GPIO_PIN4);
 //    Interrupt_enableInterrupt(INT_PORT1);
 //    Interrupt_enableMaster();
-    Interrupt_enableInterrupt(INT_PORT5);
+//    Interrupt_enableInterrupt(INT_PORT5);
     initWifi();
 
 //    motor_start();

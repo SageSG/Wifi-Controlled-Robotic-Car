@@ -15,7 +15,7 @@
 
 //int up = 8000;
 //int down =
-
+volatile static int secCounterM = 0;
 static void Delay(uint32_t loop);
 
 void adjustLeft();
@@ -25,6 +25,10 @@ void adjustRight();
 void initMotor(void);
 
 void motor_stop(void);
+
+void oneEighty(void);
+
+void motor_back(void);
 
 void motor_start(void);
 

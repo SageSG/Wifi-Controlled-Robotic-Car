@@ -318,8 +318,8 @@ body {
   text-align: center;
   font-size: 4rem;
   font-weight: bold;
-  background-color: #fff;
-  border: 3px dashed #111;
+  background-color: grey;
+  border: 3px solid #111;
   transition: border-width 0.2s, transform 0.2s, background-color 0.4s;}
 
 /* ======================MAP PAGE CSS===================== */

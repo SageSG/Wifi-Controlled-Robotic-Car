@@ -39,7 +39,6 @@ def delete_command():
 	db.session.query(CarCommands).filter(CarCommands.id==data.id).delete()
 	db.session.commit()
 	return {"command": data.command}
-	
 def reset():
 	# Delete all entires in the database 
 	num_rows_deleted = db.session.query(CarCommands).delete()

@@ -9,3 +9,4 @@ class MapControllerAPI(Resource):
 	def post(self):
 		args = parser.parse_args()
 		insert_map(args['coordinates'])
+		return 201

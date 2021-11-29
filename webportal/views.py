@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import Flask, render_template
-# from webportal.models.carstats import get_car_stats
+from webportal.models.carstats import get_car_stats
 from webportal.models.carcommands import get_command_stats
 
 

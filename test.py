@@ -1,7 +1,13 @@
 import requests
+import time
+import random
 
-BASE = "http://127.0.0.1:5000/"
+commands = {"left": "a", "forward": "b", "right": "c"}
 
-res = requests.post('http://localhost:5000/api/add_message/1234', json={"mytext":"lalala"})
-if res.ok:
-    print(res.json()
+
+while True:
+    selected = random.choice(list(commands))
+    res = requests.post('http://192.168.215.85:32639/car/test', data={"command":selected})
+    print(res)
+    print("send!")
+    time.sleep(5)

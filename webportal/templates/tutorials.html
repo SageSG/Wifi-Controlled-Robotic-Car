@@ -1,14 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container-fluid py-4">
-
 	<div class="card tabletitle">
 		<div class="card-body p-3">
 			<div class="col">
 				<div class="row">
 					<div class="col-10">
 						<div class="numbers">
-							<h5 class="font-weight-bolder mb-0">
+							<h5 class="font-weight-bolder mb-0" style="color:white";>
 								<b>Map Tutorial</b>
 							</h5>
 							<p class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -122,7 +121,7 @@
 				<div class="row">
 					<div class="col-10">
 						<div class="numbers">
-							<h5 class="font-weight-bolder mb-0">
+							<h5 class="font-weight-bolder mb-0" style="color:white";>
 								<b>Gameplay Tutorial</b>
 							</h5>
 							<p class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -316,7 +315,7 @@
 				<div class="row">
 					<div class="col-10">
 						<div class="numbers">
-							<h5 class="font-weight-bolder mb-0">
+							<h5 class="font-weight-bolder mb-0" style="color:white";>
 								<b>Dashboard Tutorial</b>
 							</h5>
 							<p class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -401,75 +400,17 @@
 			</div>
 		</div>
 	</div>
-
 </div>
-
-
 </div>
-
+<script src="{{ url_for('static', filename='tutorial.js')}}"></script>
 <script>
 	var tutorialCompleted = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-	function registerTask(order) {
-		tutorialCompleted[order] = 1;
-		console.log(tutorialCompleted)
-		checkCompleted()
-	}
-
-	function checkCompleted() {
-		let confirmMap = 0
-		for (let i = 0; i < 4; i++) {
-			if (tutorialCompleted[i] == 1) {
-				confirmMap++
-			} else {
-				confirmMap = 0
-			}
-			if (confirmMap == 4) {
-				document.getElementById('mapTutorial').classList.remove('btn-danger');
-				document.getElementById('mapTutorial').classList.add('btn-success');
-				document.getElementById('mapTutorial').innerHTML = 'Completed';
-			}
-		}
-
-		let confirmMap2 = 0
-		for (let i = 4; i < 8; i++) {
-			if (tutorialCompleted[i] == 1) {
-				confirmMap2++
-			} else {
-				confirmMap2 = 0
-			}
-			if (confirmMap2 == 4) {
-				document.getElementById('gameTutorial').classList.remove('btn-danger');
-				document.getElementById('gameTutorial').classList.add('btn-success');
-				document.getElementById('gameTutorial').innerHTML = 'Completed';
-			}
-		}
-
-		let confirmMap3 = 0
-		for (let i = 8; i < 12; i++) {
-			if (tutorialCompleted[i] == 1) {
-				confirmMap3++
-			} else {
-				confirmMap3 = 0
-			}
-			if (confirmMap3 == 4) {
-				document.getElementById('dashboardTutorial').classList.remove('btn-danger');
-				document.getElementById('dashboardTutorial').classList.add('btn-success');
-				document.getElementById('dashboardTutorial').innerHTML = 'Completed';
-			}
-		}
-	}
-
-
-
 </script>
 
 <style>
 	.tabletitle{
-		background:orange;
+		background:black;
 		color:white;
 	}
 </style>
-
-
 {% endblock %}

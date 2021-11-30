@@ -284,46 +284,24 @@
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					onclick="registerTask(7)" data-bs-target="#collapseEight" aria-expanded="false"
 					aria-controls="collapseEight">
-					#4 Tutorial Maps
+					#4 Challenge Stage
 				</button>
 			</h2>
 			<div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
 				data-bs-parent="#accordionExample2">
 				<div class="accordion-body">
-					<strong>Select a map at the bottom to learn the game</strong>
 					<div class="row">
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/forwardmap.JPG"/>
-							</div>
-							<div class="row">
-								Moving straight
-							</div>
+						<div class="col">
+							<strong>The user will complete the game once first</strong><br><br>
+							After completion, the user will be prompted to play the challenge mode.<br>
+							A random bomb will be generated, the user will need to avoid the bomb using complex statements. <br>
+							User can come up with any creative ideas.
 						</div>
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/turningmap.JPG"/>
-							</div>
-							<div class="row">
-								Turning
-							</div>
+						<div class="col">
+							<img style="float:right;" width="100" src="../static/img/challengestage.JPG"/>
 						</div>
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/ifmap.JPG"/>
-							</div>
-							<div class="row">
-								If loop
-							</div>
-						</div>
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/whilemap.JPG"/>
-							</div>
-							<div class="row">
-								While loop
-							</div>
-						</div>
+					</div>
+					
 					</div>
 					
 				</div>
@@ -361,25 +339,14 @@
 				<button class="accordion-button collapsed" onclick="registerTask(8)" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="true"
 					aria-controls="collapseNine">
-					#1 
+					#1 Temperature
 				</button>
 			</h2>
 			<div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
 				data-bs-parent="#accordionExample3" aria-expanded="true">
 				<div class="accordion-body">
-					<strong>This is the second item's accordion body.</strong> It is hidden by default, until
-					the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This is the temperature of the car sensed and gathered from the MSP432 board</strong> <br> <br>
+					If temperature is too high, please stop using the car.
 				</div>
 			</div>
 		</div>
@@ -388,24 +355,15 @@
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseTen" onclick="registerTask(9)" aria-expanded="false"
 					aria-controls="collapseTen">
-					#2
+					#2 Speed
 				</button>
 			</h2>
 			<div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen"
 				data-bs-parent="#accordionExample3">
 				<div class="accordion-body">
-					<strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This graph shows the speed of the car </strong> <br> <br>
+					The graph stores the m/s of the car travelling everytime the game is played. <br>
+					It will reset when the game is completed.
 				</div>
 			</div>
 		</div>
@@ -414,24 +372,15 @@
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseEleven" onclick="registerTask(10)" aria-expanded="false"
 					aria-controls="collapseEleven">
-					#3
+					#3 Distance
 				</button>
 			</h2>
 			<div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven"
 				data-bs-parent="#accordionExample3">
 				<div class="accordion-body">
-					<strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This shows the total distance the car travelled</strong><br><br>
+					The information is useful to understand if the codes used can be decreased, to make it quicker to reach
+					the end of the finishing line.
 				</div>
 			</div>
 		</div>
@@ -439,25 +388,15 @@
 			<h2 class="accordion-header" id="headingTwelve" onclick="registerTask(11)">
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-					#4
+					#4 Line Detection
 				</button>
 			</h2>
 			<div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve"
 				data-bs-parent="#accordionExample3">
 				<div class="accordion-body">
-					<strong>This is the second item's accordion body.</strong> It is hidden by default, until
-					the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This shows if the car has exceeded the boundary of the map</strong> <br> <br>
+					The graph represent the output of the car's line sensor. <br>
+					0 means there is no line while 1 means there is a line.
 				</div>
 			</div>
 		</div>

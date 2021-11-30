@@ -207,12 +207,28 @@
             </div>
             <div class="modal-body">
                 <p>The car has successfully traversed its path!</p>
-                <a style="margin:auto;" class="btn btn-primary" href="/dashboard" role="button">View data at
-                    Dashboard</a>
             </div>
             <div class="modal-footer">
                 <btn style="margin:auto;" class="btn btn-primary" data-bs-dismiss="modal" onclick="generateBomb();"
                     role="button">Proceed to Challenging Stage</btn>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal popup for Challenge Mode -->
+<div id="challenge_won_modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: green;">
+                <h5 class="modal-title" style="color: white"><i class="fas fa-trophy"></i> Game Won!</h5>
+            </div>
+            <div class="modal-body">
+                <p>The car has successfully traversed its path!</p>
+            </div>
+            <div class="modal-footer">
+                <a style="margin:auto;" class="btn btn-primary" href="/dashboard" role="button">View data at
+                    Dashboard</a>
             </div>
         </div>
     </div>
@@ -255,17 +271,16 @@
 
     var car_index = 0;          // Where the Car traveresed 
     const car_path = [];        // Path the car traveresed 
-    var i = 0;                  // 
+    var i = 0;  
+    var challenge = 0                // To see if its the challenge map
 
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
         document.getElementById('totalCommands').innerText = 'No. of Blocks Used: ' + numberofblockly.toString();
     }, 500);
 
-    var car_face_downwards = false;
-    var car_face_upwards = true;
-    var car_face_left = false;
-    var car_face_right = false;
+    var car_face_downwards, car_face_upwards, car_face_left, car_face_right;
+    
 
     // Check for the start flag 
     for (let i = 0; i < map.length; i++) {
@@ -277,6 +292,41 @@
         }
         counter = counter + 8;
     }
+
+    if(path_start <= 8){
+        car_face_downwards = true;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+    }
+    else if (path_start == 9 || path_start == 17 || path_start == 25 || path_start == 33 || path_start == 41 || path_start == 49){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = true;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+    }else if (path_start == 56 || path_start == 48 || path_start == 40 || path_start == 32 || path_start == 24 || path_start == 16){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = true;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+    }
+    else if(path_start >= 57){
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+    }else{
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    }
+    
+
 
     // Check for the tiles flag 
     counter = 1;
@@ -542,8 +592,15 @@
         // Check to see if the car has reached the end point 
         if (car_index == path_end) {
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
+            if (challenge == 1){
+                $("#challenge_won_modal").modal({ backdrop: 'static', keyboard: false })
+            $("#challenge_won_modal").modal("show");
+            }else{
+                challenge = 1
             $("#game_won_modal").modal({ backdrop: 'static', keyboard: false })
             $("#game_won_modal").modal("show");
+            }
+            
             return;
         }
         else {
@@ -604,10 +661,7 @@
     }
 
     function generateBomb() {
-        car_face_downwards = false;
-        car_face_upwards = true;
-        car_face_left = false;
-        car_face_right = false;
+        
         workspace.clear()
         clearCode();
 
@@ -697,6 +751,38 @@
         console.log(map)
 
         document.getElementById('grid' + path_start).style.background = "lightblue"
+        if(path_start <= 8){
+        car_face_downwards = true;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+    }
+    else if (path_start == 9 || path_start == 17 || path_start == 25 || path_start == 33 || path_start == 41 || path_start == 49){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = true;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+    }else if (path_start == 56 || path_start == 48 || path_start == 40 || path_start == 32 || path_start == 24 || path_start == 16){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = true;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+    }
+    else if(path_start >= 57){
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+    }else{
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    }
         document.getElementById('grid' + path_end).style.background = "lightblue"
         var imgEnd = '<img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">'
         document.getElementById('grid' + path_end).innerHTML = imgEnd

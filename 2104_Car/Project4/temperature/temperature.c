@@ -7,26 +7,26 @@
 
 #include "temperature.h"
 
-inline void uart_println(const char* str, ...)
-{
-    static char print_buffer[256];
-    va_list lst;
-    va_start(lst, str);
-    vsnprintf(print_buffer, 256, str, lst);
-    str = print_buffer;
-    while (*str)
-    {
-        while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
-        UCA0TXBUF = *str;
-        str++;
-    }
-    while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
-    UCA0TXBUF = '\r';
-    while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
-    UCA0TXBUF = '\n';
-}
+//inline void uart_println(const char* str, ...)
+//{
+//    static char print_buffer[256];
+//    va_list lst;
+//    va_start(lst, str);
+//    vsnprintf(print_buffer, 256, str, lst);
+//    str = print_buffer;
+//    while (*str)
+//    {
+//        while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
+//        UCA0TXBUF = *str;
+//        str++;
+//    }
+//    while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
+//    UCA0TXBUF = '\r';
+//    while (!(UCA0IFG & EUSCI_A_IFG_TXIFG));
+//    UCA0TXBUF = '\n';
+//}
 
-void initTemp(void)
+int initTemp(void)
 {
     /* Halting WDT  */
     WDT_A_holdTimer();
@@ -36,9 +36,7 @@ void initTemp(void)
     // init UART (LSB first, 1 stop bit, no parity, 8-bit characters, 115200 baud)
     P1SEL0 = 0x0c;
     UCA0CTLW0  = UCSWRST | EUSCI_A_CTLW0_SSEL__SMCLK;
-//    UCA0BRW    = (uint16_t)((uint32_t)3000000 / 115200);
-    UCA0BRW    = (uint16_t)((uint32_t)24000000 / 115200);
-
+    UCA0BRW    = (uint16_t)((uint32_t)3000000 / 115200);
     UCA0MCTLW  = 0;
     UCA0CTLW0 &= ~UCSWRST;
     /////* for uart_println */////
@@ -95,22 +93,22 @@ void initTemp(void)
 /* This interrupt happens every time a conversion has completed. Since the FPU
  * is enabled in stacking mode, we are able to use the FPU safely to perform
  * efficient floating point arithmetic.*/
-//void ADC14_IRQHandler(void)
-//{
-//    uint64_t status;
-//    int16_t conRes;
-//
-//    status = ADC14_getEnabledInterruptStatus();
-//    ADC14_clearInterruptFlag(status);
-//
-//    if(status & ADC_INT0)
-//    {
-//        conRes = ((ADC14_getResult(ADC_MEM0) - cal30) * 55);
-//        tempC = (conRes / calDifference) + 30.0f;
-////        tempF = tempC * 9.0f / 5.0f + 32.0f;
-////        uart_println("Temperature(degC): %f", tempC);
-//    }
-//}
+void ADC14_IRQHandler(void)
+{
+    uint64_t status;
+    int16_t conRes;
+
+    status = ADC14_getEnabledInterruptStatus();
+    ADC14_clearInterruptFlag(status);
+
+    if(status & ADC_INT0)
+    {
+        conRes = ((ADC14_getResult(ADC_MEM0) - cal30) * 55);
+        tempC = (conRes / calDifference) + 30.0f;
+//        tempF = tempC * 9.0f / 5.0f + 32.0f;
+//        uart_println("Temperature(degC): %f", tempC);
+    }
+}
 
 
 

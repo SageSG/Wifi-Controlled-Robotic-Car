@@ -12,7 +12,7 @@ class Map(db.Model):
     #     self.map_blob = map_blob
 
 def insert_map(coordinates):
-    map = Map(coordinates)
+    map = Map(coordinates[1::])
     db.session.add(map)
     db.session.commit()	
 

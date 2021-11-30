@@ -16,7 +16,6 @@
 #include "../motor/motor.h"
 #include "ultrasonic/ultrasonic.h"
 #include "../temperature/temperature.h"
-//#include "../encoder/encoder.h"
 
 //==========================================
 
@@ -74,7 +73,7 @@ void initWifi()
 {
     MAP_WDT_A_holdTimer();
 //    MSPrintf(EUSCI_A0_BASE, "Setting Wifi.\n\r");
-    P2->OUT = BIT6;
+
     /*Ensure MSP432 is Running at 24 MHz*/
     FlashCtl_setWaitState(FLASH_BANK0, 2);
     FlashCtl_setWaitState(FLASH_BANK1, 2);
@@ -105,8 +104,6 @@ void initWifi()
     /*Hard Reset ESP8266*/
     ESP8266_HardReset();
     __delay_cycles(48000000);
-//    __delay_cycles(480000);
-
     /*flush reset data, we do this because a lot of data received cannot be printed*/
     UART_Flush(EUSCI_A2_BASE);
     MSPrintf(EUSCI_A0_BASE, "Hard Reset\n\r");
@@ -209,7 +206,7 @@ void initWifi()
              "Data sent: %s to %s\r\n\r\nESP8266 Data Received: %s\r\n",
              HTTP_Request, "192.168.10.139", ESP8266_Data);
     getData(ESP8266_Data);
-    printf("\nhi3?;");
+
 //    printf("\nLevel1: %s", getData(ESP8266_Data));
 //    printf("\nGet function: %s", getCmdString());
 //    printf("\nString: %s", cmdString);
@@ -292,11 +289,9 @@ char getData(char *s)
         cmdString[i] = target[i]; //assign s[i] to the string literal index i
     }
     while (cmdString[i++]);
-    printf("\nhi1?;");
 //    printf("HEREEE: %s", cmdString);
     free(target);
 //    runString();
-    printf("\nhi2?;");
     return 0;
 //    return cmdString;
 }
@@ -306,7 +301,6 @@ void checkObstacle()
 {
     if ((getHCSR04Distance() < 15.0))
     {
-        GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN0);
         printf("\nOBSTACLEEEE;");
 //        motor_stop();
         oneEighty();
@@ -318,9 +312,8 @@ void checkObstacle()
 
 void runString()
 {
+//    printf("\nIMM INNNNN");
     printf("\nString: %s", cmdString);
-    printf("\nIMM INNNNN");
-//    Interrupt_enableInterrupt(INT_PORT5);
     size_t length = strlen(cmdString);
     int i = 0;
 //    printf("Hiiii?");
@@ -333,9 +326,6 @@ void runString()
         printf("\nDIstance: %.2f", getHCSR04Distance());
         printf("\n%c", cmdString[i]); /* Print each character of the string. */
 //        printf("hellooo?;");
-//        uart_println("Temperature(degC): %f", tempC);
-//        conRes = ((ADC14_getResult(ADC_MEM0) - cal30) * 55);
-//        tempC = (conRes / calDifference) + 30.0f;
 //        uart_println("Temperature(degC): %f", tempC);
         switch (cmdString[i])
         {
@@ -354,32 +344,7 @@ void runString()
                 timer++;
                 TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
 //                printf("%d\n", timer);
-//                printf("\nrpm: %.2f", rpm);
-
-//                rotationLeft = getLeft() / 20;
-//                rotationRight = getRight() / 20;
-                rpmL = ((float) (getLeft() / 20) / (float) timer) * 60.00;
-                rpmR = ((float) (getRight() / 20) / (float) timer) * 60.00;
-
-                printf("\nrpmLEFT: %.2f", rpmL);
-                printf(" | rpmRIGHT: %.2f", rpmR);
-                if (rpmL > rpmR)
-                {
-                    if (rpmL - rpmR >= 1)
-                    {
-                        printf(" - FAST LEFT");
-                        adjustLeft();
-                    }
-                }
-                else if (rpmR > rpmL)
-                {
-                    if (rpmR - rpmL >= 1)
-                    {
-                        printf(" - FAST RIGHT");
-                        adjustRight();
-                    }
-                }
-
+                printf("\nrpm: %.2f", rpm);
                 checkObstacle();
                 rpm = 0;
                 counter();
@@ -390,7 +355,7 @@ void runString()
         case '2':
             printf("\nMotor_Left();");
             motor_left();
-            while (secCounter < 5)
+            while (secCounter < 7)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -408,7 +373,7 @@ void runString()
         case '3':
             printf("\nMotor_Right();");
             motor_right();
-            while (secCounter < 5)
+            while (secCounter < 7)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -442,7 +407,6 @@ void runString()
             secCounter = 0;
             break;
         }
-
     }
     printf("\n--String End--");
 }

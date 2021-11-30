@@ -1,8 +1,10 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} 
+{% block content %}
 {% if car_data is defined and car_data|length > 0 %}
 <div class="container-fluid py-4">
+	<!-- Row 1 -->
 	<div class="row">
-		<!-- Row 1 -->
+		<!-- Col 1 -->
 		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
 			<div class="card">
 				<div class="card-body p-3">
@@ -12,20 +14,20 @@
 								<p class="text-sm mb-0 text-capitalize font-weight-bold">Connectivity</p>
 								<h5 class="font-weight-bolder mb-0">
 									<b>Connected</b>
-									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
 								</h5>
 							</div>
 						</div>
-                	<div class="col-4 text-end">
-                  	<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414" object-fit: cover;>
-                    		<h2><i class="fas fa-wifi" style="color: white;"></i></h2>
-                  	</div>
-                  </div>
+						<div class="col-4 text-end">
+							<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414" object-fit: cover;>
+								<h2><i class="fas fa-wifi" style="color: white;"></i></h2>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<!-- Col 2  -->
 		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
 			<div class="card">
 				<div class="card-body p-3">
@@ -35,20 +37,20 @@
 								<p class="text-sm mb-0 text-capitalize font-weight-bold">Current Speed</p>
 								<h5 class="font-weight-bolder mb-0">
 									<b>{{car_data[0].current_speed}}km/h</b>
-									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
 								</h5>
 							</div>
 						</div>
-                	<div class="col-4 text-end">
-                		<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
-                    		<h2><i class="bi bi-speedometer" style="color: white;"></i></h2>
-                  	</div>
-                  </div>
+          	<div class="col-4 text-end">
+          		<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
+              		<h2><i class="bi bi-speedometer" style="color: white;"></i></h2>
+            	</div>
+            </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	
+		<!-- Col 3 -->
 		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
 			<div class="card">
 				<div class="card-body p-3">
@@ -58,20 +60,20 @@
 								<p class="text-sm mb-0 text-capitalize font-weight-bold">Current Temps</p>
 								<h5 class="font-weight-bolder mb-0">
 									<b>{{car_data[0].current_temps}}°C</b>
-									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
 								</h5>
 							</div>
 						</div>
-                	<div class="col-4 text-end">
+          	<div class="col-4 text-end">
 							<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
-                    		<h2><i class="bi bi-thermometer-half" style="color: white;"></i></h2>
-                  	</div>
-                  </div>
+          		<h2><i class="bi bi-thermometer-half" style="color: white;"></i></h2>
+            	</div>
+            </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	
+		<!-- Col 4  -->
 		<div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
 			<div class="card">
 				<div class="card-body p-3">
@@ -80,16 +82,15 @@
 							<div class="numbers">
 								<p class="text-sm mb-0 text-capitalize font-weight-bold">Distance Travelled</p>
 								<h5 class="font-weight-bolder mb-0">
-									<b>20km</b>
-									<!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+									<b>{{car_data[0].total_dist}}cm</b>
 								</h5>
 							</div>
 						</div>
-                	<div class="col-4 text-end">
+          	<div class="col-4 text-end">
 							<div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" style="height: 55px; width: 55px; display: flex; justify-content: center; align-items: center; background: #131414">
-                    		<h2><i class="bi bi-map-fill" style="color: white;"></i></h2>
-                  	</div>
-                  </div>
+              		<h2><i class="bi bi-map-fill" style="color: white;"></i></h2>
+            	</div>
+            </div>
 					</div>
 				</div>
 			</div>
@@ -98,6 +99,7 @@
 
 	<!-- Row 2 -->
 	<div class="row mt-4">
+		<!-- Col 1 -->
 	  	<div class="col-lg-7 mb-lg-0 mb-4">
 	 		<div class="card">
 				<div class="card-body p-3">
@@ -111,15 +113,15 @@
 	     				</div>
                	<div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
                   	<div class="bg-gradient-primary border-radius-lg h-100">
-                    		<!-- <div class="position-relative d-flex align-items-center justify-content-center h-100"> -->
-                      		<img class="w-100 position-relative z-index-2 pt-4" src="{{ url_for('static', filename='/img/panda.jpg')}}" alt="panda" style="height: 190px; width: 40px">
-                    		<!-- </div> -->
+                      		<img class="w-100 position-relative z-index-2 pt-4" src="{{ url_for('static', filename='/img/bee.png')}}" alt="panda" style="height: 190px; width: 40px">
                   	</div>
                 	</div>
 	     			</div>
 	     		</div>
 	     	</div>
      	</div>
+
+		 <!-- Col 2 -->
 		<div class="col-lg-5">
 			<div class="card h-100 p-3">
 				<div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('{{ url_for("static", filename="/img/robotics1.jpg")}}'); background-repeat: no-repeat;">
@@ -136,6 +138,7 @@
 
 	<!-- Row 3 -->
 	<div class="row mt-4">
+		<!-- Col 1 -->
 	  	<div class="col-lg-5 mb-lg-0 mb-4">
 	 		<div class="card">
 				<div class="card-body p-3">
@@ -149,6 +152,7 @@
 	     	</div>
      	</div>
 
+		 <!-- Col 2 -->
 	  	<div class="col-lg-7 mb-lg-0 mb-4">
 	 		<div class="card">
 				<div class="card-body p-3">
@@ -165,6 +169,7 @@
 
 	<!-- Row 4 -->
 	<div class="row mt-4">
+		<!-- Col 1 -->
 	  	<div class="col-lg-7 mb-lg-0 mb-4">
 	 		<div class="card">
 				<div class="card-body p-3">
@@ -178,6 +183,7 @@
 	     	</div>
      	</div>
 
+		<!-- Col 2 -->
 	  	<div class="col-lg-5 mb-lg-0 mb-4">
 	 		<div class="card">
 				<div class="card-body p-3">
@@ -198,233 +204,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/helpers.esm.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/helpers.esm.min.js"></script>
+<script src="{{ url_for('static', filename='dashboard.js')}}"></script>
 <script>
-	// Temperature Chart
-	const ctx = document.getElementById('temp_chart').getContext('2d');
-
-	var temp_chart_stats = JSON.parse('{{ car_data[1] | tojson | safe}}');
-	var temp_chart_labels = [];
-	var temp_chart_data = [];
-
-	for (const [key, value] of Object.entries(temp_chart_stats)) {
-		temp_chart_labels.push(key);
-		temp_chart_data.push(value);
-	}	
-
-	const temp_chart = new Chart(ctx, {
-	    type: 'line',
-	    data: {
-	        labels: temp_chart_labels,
-	        datasets: [{
-	            data: temp_chart_data,
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-
-	    options: {
-	        scales: {
-	            y: {
-	                beginAtZero: true,
-	                precision: 0,
-	            }
-	        },
-
-           plugins:{   
-             legend: {
-               display: false
-					},
-            },
-
-            maintainAspectRatio: false,
-	    	}
-	})
-
-	// Speed graph 
-	var speed_chart_stats = JSON.parse('{{ car_data[2] | tojson | safe}}');
-	var speed_chart_labels = [];
-	var speed_chart_data = [];
-	for (const [key, value] of Object.entries(speed_chart_stats)) {
-		speed_chart_labels.push(key);
-		speed_chart_data.push(value);
-	}	
-
-	const ctx1 = document.getElementById('speed_chart').getContext('2d');
-	const myChart1 = new Chart(ctx1, {
-	    type: 'line',
-	    data: {
-	        labels: temp_chart_labels,
-	        datasets: [{
-	            label: 'speed',
-	            data: speed_chart_data,
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            y: {
-	                beginAtZero: true,
-	                precision: 0,
-	            }
-	        },
-
-           plugins:{   
-             legend: {
-               display: false
-					},
-            },
-
-            maintainAspectRatio: false,
-	    	}
-	});
-
-
-	// // Line Detect Chart Count Chart
-	var line_detect_count_chart_stats = JSON.parse('{{ car_data[4] | tojson | safe}}');
-	var line_detect_count_chart_labels = [];
-	var line_detect_count_chart_data = [];
-	for (const [key, value] of Object.entries(line_detect_count_chart_stats)) {
-		line_detect_count_chart_labels.push(key);
-		line_detect_count_chart_data.push(value);
-	}	
-
-	const ctx3 = document.getElementById('line_detect_count_chart').getContext('2d');
-	const myChart3 = new Chart(ctx3, {
-	    type: 'bar',
-	    data: {
-	        labels: line_detect_count_chart_labels,
-	        datasets: [{
-	            label: 'Line Detected Count',
-	            data: line_detect_count_chart_data,
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            y: {
-	                beginAtZero: true,
-			        ticks: {
-			            precision: 0,	            
-			        }        
-	            }
-	        },
-
-           plugins:{   
-             legend: {
-               display: false
-					},
-            },
-
-            maintainAspectRatio: false,
-	    	}
-	});
-
-	// Line Detection Chart 
-	var line_detect_chart_stats = JSON.parse('{{ car_data[3] | tojson | safe}}');
-	var line_detect_chart_labels = [];
-	var line_detect_chart_data = [];
-	for (const [key, value] of Object.entries(line_detect_chart_stats)) {
-		line_detect_chart_labels.push(key);
-		line_detect_chart_data.push(value);
-	}	
-
-	const ctx2 = document.getElementById('line_detect_chart').getContext('2d');
-	const myChart2 = new Chart(ctx2, {
-	    type: 'line',
-	    data: {
-	        labels: line_detect_chart_labels,
-	        datasets: [{
-	            label: 'Line Detected',
-	            data: line_detect_chart_data,
-	            backgroundColor: [
-	                'rgba(255, 99, 132, 0.2)',
-	                'rgba(54, 162, 235, 0.2)',
-	                'rgba(255, 206, 86, 0.2)',
-	                'rgba(75, 192, 192, 0.2)',
-	                'rgba(153, 102, 255, 0.2)',
-	                'rgba(255, 159, 64, 0.2)'
-	            ],
-	            borderColor: [
-	                'rgba(255, 99, 132, 1)',
-	                'rgba(54, 162, 235, 1)',
-	                'rgba(255, 206, 86, 1)',
-	                'rgba(75, 192, 192, 1)',
-	                'rgba(153, 102, 255, 1)',
-	                'rgba(255, 159, 64, 1)'
-	            ],
-	            borderWidth: 1
-	        }]
-	    },
-	    options: {
-	        scales: {
-	            y: {
-	                beginAtZero: true,
-			        ticks: {
-			            precision: 0,
-				        callback:function(value,index,values){
-				            if (value == 1) return "True";
-				            if (value == 0) return "False";
-				        }		            
-			        }        
-	            }
-	        },
-
-           plugins:{   
-             legend: {
-               display: false
-					},
-            },
-
-            maintainAspectRatio: false,
-	    	}
-	});
+	createTempChart(JSON.parse('{{ car_data[1] | tojson | safe}}'));
+	createSpeedChart(JSON.parse('{{ car_data[2] | tojson | safe}}'));
+	createLineDetectCountChart(JSON.parse('{{ car_data[4] | tojson | safe}}'));
+	createLineDetectGraph(JSON.parse('{{ car_data[3] | tojson | safe}}'));
 </script>
 
 {% else %}
@@ -433,12 +218,3 @@
 </div>
 {% endif %}
 {% endblock %}
-
-
-
-<!-- Some tests for the dashboard -->
-<!-- Ensure that data from the db can be displayed
-Ensure that data from the db are correctly displayed 
-Ensure that the charts can be displayed 
-Ensure that the charts are the intended chart displayed i.e. Line chart should display a line chart  
-Ensure that the dashboard page can load even if there is no data-->

@@ -8,6 +8,12 @@ parser.add_argument('command', required=True)
 
 
 class ControlsControllerAPI(Resource):
+
+    def get(self):
+        data = delete_command() 
+        return data
+
+
     def post(self):
     	args = parser.parse_args()
     	if args['command'] == "Forward ^":

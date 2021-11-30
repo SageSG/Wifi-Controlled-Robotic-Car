@@ -7,9 +7,17 @@ app = Flask(__name__)
 api = Api(app)
 db = SQLAlchemy()
 DB_NAME = "database.db"
+
+# from webportal.models.carstats import CarStats
+# from webportal.controller.statscontroller import CarStatsControllerAPI
+# from webportal.controller.controlscontroller import ControlsControllerAPI
+from webportal.controller.testcontroller import TestControllerAPI
+
 from webportal.models.carstats import CarStats
+from webportal.models.map import Map
 from webportal.controller.statscontroller import CarStatsControllerAPI
 from webportal.controller.controlscontroller import ControlsControllerAPI
+from webportal.controller.mapcontroller import MapControllerAPI
 
 
 def create_webportal():
@@ -26,5 +34,10 @@ def create_webportal():
 
 
 # API (To be seperated into another file)
+
+# api.add_resource(CarStatsControllerAPI, '/car/stats')
+# api.add_resource(ControlsControllerAPI, '/car/commands')
+api.add_resource(TestControllerAPI, '/car/test')
 api.add_resource(CarStatsControllerAPI, '/car/stats')
 api.add_resource(ControlsControllerAPI, '/car/commands')
+api.add_resource(MapControllerAPI, '/map/save')

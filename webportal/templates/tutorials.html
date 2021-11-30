@@ -1,0 +1,475 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-fluid py-4">
+
+	<div class="card tabletitle">
+		<div class="card-body p-3">
+			<div class="col">
+				<div class="row">
+					<div class="col-10">
+						<div class="numbers">
+							<h5 class="font-weight-bolder mb-0">
+								<b>Map Tutorial</b>
+							</h5>
+							<p class="text-sm mb-0 text-capitalize font-weight-bold">
+								Learn How to Edit / Reset Map
+							</p>
+						</div>
+					</div>
+					<div class="col-2 text-end">
+						<a id="mapTutorial" class="btn btn-danger" href="#" role="button"> Incomplete </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="accordion" id="accordionExample">
+
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingOne" onclick="registerTask(0)">
+				<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+					aria-expanded="true" aria-controls="collapseOne">
+					#1 Create New Map
+				</button>
+			</h2>
+			<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+				data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Select the Maps navigation link on the left side.</strong>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" src="../static/img/navmaps.JPG"/>
+						</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingTwo">
+				<button class="accordion-button collapsed" type="button" onclick="registerTask(1)"
+					data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+					aria-controls="collapseTwo">
+					#2 Adding Components
+				</button>
+			</h2>
+			<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+				data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="row" >
+					<div class="col" size="6">
+						<strong>Pick the map items you wish to include on the map. <br/> <br> You can use 1 start and 1 stop. </strong>
+					</div>
+					<div class="col" size="6" >
+						<img style="float:right;" src="../static/img/mapitems.JPG"/>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingThree">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					onclick="registerTask(2)" data-bs-target="#collapseThree" aria-expanded="false"
+					aria-controls="collapseThree">
+					#3 Check Map is Linked
+				</button>
+			</h2>
+			<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+				data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Ensure that there is a route from the start and end of the map.</strong>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" src="../static/img/checkmap.JPG"/>
+						</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingFour">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					onclick="registerTask(3)" data-bs-target="#collapseFour" aria-expanded="false"
+					aria-controls="collapseFour">
+					#4 Saving Map
+				</button>
+			</h2>
+			<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+				data-bs-parent="#accordionExample">
+				<div class="accordion-body">
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Click on 'Save' to save and start playing the new map. <br>  <br> 
+							Click on 'Reset' to clear the map and reset the map.</strong>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" src="../static/img/savereset.JPG"/>
+						</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card mt-4 tabletitle">
+		<div class="card-body p-3">
+			<div class="col">
+				<div class="row">
+					<div class="col-10">
+						<div class="numbers">
+							<h5 class="font-weight-bolder mb-0">
+								<b>Gameplay Tutorial</b>
+							</h5>
+							<p class="text-sm mb-0 text-capitalize font-weight-bold">
+								Learn How To Move The Car / Play The Game
+							</p>
+						</div>
+					</div>
+					<div class="col-2 text-end">
+						<a id="gameTutorial" class="btn btn-danger" href="#" role="button"> Incomplete </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="accordion" id="accordionExample2">
+
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingFive" onclick="registerTask(4)">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+					#1 Rules of the Game
+				</button>
+			</h2>
+			<div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+				data-bs-parent="#accordionExample2">
+				<div class="accordion-body">
+					<strong>You will need to go through the tutorial before playing the game</strong><br><br>
+					The objective is to reach the end flag using the car on a physical map <br>
+					The car cannot go out of the route, the line detector on the car will check if the car has exceeded the boundary<br>
+				    If there is an object, the car will detect and stop moving <br>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingSix">
+				<button class="accordion-button collapsed" type="button" onclick="registerTask(5)"
+					data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false"
+					aria-controls="collapseSix">
+					#2 Playing the Game
+				</button>
+			</h2>
+			<div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+				data-bs-parent="#accordionExample2">
+				<div class="accordion-body">
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Understanding the layout of the Map <br> <br> 
+							</strong>
+							On the left there is a map for the user to see the map that they are playing
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/layout.JPG"/>
+						</div>
+					</div>
+						<div class="row">
+
+						
+						<div class="col" size="6">
+							<strong>Blockly Codespace for Dragging and Dropping Commands <br> <br> 
+							</strong>
+							The center of the page will have a white area for the students to key in their commands
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/blockly.JPG"/>
+						</div>
+				</div>
+				<div class="row">
+					<div class="col" size="6">
+						<strong>Command List <br> <br> 
+						</strong>
+						The command list on the right shows a preview of the programming logic which the student has 
+						entered.
+					</div>
+					<div class="col" size="6">
+						<img style="float:right;" width="100" src="../static/img/commandlist.JPG"/>
+					</div>
+					
+			</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingSeven">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					onclick="registerTask(6)" data-bs-target="#collapseSeven" aria-expanded="false"
+					aria-controls="collapseSeven">
+					#3 Blockly Commands
+				</button>
+			</h2>
+			<div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+				data-bs-parent="#accordionExample2">
+				<div class="accordion-body">
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Move forward  <br>
+							</strong>
+							At any direction the car is facing, it will moveforward<br> <br>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/forward.JPG"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Turn & Move Foward <br>
+							</strong>
+							The car will turn 90% and then move forward, the direction will be stated by the user<br> <br> 
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/turning.JPG"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Counter  <br>
+							</strong>
+							Use to shorten the code by creating a repeated loop of an action<br> <br>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/counter.JPG"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col" size="6">
+							<strong>Conditional formatting <br> 
+							</strong>
+							Incresae the fun by having a interesting condition of an action<br> <br>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/conditional.JPG"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col" size="6">
+							<strong>If loop <br> 
+							</strong>
+							Use to different outcome by having a decision conditional statement before an action<br> <br>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/ifloop.JPG"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col" size="6">
+							<strong>While loop <br> 
+							</strong>
+							Use to shorten the code by having a repeated loop of an action until a confition is met<br> <br>
+						</div>
+						<div class="col" size="6">
+							<img style="float:right;" width="100" src="../static/img/whileloop.JPG"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingEight">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					onclick="registerTask(7)" data-bs-target="#collapseEight" aria-expanded="false"
+					aria-controls="collapseEight">
+					#4 Challenge Stage
+				</button>
+			</h2>
+			<div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+				data-bs-parent="#accordionExample2">
+				<div class="accordion-body">
+					<div class="row">
+						<div class="col">
+							<strong>The user will complete the game once first</strong><br><br>
+							After completion, the user will be prompted to play the challenge mode.<br>
+							A random bomb will be generated, the user will need to avoid the bomb using complex statements. <br>
+							User can come up with any creative ideas.
+						</div>
+						<div class="col">
+							<img style="float:right;" width="100" src="../static/img/challengestage.JPG"/>
+						</div>
+					</div>
+					
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="card mt-4 tabletitle">
+		<div class="card-body p-3">
+			<div class="col">
+				<div class="row">
+					<div class="col-10">
+						<div class="numbers">
+							<h5 class="font-weight-bolder mb-0">
+								<b>Dashboard Tutorial</b>
+							</h5>
+							<p class="text-sm mb-0 text-capitalize font-weight-bold">
+								Learn how To Read The Data Sensor Tables
+							</p>
+						</div>
+					</div>
+					<div class="col-2 text-end">
+						<a id="dashboardTutorial" class="btn btn-danger" href="#" role="button"> Incomplete </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="accordion" id="accordionExample3">
+
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingNine">
+				<button class="accordion-button collapsed" onclick="registerTask(8)" type="button"
+					data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="true"
+					aria-controls="collapseNine">
+					#1 Temperature
+				</button>
+			</h2>
+			<div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
+				data-bs-parent="#accordionExample3" aria-expanded="true">
+				<div class="accordion-body">
+					<strong>This is the temperature of the car sensed and gathered from the MSP432 board</strong> <br> <br>
+					If temperature is too high, please stop using the car.
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingTen">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseTen" onclick="registerTask(9)" aria-expanded="false"
+					aria-controls="collapseTen">
+					#2 Speed
+				</button>
+			</h2>
+			<div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen"
+				data-bs-parent="#accordionExample3">
+				<div class="accordion-body">
+					<strong>This graph shows the speed of the car </strong> <br> <br>
+					The graph stores the m/s of the car travelling everytime the game is played. <br>
+					It will reset when the game is completed.
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingEleven">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseEleven" onclick="registerTask(10)" aria-expanded="false"
+					aria-controls="collapseEleven">
+					#3 Distance
+				</button>
+			</h2>
+			<div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven"
+				data-bs-parent="#accordionExample3">
+				<div class="accordion-body">
+					<strong>This shows the total distance the car travelled</strong><br><br>
+					The information is useful to understand if the codes used can be decreased, to make it quicker to reach
+					the end of the finishing line.
+				</div>
+			</div>
+		</div>
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingTwelve" onclick="registerTask(11)">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+					#4 Line Detection
+				</button>
+			</h2>
+			<div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve"
+				data-bs-parent="#accordionExample3">
+				<div class="accordion-body">
+					<strong>This shows if the car has exceeded the boundary of the map</strong> <br> <br>
+					The graph represent the output of the car's line sensor. <br>
+					0 means there is no line while 1 means there is a line.
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+</div>
+
+<script>
+	var tutorialCompleted = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+	function registerTask(order) {
+		tutorialCompleted[order] = 1;
+		console.log(tutorialCompleted)
+		checkCompleted()
+	}
+
+	function checkCompleted() {
+		let confirmMap = 0
+		for (let i = 0; i < 4; i++) {
+			if (tutorialCompleted[i] == 1) {
+				confirmMap++
+			} else {
+				confirmMap = 0
+			}
+			if (confirmMap == 4) {
+				document.getElementById('mapTutorial').classList.remove('btn-danger');
+				document.getElementById('mapTutorial').classList.add('btn-success');
+				document.getElementById('mapTutorial').innerHTML = 'Completed';
+			}
+		}
+
+		let confirmMap2 = 0
+		for (let i = 4; i < 8; i++) {
+			if (tutorialCompleted[i] == 1) {
+				confirmMap2++
+			} else {
+				confirmMap2 = 0
+			}
+			if (confirmMap2 == 4) {
+				document.getElementById('gameTutorial').classList.remove('btn-danger');
+				document.getElementById('gameTutorial').classList.add('btn-success');
+				document.getElementById('gameTutorial').innerHTML = 'Completed';
+			}
+		}
+
+		let confirmMap3 = 0
+		for (let i = 8; i < 12; i++) {
+			if (tutorialCompleted[i] == 1) {
+				confirmMap3++
+			} else {
+				confirmMap3 = 0
+			}
+			if (confirmMap3 == 4) {
+				document.getElementById('dashboardTutorial').classList.remove('btn-danger');
+				document.getElementById('dashboardTutorial').classList.add('btn-success');
+				document.getElementById('dashboardTutorial').innerHTML = 'Completed';
+			}
+		}
+	}
+
+
+
+</script>
+
+<style>
+	.tabletitle{
+		background:orange;
+		color:white;
+	}
+</style>
+
+
+{% endblock %}

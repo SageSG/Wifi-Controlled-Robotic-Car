@@ -1,34 +1,39 @@
-// Javascript for Customise Map page
-
-/*
-    Notes for own reference:
-    ev = event
-    Node refers to an HTML element
-*/
-
-// Set on the elements that should allow allow drops
 function allowDrop(ev) {
+      /*
+       Set on the elements that should allow allow drops
+      :param: node. 
+      :return: None.
+    */
     ev.preventDefault();
 }
 
-/*
-    Sets the data of the item being dragged to either start_tile,
-    end_tile, route_tile, or empty_tile (based on the element's ID)
-*/
+
 function drag(ev) {
+      /*
+      Sets the data of the item being dragged to either start_tile, end_tile, route_tile, or empty_tile (based on the element's ID)
+      :param: node. 
+      :return: None.
+    */
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
-/* Remove tile from the map grid */
+
 function removeNode(node) {
+    /*
+      Remove tile from the map grid
+      :param: node. 
+      :return: None.
+    */
         node.parentNode.removeChild(node);
       }
 
-/*
-    - Customisation part of the map
-    - Drops the item into the 8x8 Map grid by cloning and appending nodes
-*/
+
 function drop(ev) {
+    /*
+      Allows the user to drop an draggable element into the grid. Drops the item into the 8x8 Map grid by cloning and appending nodes.
+      :param: None. 
+      :return: None.
+    */
       ev.preventDefault();
       var data = ev.dataTransfer.getData("text");   // Get the ID of the item to be dropped which can be either start_tile, end_tile, route_tile, or empty_tile
       var routing_tile = 'route_tile' == data
@@ -59,8 +64,13 @@ function drop(ev) {
       return false;
     }
 
-function saveMap() {
 
+function saveMap() {
+	/*
+    Saves the map created by the user. 
+    :param: None. 
+    :return: None.
+	*/
   // List that stores start point, routes, and end point
   const mapGrid = [];
 
@@ -101,16 +111,15 @@ function saveMap() {
             columns.push(empty)
         }
       }
-      mapGrid[r] = columns
-  }
-  // console.log(mapGrid)
+        mapGrid[r] = columns
+    }
+  
+    // Deletes the previous stats from the previous game and creates a new map
     var xhttp = new XMLHttpRequest();
-    var success;
-    xhttp.open("POST", "/map/save");
+    xhttp.open("DELETE", "/stats_controller");
+    xhttp.send();
+    xhttp.open("POST", "/map_controller");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xhttp.onload = function () {
-    //   success = xhttp.statusText;
-    // };
     xhttp.send("coordinates=" + mapGrid);
     $("#map_modal").modal("show");
 }

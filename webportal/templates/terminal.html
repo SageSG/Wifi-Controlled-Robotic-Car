@@ -324,6 +324,7 @@
     car_face_upwards = true;
     car_face_left = false;
     car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
     }
     
 
@@ -355,6 +356,7 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
+
         if (car_face_downwards == true) {
             car_index += 1;
             car_face_right = true;
@@ -552,6 +554,13 @@
         let y = 0
         x = Math.floor(gridnum / 8)
         y = (gridnum - ((x) * 8)) - 1
+        
+        console.log(x,y)
+        if(y < 0){
+            y = 7
+            x -= 1
+        }
+        
         if (map[x][y] == 2) {
             document.getElementById("grid" + gridnum).style.backgroundColor = "green"
             return true
@@ -588,6 +597,7 @@
 
         //Run the command list using eval function
         eval(code);
+        
 
         // Check to see if the car has reached the end point 
         if (car_index == path_end) {
@@ -617,10 +627,7 @@
     }
 
     function resetGame() {
-        car_face_downwards = false;
-        car_face_upwards = true;
-        car_face_left = false;
-        car_face_right = false;
+        
         clearCode();
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
                     <div class="row">\
@@ -657,6 +664,40 @@
                         </div>\
                     </div>\
                 </div>';
+                console.log(path_start)
+        if(path_start <= 8){
+        car_face_downwards = true;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+    }
+    else if (path_start == 9 || path_start == 17 || path_start == 25 || path_start == 33 || path_start == 41 || path_start == 49){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = true;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+    }else if (path_start == 56 || path_start == 48 || path_start == 40 || path_start == 32 || path_start == 24 || path_start == 16){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = true;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+    }
+    else if(path_start >= 57){
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+    }else{
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+    }
         workspace.clear()
     }
 

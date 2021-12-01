@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="container-fluid py-4">
-
 	<div class="card tabletitle">
 		<div class="card-body p-3">
 			<div class="col">
 				<div class="row">
 					<div class="col-10">
 						<div class="numbers">
-							<h5 class="font-weight-bolder mb-0">
+							<h5 class="font-weight-bolder mb-0" style="color:white">
+
 								<b>Map Tutorial</b>
 							</h5>
 							<p class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -41,7 +41,7 @@
 							<strong>Select the Maps navigation link on the left side.</strong>
 						</div>
 						<div class="col" size="6">
-							<img style="float:right;" src="../static/img/navmaps.JPG"/>
+							<img style="float:right;" src="../static/img/navmaps.jpg"/>
 						</div>
 				</div>
 				</div>
@@ -60,10 +60,10 @@
 				<div class="accordion-body">
 					<div class="row" >
 					<div class="col" size="6">
-						<strong>Pick the map items you wish to include on the map. <br/> <br> You can use 1 start and 1 stop. </strong>
+						<strong>Design you map by placing the map items on the grid <br/> <br> Each map should only consist of 1 start tile and 1 end tile </strong>
 					</div>
 					<div class="col" size="6" >
-						<img style="float:right;" src="../static/img/mapitems.JPG"/>
+						<img style="float:right;" src="../static/img/Item selection.gif"/>
 					</div>
 				</div>
 				</div>
@@ -122,7 +122,8 @@
 				<div class="row">
 					<div class="col-10">
 						<div class="numbers">
-							<h5 class="font-weight-bolder mb-0">
+							<h5 class="font-weight-bolder mb-0" style="color:white">
+
 								<b>Gameplay Tutorial</b>
 							</h5>
 							<p class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -139,7 +140,6 @@
 	</div>
 
 	<div class="accordion" id="accordionExample2">
-
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingFive" onclick="registerTask(4)">
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -172,36 +172,21 @@
 						<div class="col" size="6">
 							<strong>Understanding the layout of the Map <br> <br> 
 							</strong>
-							On the left there is a map for the user to see the map that they are playing
-						</div>
-						<div class="col" size="6">
-							<img style="float:right;" width="100" src="../static/img/layout.JPG"/>
-						</div>
-					</div>
-						<div class="row">
-
-						
-						<div class="col" size="6">
-							<strong>Blockly Codespace for Dragging and Dropping Commands <br> <br> 
+							On the left there is a map for the user to see the map that they are playing<br> <br>
+							<strong>Blockly Codespace for Dragging and Dropping Commands <br> <br>
 							</strong>
-							The center of the page will have a white area for the students to key in their commands
+							The center of the page will have a white area for the students to key in their commands<br> <br>
+							<strong>Command List <br> <br>
+						    </strong>
+						    The command list on the right shows a preview of the programming logic which the student has
+						    entered.
 						</div>
+
 						<div class="col" size="6">
-							<img style="float:right;" width="100" src="../static/img/blockly.JPG"/>
+							<img style="float:right; padding: 40px 0px 0px 0px;" width="500" src="../static/img/Gameplay.gif"/>
 						</div>
-				</div>
-				<div class="row">
-					<div class="col" size="6">
-						<strong>Command List <br> <br> 
-						</strong>
-						The command list on the right shows a preview of the programming logic which the student has 
-						entered.
 					</div>
-					<div class="col" size="6">
-						<img style="float:right;" width="100" src="../static/img/commandlist.JPG"/>
-					</div>
-					
-			</div>
+
 				</div>
 			</div>
 		</div>
@@ -250,7 +235,7 @@
 						<div class="col" size="6">
 							<strong>Conditional formatting <br> 
 							</strong>
-							Incresae the fun by having a interesting condition of an action<br> <br>
+							Increase the fun by having a interesting condition of an action<br> <br>
 						</div>
 						<div class="col" size="6">
 							<img style="float:right;" width="100" src="../static/img/conditional.JPG"/>
@@ -284,52 +269,30 @@
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					onclick="registerTask(7)" data-bs-target="#collapseEight" aria-expanded="false"
 					aria-controls="collapseEight">
-					#4 Tutorial Maps
+					#4 Challenge Stage
 				</button>
 			</h2>
 			<div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
 				data-bs-parent="#accordionExample2">
 				<div class="accordion-body">
-					<strong>Select a map at the bottom to learn the game</strong>
 					<div class="row">
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/forwardmap.JPG"/>
-							</div>
-							<div class="row">
-								Moving straight
-							</div>
+						<div class="col">
+							<strong>The user will complete the game once first</strong><br><br>
+							After completion, the user will be prompted to play the challenge mode.<br>
+							A random bomb will be generated, the user will need to avoid the bomb using complex statements. <br>
+							User can come up with any creative ideas.
 						</div>
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/turningmap.JPG"/>
-							</div>
-							<div class="row">
-								Turning
-							</div>
+						<div class="col">
+							<img style="float:right;" width="100" src="../static/img/challengestage.JPG"/>
 						</div>
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/ifmap.JPG"/>
-							</div>
-							<div class="row">
-								If loop
-							</div>
-						</div>
-						<div class="col" size="md6 lg3 xs12">
-							<div class="row">
-								<img style="float:center;" width="100" src="../static/img/whilemap.JPG"/>
-							</div>
-							<div class="row">
-								While loop
-							</div>
-						</div>
+					</div>
+					
 					</div>
 					
 				</div>
 			</div>
 		</div>
-	</div>
+	
 
 
 	<div class="card mt-4 tabletitle">
@@ -338,7 +301,8 @@
 				<div class="row">
 					<div class="col-10">
 						<div class="numbers">
-							<h5 class="font-weight-bolder mb-0">
+							<h5 class="font-weight-bolder mb-0" style="color:white">
+
 								<b>Dashboard Tutorial</b>
 							</h5>
 							<p class="text-sm mb-0 text-capitalize font-weight-bold">
@@ -361,25 +325,14 @@
 				<button class="accordion-button collapsed" onclick="registerTask(8)" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="true"
 					aria-controls="collapseNine">
-					#1 
+					#1 Temperature
 				</button>
 			</h2>
 			<div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
 				data-bs-parent="#accordionExample3" aria-expanded="true">
 				<div class="accordion-body">
-					<strong>This is the second item's accordion body.</strong> It is hidden by default, until
-					the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This is the temperature of the car sensed and gathered from the MSP432 board</strong> <br> <br>
+					If temperature is too high, please stop using the car.
 				</div>
 			</div>
 		</div>
@@ -388,24 +341,15 @@
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseTen" onclick="registerTask(9)" aria-expanded="false"
 					aria-controls="collapseTen">
-					#2
+					#2 Speed
 				</button>
 			</h2>
 			<div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen"
 				data-bs-parent="#accordionExample3">
 				<div class="accordion-body">
-					<strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This graph shows the speed of the car </strong> <br> <br>
+					The graph stores the m/s of the car travelling everytime the game is played. <br>
+					It will reset when the game is completed.
 				</div>
 			</div>
 		</div>
@@ -414,24 +358,15 @@
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseEleven" onclick="registerTask(10)" aria-expanded="false"
 					aria-controls="collapseEleven">
-					#3
+					#3 Distance
 				</button>
 			</h2>
 			<div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven"
 				data-bs-parent="#accordionExample3">
 				<div class="accordion-body">
-					<strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This shows the total distance the car travelled</strong><br><br>
+					The information is useful to understand if the codes used can be decreased, to make it quicker to reach
+					the end of the finishing line.
 				</div>
 			</div>
 		</div>
@@ -439,98 +374,32 @@
 			<h2 class="accordion-header" id="headingTwelve" onclick="registerTask(11)">
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
-					#4
+					#4 Line Detection
 				</button>
 			</h2>
 			<div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve"
 				data-bs-parent="#accordionExample3">
 				<div class="accordion-body">
-					<strong>This is the second item's accordion body.</strong> It is hidden by default, until
-					the
-					collapse plugin adds the appropriate classes that we use to style each element. These
-					classes
-					control the overall appearance, as well as the showing and hiding via CSS transitions. You
-					can
-					modify any of this with custom CSS or overriding our default variables. It's also worth
-					noting
-					that
-					just about any HTML can go within the <code>.accordion-body</code>, though the transition
-					does
-					limit
-					overflow.
+					<strong>This shows if the car has exceeded the boundary of the map</strong> <br> <br>
+					The graph represent the output of the car's line sensor. <br>
+					0 means there is no line while 1 means there is a line.
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>
 
-
 </div>
-
+</div>
+<script src="{{ url_for('static', filename='tutorial.js')}}"></script>
 <script>
 	var tutorialCompleted = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-	function registerTask(order) {
-		tutorialCompleted[order] = 1;
-		console.log(tutorialCompleted)
-		checkCompleted()
-	}
-
-	function checkCompleted() {
-		let confirmMap = 0
-		for (let i = 0; i < 4; i++) {
-			if (tutorialCompleted[i] == 1) {
-				confirmMap++
-			} else {
-				confirmMap = 0
-			}
-			if (confirmMap == 4) {
-				document.getElementById('mapTutorial').classList.remove('btn-danger');
-				document.getElementById('mapTutorial').classList.add('btn-success');
-				document.getElementById('mapTutorial').innerHTML = 'Completed';
-			}
-		}
-
-		let confirmMap2 = 0
-		for (let i = 4; i < 8; i++) {
-			if (tutorialCompleted[i] == 1) {
-				confirmMap2++
-			} else {
-				confirmMap2 = 0
-			}
-			if (confirmMap2 == 4) {
-				document.getElementById('gameTutorial').classList.remove('btn-danger');
-				document.getElementById('gameTutorial').classList.add('btn-success');
-				document.getElementById('gameTutorial').innerHTML = 'Completed';
-			}
-		}
-
-		let confirmMap3 = 0
-		for (let i = 8; i < 12; i++) {
-			if (tutorialCompleted[i] == 1) {
-				confirmMap3++
-			} else {
-				confirmMap3 = 0
-			}
-			if (confirmMap3 == 4) {
-				document.getElementById('dashboardTutorial').classList.remove('btn-danger');
-				document.getElementById('dashboardTutorial').classList.add('btn-success');
-				document.getElementById('dashboardTutorial').innerHTML = 'Completed';
-			}
-		}
-	}
-
-
-
 </script>
 
 <style>
 	.tabletitle{
-		background:orange;
+		background:black;
 		color:white;
 	}
 </style>
-
-
 {% endblock %}

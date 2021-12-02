@@ -238,6 +238,7 @@
     const car_path = [];        // Path the car traveresed 
     var i = 0;  
     var challenge = 0                // To see if its the challenge map
+    var listofcommands = []
 
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
@@ -320,6 +321,8 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
+        listofcommands.push('1')
+        listofcommands.push('3')
         if (car_face_downwards == true) {
             car_index += 1;
             car_face_right = true;
@@ -377,6 +380,8 @@
 
     // Function to process the car index if the car turns right 
     function turnRight(car_index) {
+        listofcommands.push('1')
+        listofcommands.push('4')
         if (car_face_downwards == true) {
             car_index -= 1;
             car_face_right = false;
@@ -433,6 +438,7 @@
 
     // Function to process the car index if the car moves forward 
     function moveForward(car_index) {
+        listofcommands.push('1')
         if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
@@ -553,9 +559,16 @@
 
         //Run the command list using eval function
         eval(code);
+        
 
         // Check to see if the car has reached the end point 
         if (car_index == path_end) {
+            
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + listofcommands); 
+            
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
             if (challenge == 1){
                 $("#challenge_won_modal").modal({ backdrop: 'static', keyboard: false })

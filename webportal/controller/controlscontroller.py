@@ -29,16 +29,21 @@ class ControlsControllerAPI(Resource):
 		:return: 201.
 		"""  		
 		args = parser.parse_args()
-		if args['command'] == "motor_start()":
-			command = 1
+		print(args['command'])
+		xlist = args['command'].split(",")
+		for x in xlist:
+			print (x)
+			if x == "1":
+				command = 1
 
-		elif args['command'] == "motor_back()":
-			command = 2
+			elif x == "2":
+				command = 2
 
-		elif args['command'] == "motor_left()":
-			command = 3
+			elif x == "3":
+				command = 3
 
-		elif args['command'] == "motor_right()":
-			command = 4
-		insert_commands(command)
+			elif x == "4":
+				command = 4
+			
+			insert_commands(command)
 		return 200

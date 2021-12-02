@@ -24,7 +24,6 @@ def insert_commands(command):
 	try:
 		db.session.add(command)
 		db.session.commit()
-		print('hi')
 	except:
 		db.session.rollback()
 	finally: 

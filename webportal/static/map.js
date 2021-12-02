@@ -116,7 +116,7 @@ function saveMap() {
   
     // Deletes the previous stats from the previous game and creates a new map
     var xhttp = new XMLHttpRequest();
-    xhttp.open("DELETE", "/car_controller/stats");
+    xhttp.open("DELETE", "/stats_controller");
     xhttp.send();
     xhttp.open("POST", "/map_controller");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

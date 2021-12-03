@@ -24,8 +24,8 @@ def create_webportal():
         db.create_all()
     from .views import views
     app.register_blueprint(views, url_prefix='/')
-    api.add_resource(CarStatsControllerAPI, '/car_controller/stats')
-    api.add_resource(ControlsControllerAPI, '/car_controller/commands')
+    api.add_resource(CarStatsControllerAPI, '/stats_controller')
+    api.add_resource(ControlsControllerAPI, '/controls_controller')
     api.add_resource(MapControllerAPI, '/map_controller')
     return app
 

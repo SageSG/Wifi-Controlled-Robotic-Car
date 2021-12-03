@@ -229,6 +229,7 @@
 
     // One function 
     var map = {{ map| safe }};  // Get the map from Python 
+    var resetmap = map;
     var counter = 1;            // Counter is used to facilitate 
     var path_start = 0;         // Start of the map path 
     var path_end = 0;           // End of the map path
@@ -238,6 +239,10 @@
     const car_path = [];        // Path the car traveresed 
     var i = 0;  
     var challenge = 0                // To see if its the challenge map
+    var listofcommands = []
+
+    var timing;
+    var additional = 60000;
 
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
@@ -320,8 +325,8 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
+        listofcommands.push('3')
         if (car_face_downwards == true) {
-            car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -334,7 +339,6 @@
         }
 
         else if (car_face_upwards == true) {
-            car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -347,7 +351,6 @@
         }
 
         else if (car_face_left == true) {
-            car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
@@ -360,7 +363,6 @@
         }
 
         else if (car_face_right == true) {
-            car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
@@ -377,8 +379,8 @@
 
     // Function to process the car index if the car turns right 
     function turnRight(car_index) {
+        listofcommands.push('4')
         if (car_face_downwards == true) {
-            car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -391,7 +393,6 @@
         }
 
         else if (car_face_upwards == true) {
-            car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -404,7 +405,6 @@
         }
 
         else if (car_face_left == true) {
-            car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
@@ -417,7 +417,6 @@
         }
 
         else if (car_face_right == true) {
-            car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
@@ -433,6 +432,7 @@
 
     // Function to process the car index if the car moves forward 
     function moveForward(car_index) {
+        listofcommands.push('1')
         if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
@@ -487,36 +487,44 @@
 
     // Move the car left
     function Motor_Left() {
+        setTimeout(function () {
         car_index = turnLeft(car_index);
-        if (!checkRoute(car_index)) {
-            game_over = true
-        }
+        
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     // Move the car right 
     function Motor_Right() {
+        setTimeout(function () {
         car_index = turnRight(car_index);
-        if (!checkRoute(car_index)) {
-            game_over = true
-        }
+        
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     // Move the car forward
     function Motor_Start() {
+        setTimeout(function () {
         car_index = moveForward(car_index);
         if (!checkRoute(car_index)) {
             game_over = true
         }
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     function checkRoute(gridnum) {
         let x = 0
         let y = 0
-        x = Math.floor(gridnum / 8)
+        x = Math.ceil(gridnum / 8) -1
         y = (gridnum - ((x) * 8)) - 1
+        if (y == -1){
+            y = 7
+        }
         if (map[x][y] == 2) {
             document.getElementById("grid" + gridnum).style.backgroundColor = "green"
             return true
@@ -533,6 +541,8 @@
     var game_over = false;
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
+        alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
+        timing = 18000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -553,9 +563,17 @@
 
         //Run the command list using eval function
         eval(code);
+        
 
         // Check to see if the car has reached the end point 
-        if (car_index == path_end) {
+        setTimeout(function () {
+        if (car_index == path_end && game_over == false) {
+            
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + listofcommands); 
+            
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
             if (challenge == 1){
                 $("#challenge_won_modal").modal({ backdrop: 'static', keyboard: false })
@@ -578,14 +596,17 @@
             $("#game_over_modal").modal("show");
             return;
         }
+    }, timing);
 
     }
 
     function resetGame() {
+        map = resetmap;
         car_face_downwards = false;
         car_face_upwards = true;
         car_face_left = false;
         car_face_right = false;
+        game_over = false;
         clearCode();
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
                     <div class="row">\
@@ -622,12 +643,14 @@
                         </div>\
                     </div>\
                 </div>';
-        workspace.clear()
+        // workspace.clear()
+        document.getElementById("textArea").setAttribute = "";
+
     }
 
     function generateBomb() {
-        
-        workspace.clear()
+        document.getElementById("textArea").setAttribute = "";
+        // workspace.clear()
         clearCode();
 
         let listofroute = []
@@ -748,6 +771,7 @@
     car_face_left = false;
     car_face_right = false;
     }
+    
         document.getElementById('grid' + path_end).style.background = "lightblue"
         var imgEnd = '<img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">'
         document.getElementById('grid' + path_end).innerHTML = imgEnd

@@ -244,6 +244,7 @@
     var timing;
     var additional = 60000;
 
+// Count the number of blocky used, (for future intergration)
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
         document.getElementById('totalCommands').innerText = 'No. of Blocks Used: ' + numberofblockly.toString();
@@ -517,6 +518,7 @@
         timing += additional
     }
 
+// Check to make sure the route is possible
     function checkRoute(gridnum) {
         let x = 0
         let y = 0

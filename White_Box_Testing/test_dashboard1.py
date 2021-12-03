@@ -1,12 +1,11 @@
-import sqlite3
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_testing import TestCase
 from webportal.models.carstats import *
 from webportal.models.carstats import CarStats
 from webportal import db, create_test_app
-# Unit testing carstats.py functions
 
+# Unit testing carstats.py functions
 class TestCarStats(TestCase):
 
     def create_app(self):

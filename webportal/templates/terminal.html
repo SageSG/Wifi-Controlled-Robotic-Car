@@ -325,7 +325,6 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
-        alert('please wait..')
         listofcommands.push('3')
         if (car_face_downwards == true) {
             car_face_right = true;
@@ -380,7 +379,6 @@
 
     // Function to process the car index if the car turns right 
     function turnRight(car_index) {
-        alert('please wait..')
         listofcommands.push('4')
         if (car_face_downwards == true) {
             car_face_right = false;
@@ -435,7 +433,6 @@
     // Function to process the car index if the car moves forward 
     function moveForward(car_index) {
         listofcommands.push('1')
-        alert('please wait..')
         if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
@@ -544,8 +541,8 @@
     var game_over = false;
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
-        alert("Please wait for the car to run LOL eta 1min per step :)")
-        timing = 1000; // time for car to run
+        alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
+        timing = 18000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {

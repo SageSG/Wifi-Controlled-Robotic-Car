@@ -3,7 +3,6 @@ from webportal.models.carcommands import *
 
 
 parser = reqparse.RequestParser()
-parser.add_argument('direction', required=True)
 parser.add_argument('command', required=True)
 
 

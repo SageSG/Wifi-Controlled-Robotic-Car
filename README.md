@@ -12,7 +12,7 @@ The Bumbling Cat Pandas team had developed a gamified web-based learning system 
 The system engages the students by having a game that requires them to create a route using block-based programming that would pilot a robotic car through a maze. The game further challenges the students logic skills by generating bombs that would require the students to re-evaluate their routes to move the car around the bombs. 
 
 ## Installation <a name="installation"></a>
-pip -r requirements.txt
+pip install -r requirements.txt
 
 ## Usage <a name="usage"></a>
 1) Execute the program: python main.py

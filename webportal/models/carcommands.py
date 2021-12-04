@@ -2,25 +2,23 @@ from webportal import db
 
 class CarCommands(db.Model):
 	"""
-	Class to contain the car command attributes. 
-	:param: None.
+	Class to control the behaviour of the Car Stats Controller API. 
+	:param: Resource. 
 	:return: None.
-	"""	
+	"""    	
 	id = db.Column(db.Integer , primary_key=True)
-	direction = db.Column(db.String(20))
 	command = db.Column(db.Integer)
 
-	def __init__(self, direction, command):
-		self.direction = direction
+	def __init__(self, command):
 		self.command = command 
 
 
 def insert_commands(command):
 	"""
-	Inserts the car commands into the DB. 
+	Inserts the command into the DB.
 	:param: command.
 	:return: None.
-	"""	
+	"""		
 	# Inserts the commands to the db 
 	command = CarCommands(command)
 	try:
@@ -34,22 +32,18 @@ def insert_commands(command):
 
 def delete_command():
 	"""
-	Deletes the queried car command from the DB. 
+	Deletes the most command entry from the db. 
 	:param: None.
-	:return: {"command": data.command}.
-	"""		
-	data = db.session.query(CarCommands).first()
-	db.session.query(CarCommands).filter(CarCommands.id==data.id).delete()
-	db.session.commit()
-	return {"command": data.command}
-
-
-def reset():
-	"""
-	Deletes all of the data from the car command DB.
-	:param: None.
-	:return: None.
+	:return: {"command": data.command} or False.
 	"""			
-	# Delete all entires in the database 
-	num_rows_deleted = db.session.query(CarCommands).delete()
-	db.session.commit() 
+	try:
+		data = db.session.query(CarCommands).first()
+		db.session.query(CarCommands).filter(CarCommands.id==data.id).delete()
+		db.session.commit()
+	except:
+		db.session.rollback()
+		return False
+	finally: 
+		db.session.close()
+
+	return {"command": data.command}

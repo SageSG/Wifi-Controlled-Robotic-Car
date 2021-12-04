@@ -26,6 +26,8 @@ The robotic car consists of MSP432 with ultrasonic sensor, infra-red sensor and 
 - Ultrasonic sensor will detect nearby obstacles to ensure that the car will not collide with other objects.
 - The battery will power all the components on the car.
 
+https://user-images.githubusercontent.com/32363441/144721149-a5590148-93c6-41c7-a3ef-8eda82d52cca.mp4
+
 ## Technologies Used <a name="technologies-used"></a>
 * Python
 * Python Flask Framework

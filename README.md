@@ -18,4 +18,4 @@ pip -r requirements.txt
 1) Execute the program: python main.py
 2) Navigate to the link provided in the command line. 
 
-![screenshot](https://drive.google.com/file/d/1JWoiP1Clp29KRJQxnHNQIVjMYjqNzBQ-/view?usp=sharing)
+![screenshot](https://drive.google.com/uc?export=view&id=1JWoiP1Clp29KRJQxnHNQIVjMYjqNzBQ-)

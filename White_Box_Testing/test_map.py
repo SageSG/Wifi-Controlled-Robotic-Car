@@ -57,3 +57,7 @@ class TestMap(TestCase):
         # Check if values stored in Map table are deleted
         self.assertEquals(num_rows, 0)
         self.assertEqual(bool_value, True)
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()

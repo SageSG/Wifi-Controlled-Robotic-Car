@@ -12,7 +12,7 @@ The feature branch contains the development code for each specific feature.
 ### Whitebox Test branch
 The whitebox test branch contains the code that is used to test the development code. 
 
-## Workflow 
+## General Workflow Guidlines 
 - Always commit to the dev branch before the master branch.
 - Use the apporpirate branch for the code that you are working on - E.g. Terminal code should fall under the "feauture/terminal" branch.
 - Pull requests to the dev branch do not require approval unless code conflicts occur.

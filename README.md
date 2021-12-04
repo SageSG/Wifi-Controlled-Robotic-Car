@@ -20,12 +20,11 @@ This gameplay requires the student to follow the virtual maze layout and build a
 
 ## Robotic Car <a name="robotic_car"></a>
 The robotic car consists of MSP432 with ultrasonic sensor, infra-red sensor and is powered by battery.
-• It uses a Wi-Fi to communicate to the web interface to get its set of instructions.
-• There is memory storage in the MSP432 board, microcontroller, and processor of the car.
-• The infra-red sensor is used to detect the lines drawn on surfaces.
-• Ultrasonic sensor will detect nearby obstacles to ensure that the car will not collide with other objects.
-• The battery will power all the components on the car.
-https://user-images.githubusercontent.com/30022989/144720883-e14bbd91-6b15-4336-ba3f-43057edae0b9.mp4
+- It uses a Wi-Fi to communicate to the web interface to get its set of instructions.
+- There is memory storage in the MSP432 board, microcontroller, and processor of the car.
+- The infra-red sensor is used to detect the lines drawn on surfaces.
+- Ultrasonic sensor will detect nearby obstacles to ensure that the car will not collide with other objects.
+- The battery will power all the components on the car.
 
 ## Technologies Used <a name="technologies-used"></a>
 * Python

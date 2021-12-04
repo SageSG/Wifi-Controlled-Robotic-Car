@@ -1,4 +1,10 @@
 # ICT2x01 Project: Wi-Fi Enabled Robotic Toy Car
+Team Bumbling Cat Pandas
+- Jas Pang, 2000823
+- Jonathan Tan, 2001428
+- Nur Shahidah Binte Imran, 2001470
+- Ryan Goh Shao Chong, 1802980
+- Yip Hou Liang, 2000721
 
 # Table of Contents
 1. [Description of Project](#description-of-Project)

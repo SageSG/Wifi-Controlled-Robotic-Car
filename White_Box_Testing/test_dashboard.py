@@ -1,49 +1,63 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_testing import TestCase
-from webportal.models.carstats import *
 from webportal.models.carstats import CarStats
+from webportal.models.carstats import *
 from webportal import db, create_test_app
 
-# Unit testing carstats.py functions
 class TestCarStats(TestCase):
-
+    '''
+        Test cases for the carstats.py file.
+    '''
     def create_app(self):
+        """
+        	Uses app context for testing environment instead of the production one.
+        """
         return create_test_app()
 
     def setUp(self):
+        '''
+            Sets up the testing environment by creating a new database for the test cases to use and
+            inserts two new rows into the car_stats table.
+        '''
         db.create_all()
         insert_stats(100,101,105, True)
         insert_stats(200,201,205, True)
 
-    # Tests if values are properly inserted into CarStats object.
     def test_init(self):
-
+        '''
+            Tests that the constructor in the carstats.py file
+            is able to assign the correct values to the right parameters.
+        '''
         car_stats_object = CarStats(25, 5, 50, True)
         self.assertEqual(car_stats_object.temp, 25)
         self.assertEqual(car_stats_object.dist, 5)
         self.assertEqual(car_stats_object.speed, 50)
         self.assertEqual(car_stats_object.line, True)
 
-    # Tests if values are properly inserted into car_stats table in DB
     def test_insert_stats(self):
 
-        ## Insert values into DB without errors
+        '''
+            Tests that the insert_stats() function in carstats.py is able to insert correct
+            values into the car_stats table in the database without errors.
+        '''
+
         insert_stats(300,301,305, True)
-        # Retrieve the latest stats from the DB
+
         data = db.session.query(CarStats).order_by('id').all()
 
-        # Latest entry data
         latest_entry = data[-1]
 
-        # Test if all values in DB matched what was inserted
         self.assertEquals(latest_entry.temp, 300)
         self.assertEquals(latest_entry.dist, 301)
         self.assertEquals(latest_entry.speed, 305)
         self.assertEquals(latest_entry.line, True)
 
-    # Tests if
     def test_get_stats(self):
+
+        '''
+            Tests that data is retrieved accurately from the database.
+        '''
         # [0] current_stats,
         # [1] temps_graph_stats,
         # [2] speed_graph_stats,
@@ -56,8 +70,29 @@ class TestCarStats(TestCase):
         self.assertEqual(stats[0]["total_dist"], 302)
         self.assertEqual(stats[0]["current_temps"], 200)
 
+        temp_list = list(stats[1].values())
+        self.assertEqual(temp_list[0], 200)
+
+        speed_list = list(stats[2].values())
+        self.assertEqual(speed_list[0], 205)
+
+        line_list = list(stats[3].values())
+        self.assertEqual(line_list[0], True)
+
+        self.assertEqual(stats[4]["true_count"], 2)
+        self.assertEqual(stats[4]["false_count"], 0)
+
+
     def test_delete_stats(self):
+        '''
+            Tests if the delete_stats() function of the carstats.py file is able to delete all the entries in the
+            car_stats table when called.
+        '''
         delete_stats()
         num_rows = db.session.query(CarStats).count()
         self.assertEquals(num_rows, 0)
+
+    def tearDown(self):
+        db.session.remove()
+        db.drop_all()
 

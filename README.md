@@ -52,5 +52,45 @@ pip install -r requirements.txt
 ![screenshot](https://drive.google.com/uc?export=view&id=1JWoiP1Clp29KRJQxnHNQIVjMYjqNzBQ-)
 
 ## Whitebox Test <a name="whitebox_test"></a>
+**Class:** MapControllerAPI
+**Technique:** Statement Coverage
+**Test File:** test_mapcontroller.py
+**Location:** webportal/whitebox_testing
+
+### <ins>Test Cases</ins>
+The statement coverage statistics for each function were manually driven by first counting the total number of statements in the function and then counting the number of statements tested in the test case.
+
+#### Test Case: test_post_delete
+* Tests the post and delete functions of the MapControllerAPI class.
+
+##### post function
+Total number of statements = 4
+
+![total_statements_post](https://drive.google.com/uc?export=view&id=19hn509fmrP6bO6VNpwPRn9rnhl7Ygkfz)
+
+Number of statements tested = 4
+
+![tested_statements_post](https://drive.google.com/uc?export=view&id=1_8VkQ1-VjSQOhKAoR2bEItyepfd8ADAt)
+
+Coverage statistics = 4/4 = 1
+
+#### delete function
+Total number of statements = 5
+
+![total_statements_delete](https://drive.google.com/uc?export=view&id=1rK_7eopl9eaU0LIcKt1vk92riK1EB8nw)
+
+Number of statements tested = 5
+
+![tested_statements_delete](https://drive.google.com/uc?export=view&id=1Qkc0ll5onjL_OEQOrLfIP5Kf_qSX7miO)
+
+Coverage statistics = 5/5 = 1
+
+### <ins>Running the Test Suite</ins>
+1) Download the zipped file.
+2) Navigate to the directory of the project. (2x01)
+4) Run python -m unittest whitebox_testing/test_mapcontroller.py
+
+![run_test](https://media.giphy.com/media/ssjSWnQiRcXHSRrj90/giphy.gif)
+
 
 ## Blackbox Test <a name="blackbox_test"></a>

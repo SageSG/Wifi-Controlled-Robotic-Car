@@ -53,8 +53,11 @@ pip install -r requirements.txt
 
 ## Whitebox Test <a name="whitebox_test"></a>
 **Class:** MapControllerAPI
+
 **Technique:** Statement Coverage
+
 **Test File:** test_mapcontroller.py
+
 **Location:** whitebox_testing
 
 ### <ins>Test Cases</ins>

@@ -97,7 +97,7 @@ Coverage statistics = 5/5 = 1
 
 ### <ins>Test Cases</ins>
 
-#### Test Case1: User Access Web Portal via localhost at the respective URL.
+#### Test Case: User Access Web Portal via localhost at the respective URL.
 Precondition: 
 Domain URL must be valid and available.
 
@@ -109,7 +109,7 @@ User successfully accesses the web portal. Test case passed.
 
 ![tc1](https://user-images.githubusercontent.com/73056944/144760449-4f0967ea-d424-4ba4-aeef-db4a95e26e9d.png)
 
-#### Test Case2: User navigates to tutorial page by selecting tutorial button.
+#### Test Case: User navigates to tutorial page by selecting tutorial button.
 Precondition: 
 The tutorial page has to be accessible by the user.
 
@@ -121,7 +121,7 @@ User successfully accesses the tutorial page. Test case passed.
 
 ![tc2](https://user-images.githubusercontent.com/73056944/144760486-c8dabfdc-36a1-40c3-bff9-60a9b5db6298.png)
 
-#### Test Case3: User reads tutorials on the tutorial page.
+#### Test Case: User reads tutorials on the tutorial page.
 Precondition: 
 User has successfully accessed the tutorial page.
 
@@ -134,7 +134,7 @@ User is able to view the tutorials. Test case passed.
 ![tc3](https://user-images.githubusercontent.com/73056944/144760571-913002c7-44ad-498d-b298-d9a5cd6cca18.png)
 
 
-#### Test Case4: User navigates to customise map page by selecting customise button.
+#### Test Case: User navigates to customise map page by selecting customise button.
 Precondition: 
 The map page URL has to be accessible by the user.
 
@@ -146,7 +146,7 @@ The feature of being able to customise the previously created maps was not imple
 
 ![tc4](https://user-images.githubusercontent.com/73056944/144760627-179124d3-cbb7-404e-91e9-8df240c8dd2a.png)
 
-#### Test Case5: User can display previously created maps.
+#### Test Case: User can display previously created maps.
 Precondition: 
 User must be able to access web portal and the map creation page.
 
@@ -158,7 +158,7 @@ The feature of displaying the previously created maps was not implemented in the
 
 ![tc5](https://user-images.githubusercontent.com/73056944/144760672-fae3690f-f763-44c9-93ee-ad8bf106c083.png)
 
-#### Test Case6: User can view map assets - grids, routes, boundary - when an empty map is loaded.
+#### Test Case: User can view map assets - grids, routes, boundary - when an empty map is loaded.
 Precondition: 
 User must be able to create maps and is on the Maps page.
 
@@ -172,7 +172,7 @@ A boundary and unshaded square grids are displayed on the screen to represent an
 
 ![tc6](https://user-images.githubusercontent.com/73056944/144760712-8b532bb0-df6a-4d09-845c-04d4b786290a.png)
 
-#### Test Case7: User can view an empty map on the map creation page.
+#### Test Case: User can view an empty map on the map creation page.
 Precondition: 
 User must be able to access web portal and the map creation page.
 
@@ -184,7 +184,7 @@ An empty map is displayed on the screen, available for the user to modify it. Te
 
 ![tc7](https://user-images.githubusercontent.com/73056944/144760729-8201a036-51f0-4e0c-af1b-b55cc6c4b4ac.png)
 
-#### Test Case8: User can delete a previously saved map.
+#### Test Case: User can delete a previously saved map.
 Precondition:
 User must be able to select maps and is on the Maps page.
 
@@ -198,7 +198,7 @@ The feature of deleting maps was not implemented on the maps page. Test case fai
 
 ![tc8](https://user-images.githubusercontent.com/73056944/144760763-1649f579-d9d2-4403-b230-528671e96c98.png)
 
-#### Test Case9: User can edit items on the empty map by utilising the map assets.
+#### Test Case: User can edit items on the empty map by utilising the map assets.
 Precondition: 
 User must be able to view and utilise the Maps assets on the maps page.
 
@@ -212,7 +212,7 @@ Grids that were clicked will be shaded, representing a new route on the map. Tes
 
 ![tc9](https://user-images.githubusercontent.com/73056944/144760811-2b0870b1-f4bf-4e78-877f-04a1cdac5fd4.png)
 
-#### Test Case10: User can save an edited map that was initially empty.
+#### Test Case: User can save an edited map that was initially empty.
 Precondition: 
 User have already customised an empty map to include new routes.
 
@@ -228,7 +228,7 @@ Based on the game's internal logic, the user is not allowed to save an empty map
 
 ![tc10](https://user-images.githubusercontent.com/73056944/144760838-85f887e9-e5fc-4d24-926e-2307f44059c1.png)
 
-#### Test Case11: User can create and save a new game map.
+#### Test Case: User can create and save a new game map.
 Precondition: 
 User must be able to access web portal and the map creation page.
 
@@ -246,7 +246,7 @@ Student will be able to modify the map and the map will be saved to the database
 
 ![tc11](https://user-images.githubusercontent.com/73056944/144760894-2bfc228f-9ecc-4547-9c6d-560473085faa.png)
 
-#### Test Case12: User is able to delete saved maps.
+#### Test Case: User is able to delete saved maps.
 Precondition: 
 1) User must be able to access web portal and the map creation page.
                                                                                                  
@@ -264,7 +264,7 @@ The feature of being able to delete maps was not implemented in the maps page. T
 
 ![tc12](https://user-images.githubusercontent.com/73056944/144760934-48c29076-9707-41a4-baae-18277b526c6d.png)
 
-#### Test Case13: User navigates to dashboard by selecting dashboard button.
+#### Test Case: User navigates to dashboard by selecting dashboard button.
 Precondition: 
 The dashboard page url has to be accessible by the user.        
 
@@ -278,7 +278,7 @@ Dashboard page will be displayed. Test case passed.
 
 ![tc13](https://user-images.githubusercontent.com/73056944/144760985-ef8ce20e-92c1-48b2-92f5-7c55fe0eac77.png)
 
-#### Test Case14: User will see car status updated through the dashboard.
+#### Test Case: User will see car status updated through the dashboard.
 Precondition: 
 1. User must be able to access web portal and the dashboard page. 
                                                                                                                
@@ -294,7 +294,7 @@ The readings are constantly updated. Test case passed.
 
 ![tc14](https://user-images.githubusercontent.com/73056944/144761028-a78b8622-bf1b-4635-a7f1-af34825071fc.png)
 
-#### Test Case15: User views Car Connection Info on the Dashboard.
+#### Test Case: User views Car Connection Info on the Dashboard.
 Precondition: 
 1. User must be able to access web portal and the dashboard page.
                                   
@@ -308,7 +308,7 @@ There is a lack of a proper mechanism to determine if the car is connected to th
 
 ![tc15](https://user-images.githubusercontent.com/73056944/144761072-78c2d50a-2dd0-4efa-9d52-45630c392e79.png)
 
-#### Test Case16: User views Car Speed Info on the Dashboard.
+#### Test Case: User views Car Speed Info on the Dashboard.
 Precondition: 
 1. User must be able to access web portal and the dashboard page.
                            
@@ -322,7 +322,7 @@ Car Speed Information can be seen on the dashboard. Test case passed.
 
 ![tc16](https://user-images.githubusercontent.com/73056944/144761114-77cec2f1-7d70-4f82-a75c-29752e812f2d.png)
 
-#### Test Case17: User views Car Current Temperature on the Dashboard
+#### Test Case: User views Car Current Temperature on the Dashboard
 Precondition: 
 1. User must be able to access web portal and the dashboard page.
                             
@@ -336,7 +336,7 @@ The current car temperature can be seen on the Dashboard. Test case passed.
 
 ![tc17](https://user-images.githubusercontent.com/73056944/144761153-e222b930-d7bb-4b42-8fca-c8af2732e003.png)
 
-#### Test Case18: User views Car Temperature Graph on the Dashboard.
+#### Test Case: User views Car Temperature Graph on the Dashboard.
 Precondition: 
 1. User must be able to access web portal and the dashboard page.
                                 
@@ -350,7 +350,7 @@ The Car Temperature Graph can be seen on the Dashboard. Test case passed.
 
 ![tc18](https://user-images.githubusercontent.com/73056944/144761193-c7a0ec76-6c3e-429f-8554-7359ef7ce5d6.png)
 
-#### Test Case19: User views rate of line detection graph on the Dashboard.
+#### Test Case: User views rate of line detection graph on the Dashboard.
 Precondition: 
 1. User must be able to access web portal and the dashboard page.
                                
@@ -364,7 +364,7 @@ The rate of line detection graph can be seen on the Dashboard. Test case passed.
 
 ![tc19](https://user-images.githubusercontent.com/73056944/144761237-0769c64a-fade-449d-9390-31ca656aa3d2.png)
 
-#### Test Case20: User views line detection count graph on the Dashboard.
+#### Test Case: User views line detection count graph on the Dashboard.
 Precondition: 
 1. User must be able to access web portal and the dashboard page.
                                 
@@ -378,7 +378,7 @@ The line detection count graph can be seen on the dashboard. Test case passed.
 
 ![tc20](https://user-images.githubusercontent.com/73056944/144761277-48792e61-ff39-4895-885a-8a8d3df66129.png)
 
-#### Test Case21: User navigates to terminal page by selecting terminal button.
+#### Test Case: User navigates to terminal page by selecting terminal button.
 Precondition: 
 The terminal page URL has to be accessible by the user.
 
@@ -390,7 +390,7 @@ The terminal page will be displayed. Test case passed.
 
 ![tc21](https://user-images.githubusercontent.com/73056944/144761342-2d63fa04-514b-447b-9acb-1afdab516c2d.png)
 
-#### Test Case22: User views the created map.
+#### Test Case: User views the created map.
 Precondition: 
 1. The terminal page has to be accessible by the user.
                                        
@@ -406,7 +406,7 @@ The map created by the user gets displayed onto the terminal. Test case passed.
 
 ![tc22](https://user-images.githubusercontent.com/73056944/144761382-615fce1f-a793-4ac3-9032-1f7ec88681d0.png)
 
-#### Test Case23: User inputs commands into the terminal and executes them. 
+#### Test Case: User inputs commands into the terminal and executes them. 
 Precondition: 
 1. The terminal page has to be accessible by the user.
                                           
@@ -424,7 +424,7 @@ The commands inputted by the user will be sent to the robotic car to be executed
 
 ![tc23](https://user-images.githubusercontent.com/73056944/144761445-62edbff9-3400-4aaf-8867-9c290e379037.png)
 
-#### Test Case24: User removes a command from the terminal. 
+#### Test Case: User removes a command from the terminal. 
 Precondition: 
 1. The terminal page has to be accessible by the user.
                                                                     
@@ -443,7 +443,7 @@ The command that the user dragged to the bin will be removed. Test case passed.
 ![tc24](https://user-images.githubusercontent.com/73056944/144761484-aec6dd0c-d18c-4d49-b834-760a05be836a.png)
 
 
-#### Test Case25: User resets all of the command entered into the terminal. 
+#### Test Case: User resets all of the command entered into the terminal. 
 Precondition: 
 1. The terminal page has to be accessible by the user.                                                                    
 
@@ -461,7 +461,7 @@ All of the commands inputted by the user will be removed. Test case passed.
 
 ![tc25](https://user-images.githubusercontent.com/73056944/144761534-a3a608b1-0cdc-428f-8471-6b8acec5549b.png)
 
-#### Test Case26: User plays the game.  
+#### Test Case: User plays the game.  
 Precondition: 
 1. The maps page has to be accessible by the user.
                                                            

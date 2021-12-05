@@ -25,17 +25,6 @@ class CarStatsControllerAPI(Resource):
 		insert_stats(args['temp'], args['dist'], args['speed'], args['line'])
 		return 201
 
-
-	def display_dashboard_stats(self):
-		"""
-		Retrieves the dashboard statistics and displays them on the dashboard UI. 
-		:param: self. 
-		:return: stats.
-		"""    	       
-		stats = get_stats() 
-		return stats
-
-
 	def delete(self):
 		"""
 		Defines the behaviour of how the Map Controller API reacts to a HTTP DELETE request. 

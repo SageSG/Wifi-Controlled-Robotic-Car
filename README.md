@@ -16,7 +16,7 @@ Team Bumbling Cat Pandas
 7. [Whitebox Test](#whitebox-test)
 8. [Blackbox Test](#blackbox-test)
 
-## Description of Project <a name="description-of-project"></a>
+## Description of Project <a name="description-of-Project"></a>
 The Bumbling Cat Pandas team had developed a gamified web-based learning system that integrates both the virtual and physical environment that aims to instill critical problem-solving and computational thinking skills.
 
 The system engages the students by having a game that requires them to create a route using block-based programming that would pilot a robotic car through a maze. The game further challenges the students logic skills by generating bombs that would require the students to re-evaluate their routes to move the car around the bombs. 
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 
 ![screenshot](https://drive.google.com/uc?export=view&id=1JWoiP1Clp29KRJQxnHNQIVjMYjqNzBQ-)
 
-## Whitebox Test <a name="whitebox_test"></a>
+## Whitebox Test <a name="whitebox-test"></a>
 **Class:** MapControllerAPI
 
 **Technique:** Statement Coverage
@@ -106,5 +106,8 @@ The statement coverage statistics for each function were manually driven by firs
 
 https://user-images.githubusercontent.com/45367080/144812563-1a35d873-6674-4e3c-b75c-cedcabe289ce.mp4
 
+## Blackbox Test <a name="blackbox-test"></a>
+The various system test cases as shown in the video for the web portal's features are derived from its state diagram.
+![image](https://user-images.githubusercontent.com/32363441/144779751-49ea15ee-4b38-4a48-93d2-b9f3ae3bb438.png)
 
-## Blackbox Test <a name="blackbox_test"></a>
+https://user-images.githubusercontent.com/32363441/144779944-6ca38f9a-0c53-4003-9ea9-e254f6e9354e.mp4

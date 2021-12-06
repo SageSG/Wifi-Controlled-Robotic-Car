@@ -25,6 +25,7 @@ class CarStatsControllerAPI(Resource):
 		insert_stats(args['temp'], args['dist'], args['speed'], args['line'])
 		return 201
 
+
 	def delete(self):
 		"""
 		Defines the behaviour of how the Map Controller API reacts to a HTTP DELETE request. 

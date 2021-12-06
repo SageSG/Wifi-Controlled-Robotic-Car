@@ -96,7 +96,7 @@
                         <div class="col-1 d-grid p-0 mb-1">
                             <div>
                                 <button type="button" onclick="resetGame()"
-                                    class="btn btn-danger btn-sm me-1">Clear</button>
+                                    class="btn btn-danger btn-sm me-1">Stop</button>
                             </div>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                 <h5 class="modal-title" style="color: white"><i class="fas fa-trophy"></i> Game Won!</h5>
             </div>
             <div class="modal-body">
-                <p>The car has successfully traversed its path!</p>
+                <p>The car has successfully traversed its path!<br> <b>Please put the car back to the start position</b> <br> Add a papercup at the bomb spot</p>
             </div>
             <div class="modal-footer">
                 <btn style="margin:auto;" class="btn btn-primary" data-bs-dismiss="modal" onclick="generateBomb();"
@@ -208,7 +208,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetGame();"></button>
             </div>
             <div class="modal-body">
-                <p>The car has failed to traverse its path!</p>
+                <p>The car has failed to traverse its path! <br> <b>Please put the car back to the start position</b></p>
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" data-bs-dismiss="modal" onclick="resetGame();" role="button"> Replay the
@@ -241,7 +241,7 @@
     var listofcommands = []
 
     var timing;
-    var additional = 1000;
+    var additional = 50000;
 
 // Count the number of blocky used, (for future intergration)
     setInterval(function () {
@@ -558,7 +558,7 @@
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
         alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
-        timing = 1000; // time for car to run
+        timing = 15000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {

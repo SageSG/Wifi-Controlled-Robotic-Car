@@ -229,7 +229,6 @@
 
     // One function 
     var map = {{ map| safe }};  // Get the map from Python 
-    var resetmap = map;
     var counter = 1;            // Counter is used to facilitate 
     var path_start = 0;         // Start of the map path 
     var path_end = 0;           // End of the map path
@@ -242,7 +241,7 @@
     var listofcommands = []
 
     var timing;
-    var additional = 60000;
+    var additional = 1000;
 
 // Count the number of blocky used, (for future intergration)
     setInterval(function () {
@@ -559,7 +558,7 @@
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
         alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
-        timing = 15000; // time for car to run
+        timing = 1000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -571,8 +570,6 @@
         var code = Blockly.JavaScript.workspaceToCode(workspace);
         result = code.concat("\n", result);
         document.getElementById('textArea').innerText = result;
-
-
 
         // Parse the commands gotten from the 'textArea'
         const commands = code.split("\n");
@@ -613,11 +610,44 @@
     }
 
     function resetGame() {
-        map = resetmap;
+        map = {{ map| safe }}
+
+        console.log(map)
+        console.log(path_start)
+        challenge = 0
+        if(path_start <= 8){
+        car_face_downwards = true;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+    }
+    else if (path_start == 9 || path_start == 17 || path_start == 25 || path_start == 33 || path_start == 41 || path_start == 49){
         car_face_downwards = false;
-        car_face_upwards = true;
-        car_face_left = false;
-        car_face_right = false;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = true;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+    }else if (path_start == 56 || path_start == 48 || path_start == 40 || path_start == 32 || path_start == 24 || path_start == 16){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = true;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+    }
+    else if(path_start >= 57){
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+    }else{
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    }
+
         game_over = false;
         clearCode();
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
@@ -748,8 +778,6 @@
             document.getElementById('grid' + value).style.background = "yellow"
         }
 
-        console.log(map)
-
         document.getElementById('grid' + path_start).style.background = "lightblue"
         if(path_start <= 8){
         car_face_downwards = true;
@@ -782,6 +810,7 @@
     car_face_upwards = true;
     car_face_left = false;
     car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
     }
     
         document.getElementById('grid' + path_end).style.background = "lightblue"

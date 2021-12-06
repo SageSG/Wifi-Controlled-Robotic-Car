@@ -29,7 +29,6 @@ class ControlsControllerAPI(Resource):
 		:return: 201.
 		"""  		
 		args = parser.parse_args()
-		print(args['command'])
 		command = args['command']	
 		insert_commands(command)
 		return 200

@@ -32,9 +32,13 @@ def terminal():
         for i in range(0, len(l), n): 
             yield l[i:i + n]
     n = 8 
-    data = get_map()
-    map_rows = list(divide_chunks(data.map_coordinates.split(","), n))
-    return render_template('terminal.html', title="Terminal", map=map_rows)
+    try:
+        data = get_map()
+        map_rows = list(divide_chunks(data.map_coordinates.split(","), n))
+        return render_template('terminal.html', title="Terminal", map=map_rows)
+    except IndexError:
+        data = []
+        return render_template('terminal.html', title="Terminal", map=[])
 
 
 @views.route("/tutorials")

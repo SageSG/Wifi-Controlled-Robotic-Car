@@ -18,6 +18,10 @@
 volatile static int secCounterM = 0;
 static void Delay(uint32_t loop);
 
+void adjustLeft();
+
+void adjustRight();
+
 void initMotor(void);
 
 void motor_stop(void);

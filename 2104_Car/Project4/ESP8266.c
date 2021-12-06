@@ -314,7 +314,7 @@ bool SendData(char *Data, uint32_t DataSize)
     {
         return false;
     }
-
+    MSPrintf(EUSCI_A0_BASE, Data);
     UART_Printf(EUSCI_A2_BASE, Data);
 
     __delay_cycles(48000000);

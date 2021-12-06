@@ -101,6 +101,7 @@ The statement coverage statistics for each function were manually driven by firs
 ### <ins>Running the Test Suite</ins>
 1) Download the zipped file.
 2) Navigate to the directory of the project. (2x01)
+3) If required, install tabulate or install using requirements.txt: pip install tabulate or pip install -r requirements.txt
 4) Run python -m unittest whitebox_testing/test_mapcontroller.py
 
 https://user-images.githubusercontent.com/45367080/144812563-1a35d873-6674-4e3c-b75c-cedcabe289ce.mp4

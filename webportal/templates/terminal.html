@@ -1,6 +1,6 @@
 {% extends "layout.html" %} 
 {% block content %}
-{% if data is defined and data|length > 0 %}
+{% if map is defined and map|length > 0 %}
 <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
 <script src="https://unpkg.com/blockly/blockly.min.js"></script>
 <script src="{{ url_for('static', filename='scripts/block.js')}}"></script>

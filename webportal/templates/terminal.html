@@ -1,4 +1,6 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} 
+{% block content %}
+{% if data is defined and data|length > 0 %}
 <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
 <script src="https://unpkg.com/blockly/blockly.min.js"></script>
 <script src="{{ url_for('static', filename='scripts/block.js')}}"></script>
@@ -96,7 +98,7 @@
                         <div class="col-1 d-grid p-0 mb-1">
                             <div>
                                 <button type="button" onclick="resetGame()"
-                                    class="btn btn-danger btn-sm me-1">Clear</button>
+                                    class="btn btn-danger btn-sm me-1">Stop</button>
                             </div>
                         </div>
                     </div>
@@ -171,7 +173,7 @@
                 <h5 class="modal-title" style="color: white"><i class="fas fa-trophy"></i> Game Won!</h5>
             </div>
             <div class="modal-body">
-                <p>The car has successfully traversed its path!</p>
+                <p>The car has successfully traversed its path!<br> <b>Please put the car back to the start position</b> <br> Add a papercup at the bomb spot</p>
             </div>
             <div class="modal-footer">
                 <btn style="margin:auto;" class="btn btn-primary" data-bs-dismiss="modal" onclick="generateBomb();"
@@ -208,7 +210,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="resetGame();"></button>
             </div>
             <div class="modal-body">
-                <p>The car has failed to traverse its path!</p>
+                <p>The car has failed to traverse its path! <br> <b>Please put the car back to the start position</b></p>
             </div>
             <div class="modal-footer">
                 <a class="btn btn-primary" data-bs-dismiss="modal" onclick="resetGame();" role="button"> Replay the
@@ -227,6 +229,10 @@
             collapse: true
         });
 
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", "/controls_controller");
+            xhttp.send(); 
+
     // One function 
     var map = {{ map| safe }};  // Get the map from Python 
     var counter = 1;            // Counter is used to facilitate 
@@ -240,6 +246,10 @@
     var challenge = 0                // To see if its the challenge map
     var listofcommands = []
 
+    var timing;
+    var additional = 3000;
+
+// Count the number of blocky used, (for future intergration)
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
         document.getElementById('totalCommands').innerText = 'No. of Blocks Used: ' + numberofblockly.toString();
@@ -321,10 +331,13 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
-        listofcommands.push('1')
-        listofcommands.push('3')
+        
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 3); 
+            
         if (car_face_downwards == true) {
-            car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -337,7 +350,6 @@
         }
 
         else if (car_face_upwards == true) {
-            car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -350,7 +362,6 @@
         }
 
         else if (car_face_left == true) {
-            car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
@@ -363,7 +374,6 @@
         }
 
         else if (car_face_right == true) {
-            car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
@@ -380,10 +390,13 @@
 
     // Function to process the car index if the car turns right 
     function turnRight(car_index) {
-        listofcommands.push('1')
-        listofcommands.push('4')
+        
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 4); 
+            
         if (car_face_downwards == true) {
-            car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -396,7 +409,6 @@
         }
 
         else if (car_face_upwards == true) {
-            car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -409,7 +421,6 @@
         }
 
         else if (car_face_left == true) {
-            car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
@@ -422,7 +433,6 @@
         }
 
         else if (car_face_right == true) {
-            car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
@@ -438,7 +448,12 @@
 
     // Function to process the car index if the car moves forward 
     function moveForward(car_index) {
-        listofcommands.push('1')
+        
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 1); 
+            
         if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
@@ -493,36 +508,45 @@
 
     // Move the car left
     function Motor_Left() {
+        setTimeout(function () {
         car_index = turnLeft(car_index);
-        if (!checkRoute(car_index)) {
-            game_over = true
-        }
+        
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     // Move the car right 
     function Motor_Right() {
+        setTimeout(function () {
         car_index = turnRight(car_index);
-        if (!checkRoute(car_index)) {
-            game_over = true
-        }
+        
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     // Move the car forward
     function Motor_Start() {
+        setTimeout(function () {
         car_index = moveForward(car_index);
         if (!checkRoute(car_index)) {
             game_over = true
         }
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
+// Check to make sure the route is possible
     function checkRoute(gridnum) {
         let x = 0
         let y = 0
-        x = Math.floor(gridnum / 8)
+        x = Math.ceil(gridnum / 8) -1
         y = (gridnum - ((x) * 8)) - 1
+        if (y == -1){
+            y = 7
+        }
         if (map[x][y] == 2) {
             document.getElementById("grid" + gridnum).style.backgroundColor = "green"
             return true
@@ -539,6 +563,8 @@
     var game_over = false;
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
+        
+        timing = 1000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -551,8 +577,6 @@
         result = code.concat("\n", result);
         document.getElementById('textArea').innerText = result;
 
-
-
         // Parse the commands gotten from the 'textArea'
         const commands = code.split("\n");
         car_index = path_start;
@@ -562,12 +586,8 @@
         
 
         // Check to see if the car has reached the end point 
-        if (car_index == path_end) {
-            
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/controls_controller");
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("command=" + listofcommands); 
+        setTimeout(function () {
+        if (car_index == path_end && game_over == false) {
             
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
             if (challenge == 1){
@@ -591,14 +611,55 @@
             $("#game_over_modal").modal("show");
             return;
         }
+    }, timing);
 
     }
 
     function resetGame() {
+
+        var change = new XMLHttpRequest();
+        change.open("DELETE", "/controls_controller");
+        change.send(); 
+
+        map = {{ map| safe }}
+
+        console.log(map)
+        console.log(path_start)
+        challenge = 0
+        if(path_start <= 8){
+        car_face_downwards = true;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
+    }
+    else if (path_start == 9 || path_start == 17 || path_start == 25 || path_start == 33 || path_start == 41 || path_start == 49){
         car_face_downwards = false;
-        car_face_upwards = true;
-        car_face_left = false;
-        car_face_right = false;
+    car_face_upwards = false;
+    car_face_left = false;
+    car_face_right = true;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
+    }else if (path_start == 56 || path_start == 48 || path_start == 40 || path_start == 32 || path_start == 24 || path_start == 16){
+        car_face_downwards = false;
+    car_face_upwards = false;
+    car_face_left = true;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
+    }
+    else if(path_start >= 57){
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
+    }else{
+        car_face_downwards = false;
+    car_face_upwards = true;
+    car_face_left = false;
+    car_face_right = false;
+    }
+
+        game_over = false;
         clearCode();
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
                     <div class="row">\
@@ -635,12 +696,14 @@
                         </div>\
                     </div>\
                 </div>';
-        workspace.clear()
+        // workspace.clear()
+        document.getElementById("textArea").setAttribute = "";
+
     }
 
     function generateBomb() {
-        
-        workspace.clear()
+        document.getElementById("textArea").setAttribute = "";
+        // workspace.clear()
         clearCode();
 
         let listofroute = []
@@ -726,8 +789,6 @@
             document.getElementById('grid' + value).style.background = "yellow"
         }
 
-        console.log(map)
-
         document.getElementById('grid' + path_start).style.background = "lightblue"
         if(path_start <= 8){
         car_face_downwards = true;
@@ -760,7 +821,9 @@
     car_face_upwards = true;
     car_face_left = false;
     car_face_right = false;
+    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
     }
+    
         document.getElementById('grid' + path_end).style.background = "lightblue"
         var imgEnd = '<img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">'
         document.getElementById('grid' + path_end).innerHTML = imgEnd
@@ -797,4 +860,9 @@
         background-repeat: no-repeat;
     }
 </style>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    <i class="fas fa-exclamation-triangle"></i> Error! No map has been created yet! 
+</div>
+{% endif %}
 {% endblock %}

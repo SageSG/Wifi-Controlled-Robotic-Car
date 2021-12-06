@@ -24,7 +24,7 @@ void init_HCSR04(void)
     /* Timer_A UpMode Configuration Parameter */
     const Timer_A_UpModeConfig upConfig = { TIMER_A_CLOCKSOURCE_SMCLK, // SMCLK Clock Source
             TIMER_A_CLOCKSOURCE_DIVIDER_24,          // SMCLK/3 = 1MHz
-            TICKPERIOD*100,                             // 1000 tick period
+            TICKPERIOD*10,                             // 1000 tick period
             TIMER_A_TAIE_INTERRUPT_DISABLE,         // Disable Timer interrupt
             TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,    // Enable CCR0 interrupt
             TIMER_A_DO_CLEAR                        // Clear value

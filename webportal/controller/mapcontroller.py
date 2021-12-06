@@ -6,7 +6,6 @@ from webportal.models.carstats import *
 parser = reqparse.RequestParser()
 parser.add_argument('coordinates', required=True)
 
-
 class MapControllerAPI(Resource):
 	"""
 	Class to control the behaviour of the Map Controller API. 
@@ -21,7 +20,6 @@ class MapControllerAPI(Resource):
 		"""    			
 		args = parser.parse_args()
 		insert_map(args['coordinates'])
-		# generate_stats()
 		return 201
 
 
@@ -31,7 +29,7 @@ class MapControllerAPI(Resource):
 		:param: self. 
 		:return: 200 or 500.
 		"""         
-		# Remove all entires in the DB		
+		# Remove all entries in the DB
 		status = delete_map()
 		if status is True:
 			return 200

@@ -28,3 +28,16 @@ def create_webportal():
     api.add_resource(ControlsControllerAPI, '/controls_controller')
     api.add_resource(MapControllerAPI, '/map_controller')
     return app
+
+# Used for testing purposes
+def create_test_app():
+    app.config['TESTING'] = True
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///testdatabase.db"
+    # Dynamically bind SQLAlchemy to application
+    db.init_app(app)
+    app.app_context().push()  # this does the binding
+    from .views import views
+    app.register_blueprint(views, url_prefix='/')
+    api.add_resource(CarStatsControllerAPI, '/stats_controller')
+    api.add_resource(MapControllerAPI, '/map_controller')
+    return app

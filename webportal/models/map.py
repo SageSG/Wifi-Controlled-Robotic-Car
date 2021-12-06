@@ -53,13 +53,19 @@ def delete_map():
 	:param: None. 
 	:return: True or False.
 	"""         
-	# Remove all entires in the DB
+	# Remove all entries in the DB
+	deleted = False
 	num_rows_deleted = db.session.query(Map).delete()
+
 	try:
 		db.session.commit()
+		num_rows_left = db.session.query(Map).count()
+		if num_rows_left == 0 and num_rows_deleted > 0:
+			deleted = True
 	except:
 		db.session.rollback()
-		return False
+
 	finally: 
 		db.session.close()
-	return True    
+
+	return deleted

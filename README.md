@@ -53,9 +53,19 @@ pip install -r requirements.txt
 
 ## Whitebox Test <a name="whitebox_test"></a>
 **Class:** MapControllerAPI
+
 **Technique:** Statement Coverage
+
 **Test File:** test_mapcontroller.py
+
 **Location:** whitebox_testing
+
+#### Description of white box testing
+White box unit testing was conducted on the MapControllerAPI class for its two functions - post and delete. The testing 
+technique used is statement coverage, where each statement is tested at least once
+
+Unit testing is a small test performed on either a component, method, or class. It allows the tests to be completed in a
+short amount of time and is used to determine if the function is behaving as expected.
 
 ### <ins>Test Cases</ins>
 The statement coverage statistics for each function were manually driven by first counting the total number of statements in the function and then counting the number of statements tested in the test case.

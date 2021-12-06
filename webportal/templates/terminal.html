@@ -245,7 +245,7 @@
     var listofcommands = []
 
     var timing;
-    var additional = 50000;
+    var additional = 3000;
 
 // Count the number of blocky used, (for future intergration)
     setInterval(function () {
@@ -561,8 +561,8 @@
     var game_over = false;
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
-        alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
-        timing = 15000; // time for car to run
+        
+        timing = 1000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -618,7 +618,7 @@
         var change = new XMLHttpRequest();
         change.open("DELETE", "/controls_controller");
         change.send(); 
-        
+
         map = {{ map| safe }}
 
         console.log(map)

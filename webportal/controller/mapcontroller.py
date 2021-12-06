@@ -20,7 +20,6 @@ class MapControllerAPI(Resource):
 		"""    			
 		args = parser.parse_args()
 		insert_map(args['coordinates'])
-		# generate_stats()
 		return 201
 
 

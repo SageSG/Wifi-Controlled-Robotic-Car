@@ -1,4 +1,6 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %} 
+{% block content %}
+{% if data is defined and data|length > 0 %}
 <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
 <script src="https://unpkg.com/blockly/blockly.min.js"></script>
 <script src="{{ url_for('static', filename='scripts/block.js')}}"></script>
@@ -858,4 +860,9 @@
         background-repeat: no-repeat;
     }
 </style>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    <i class="fas fa-exclamation-triangle"></i> Error! No map has been created yet! 
+</div>
+{% endif %}
 {% endblock %}

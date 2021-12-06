@@ -45,7 +45,6 @@ def delete_command():
 		return False
 	finally: 
 		db.session.close()
-
 	return {"command": data.command}
 
 
@@ -55,10 +54,8 @@ def delete_all_commands():
 	:param: None.
 	:return: True or False.
 	"""
-	
 	# Remove all entires in the DB
 	num_rows_deleted = db.session.query(CarCommands).delete()
-	print(num_rows_deleted)
 	try:
 		db.session.commit()
 	except:

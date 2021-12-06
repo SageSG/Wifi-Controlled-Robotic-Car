@@ -56,7 +56,6 @@ def delete_map():
 	# Remove all entries in the DB
 	deleted = False
 	num_rows_deleted = db.session.query(Map).delete()
-
 	try:
 		db.session.commit()
 		num_rows_left = db.session.query(Map).count()
@@ -67,5 +66,4 @@ def delete_map():
 
 	finally: 
 		db.session.close()
-
 	return deleted

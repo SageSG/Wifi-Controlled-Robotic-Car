@@ -610,6 +610,10 @@
     }
 
     function resetGame() {
+
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", "/controls_controller");
+            xhttp.send(); 
         map = {{ map| safe }}
 
         console.log(map)

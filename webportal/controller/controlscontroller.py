@@ -33,3 +33,16 @@ class ControlsControllerAPI(Resource):
 		command = args['command']	
 		insert_commands(command)
 		return 200
+
+
+	def delete(self):
+		"""
+		Defines the behaviour of how the Controls Controller API reacts to a HTTP DELETE request. 
+		:param: self. 
+		:return: 200 or 500.
+		"""         		
+		status = delete_all_commands()
+		if status is True:
+			return 200
+		else:
+			return 500

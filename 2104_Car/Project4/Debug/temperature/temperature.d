@@ -53,11 +53,11 @@ temperature/temperature.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/
 temperature/temperature.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/wdt_a.h
 temperature/temperature.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/sysctl.h
 temperature/temperature.obj: C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/flash.h
-temperature/temperature.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/UART_Driver.h
+temperature/temperature.obj: C:/Users/Jaspzx/Downloads/Project4\ (3)/Project4/UART_Driver.h
 temperature/temperature.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdio.h
 temperature/temperature.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdarg.h
-temperature/temperature.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/MSPIO.h
-temperature/temperature.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ESP8266.h
+temperature/temperature.obj: C:/Users/Jaspzx/Downloads/Project4\ (3)/Project4/MSPIO.h
+temperature/temperature.obj: C:/Users/Jaspzx/Downloads/Project4\ (3)/Project4/ESP8266.h
 temperature/temperature.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h
 temperature/temperature.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 temperature/temperature.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h
@@ -168,15 +168,15 @@ C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/
 
 C:/ti/simplelink_msp432p4_sdk_3_40_01_02/source/ti/devices/msp432p4xx/driverlib/flash.h:
 
-C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/UART_Driver.h:
+C:/Users/Jaspzx/Downloads/Project4\ (3)/Project4/UART_Driver.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdio.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdarg.h:
 
-C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/MSPIO.h:
+C:/Users/Jaspzx/Downloads/Project4\ (3)/Project4/MSPIO.h:
 
-C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ESP8266.h:
+C:/Users/Jaspzx/Downloads/Project4\ (3)/Project4/ESP8266.h:
 
 C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.h:
 

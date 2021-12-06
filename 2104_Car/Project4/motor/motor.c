@@ -5,8 +5,6 @@
  *      Author: Jaspzx
  */
 
-/* DriverLib Includes */
-
 #include "motor/motor.h"
 
 /* Timer_A PWM Configuration Parameter */
@@ -22,6 +20,7 @@ TIMER_A_CLOCKSOURCE_SMCLK,
                                      TIMER_A_CAPTURECOMPARE_REGISTER_2,
                                      TIMER_A_OUTPUTMODE_RESET_SET, 1000 };
 
+/* Delay. */
 static void Delay(uint32_t loop)
 {
     volatile uint32_t i;
@@ -30,6 +29,7 @@ static void Delay(uint32_t loop)
         ;
 }
 
+/* Initialise the motor. */
 void initMotor(void)
 {
     GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P2, GPIO_PIN4,
@@ -44,6 +44,7 @@ void initMotor(void)
 //    Interrupt_enableInterrupt(INT_PORT1);
 }
 
+/* Stop the car.*/
 void motor_stop(void)
 {
     GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
@@ -63,6 +64,7 @@ void motor_stop(void)
     P2->OUT = BIT0;     // ON RED
 }
 
+/* Start the car, Move Straight.*/
 void motor_start(void)
 {
     GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
@@ -80,13 +82,11 @@ void motor_start(void)
     pwmConfigRight.dutyCycle = 8000;        //Right
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigLeft);
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigRight);
-//    pwmConfigLeft.dutyCycle = 8000;
-//    Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigLeft);
-//    P2->OUT = BIT0;     // ON RED
 
     Delay(5000);
 }
 
+/* Reverse the car. */
 void motor_back(void)
 {
     GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN2);
@@ -107,6 +107,7 @@ void motor_back(void)
     P2->OUT = BIT0;     // ON RED
 }
 
+/* Turn the Car left.   */
 void motor_left(void)
 {
     GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
@@ -127,6 +128,7 @@ void motor_left(void)
 //    P2->OUT = BIT0;     // ON RED
 }
 
+/* Turn the car right. */
 void motor_right(void)
 {
     GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_PIN0);
@@ -144,9 +146,9 @@ void motor_right(void)
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigLeft);
     pwmConfigRight.dutyCycle = 0;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigRight);
-//    P2->OUT = BIT0;     // ON RED
 }
 
+/* Turn the car 180 Degrees. */
 void oneEighty()
 {
 //    motor_stop();
@@ -177,20 +179,28 @@ void oneEighty()
     secCounterM = 0;
 }
 
+/* Adjusting PWM for RightSide */
 void adjustLeft()
 {
-    int diff = pwmConfigRight.dutyCycle - pwmConfigLeft.dutyCycle;
-    pwmConfigLeft.dutyCycle -= diff;
-//    pwmConfigLeft.dutyCycle -= 25;         // LEFT
-    Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigLeft);
-    printf(" - ADJUSTED LEFT");
-}
-
-void adjustRight()
-{
-//    pwmConfigRight.dutyCycle -= 25;         // RIGHT
-    int diff = pwmConfigLeft.dutyCycle - pwmConfigRight.dutyCycle;
-    pwmConfigRight.dutyCycle -= diff;
+//    int diff = pwmConfigRight.dutyCycle - pwmConfigLeft.dutyCycle;
+//    pwmConfigLeft.dutyCycle -= diff;
+//    pwmConfigRight.dutyCycle -= 20;         // LEFT
+    pwmConfigRight.dutyCycle += 15;
     Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigRight);
     printf(" - ADJUSTED RIGHT");
+    printf("\nPWMLEFT:  %d", pwmConfigLeft.dutyCycle);
+    printf(" | PWMRIGHT: %d\n", pwmConfigRight.dutyCycle);
+}
+
+/* Adjusting PWM for LeftSide */
+void adjustRight()
+{
+//    pwmConfigRight.dutyCycle -= 22;         // RIGHT
+//    int diff = pwmConfigLeft.dutyCycle - pwmConfigRight.dutyCycle;
+//    pwmConfigRight.dutyCycle -= diff;
+    pwmConfigLeft.dutyCycle += 10;
+    Timer_A_generatePWM(TIMER_A0_BASE, &pwmConfigLeft);
+    printf(" - ADJUSTED LEFT");
+    printf("\nPWMLEFT:  %d", pwmConfigLeft.dutyCycle);
+    printf(" | PWMRIGHT: %d\n", pwmConfigRight.dutyCycle);
 }

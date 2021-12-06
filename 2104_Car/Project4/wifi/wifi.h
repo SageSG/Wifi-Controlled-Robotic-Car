@@ -43,7 +43,7 @@ eUSCI_UART_ConfigV1 UART2Config = {
 const char *username = "AndroidAP542c";
 const char *password = "vgar7960";
 //
-const char url []= "192.168.125.247";
+const char url []= "192.168.184.247";
 
 volatile char cmdString[20] = "";
 const char PATTERN1 [] = "\"command\": ";

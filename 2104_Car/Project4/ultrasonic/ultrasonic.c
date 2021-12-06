@@ -9,6 +9,8 @@
 
 // -------------------------------------------------------------------------------------------------------------------
 
+
+/* Delay */
 static void Delay(uint32_t loop)
 {
     volatile uint32_t i;
@@ -18,7 +20,7 @@ static void Delay(uint32_t loop)
 }
 
 // -------------------------------------------------------------------------------------------------------------------
-
+/*  Initialise Ultrasonic sensor */
 void init_HCSR04(void)
 {
     /* Timer_A UpMode Configuration Parameter */
@@ -52,7 +54,7 @@ void init_HCSR04(void)
 }
 
 // -------------------------------------------------------------------------------------------------------------------
-
+/*  TA0_0_Handler */
 void TA0_0_IRQHandler(void)
 {
     /* Increment global variable (count number of interrupt occurred) */
@@ -64,7 +66,7 @@ void TA0_0_IRQHandler(void)
 }
 
 // -------------------------------------------------------------------------------------------------------------------
-
+/*  Get the returned Pulse time. */
 static uint32_t getHCSR04Time(void)
 {
     uint32_t pulsetime = 0;
@@ -84,7 +86,7 @@ static uint32_t getHCSR04Time(void)
 }
 
 // -------------------------------------------------------------------------------------------------------------------
-
+/*  Get the distance returned from ultrasonic sensor. */
 float getHCSR04Distance(void)
 {
     uint32_t pulseduration = 0;

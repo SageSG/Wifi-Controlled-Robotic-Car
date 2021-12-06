@@ -25,36 +25,41 @@ int rotationRight = 0;
 uint32_t status = 0;
 uint32_t status2 = 0;
 
+/* Get right count */
 float getRight()
 {
     return right;
 }
 
-void setRight()
-{
-    right = 0;
-}
+//void setRight()
+//{
+//    right = 0;
+//}
 
+/* Get Left count */
 float getLeft()
 {
     return left;
 }
 
-void setLeft()
-{
-    left = 0;
-}
+//void setLeft()
+//{
+//    left = 0;
+//}
 
+/* Get left RPM */
 int getRotationLeft()
 {
     return left / 20;
 }
 
+/* Get right RPM */
 int getRotationRight()
 {
     return right / 20;
 }
 
+/*Initialise Encoder */
 void initEncoder()
 {
 //    printf("\nIm hereee");
@@ -77,6 +82,7 @@ void initEncoder()
 //    Interrupt_enableMaster();
 }
 
+/*  Port 3 IRQ Handler */
 void PORT3_IRQHandler(void)
 {
 //    status = 0;
@@ -97,6 +103,7 @@ void PORT3_IRQHandler(void)
 //    __DSB(); // Ensures SLEEPONEXIT is set immediately before exiting ISR
 }
 
+/*  Port 2 IRQ Handler */
 void PORT2_IRQHandler(void)
 {
 //    status2 = 0;

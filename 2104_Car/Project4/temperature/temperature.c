@@ -7,6 +7,7 @@
 
 #include "temperature.h"
 
+/*  Uart_Print (Not used) */
 inline void uart_println(const char* str, ...)
 {
     static char print_buffer[256];
@@ -26,6 +27,7 @@ inline void uart_println(const char* str, ...)
     UCA0TXBUF = '\n';
 }
 
+/*  Initialise Temperature Sensor */
 void initTemp(void)
 {
     /* Halting WDT  */

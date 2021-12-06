@@ -76,11 +76,12 @@ int main(void)
     /* Stop Watchdog  */
     MAP_WDT_A_holdTimer();
 
-    //    /* Configure P2.0 and set it to LOW */
+    /* Configure P1.0 & P2.0*/
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN1);
     GPIO_setAsOutputPin(GPIO_PORT_P2, GPIO_PIN0 | GPIO_PIN1 | GPIO_PIN2);
     GPIO_setOutputLowOnPin(GPIO_PORT_P2, GPIO_PIN0 | GPIO_PIN1 | GPIO_PIN2);
 
+    /* Initialise modules. */
     initMotor();
     initEncoder();
 //    initTemp();
@@ -90,19 +91,18 @@ int main(void)
 //    init_HCSR04();
 //    motor_start();
 //    runString();
+
+    // While loop to get & send data to portal.
     while (1)
     {
         if (transferdata == true)
         {
-
 //            printf("\nObstacle Distance: %.2f", getHCSR04Distance());
-//            checkObstacle();
             transferdata = false;
             connectWifi();
-            initWifi();       // GET
+            initWifi();         // GET
             connectWifi();
-            sendWifi();     // POST
-//            Delay(10000); // Dont think this matters
+            sendWifi();         // POST
             transferdata = true;
         }
 ////        PCM_gotoLPM0();

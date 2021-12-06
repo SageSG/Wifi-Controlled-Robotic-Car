@@ -1,20 +1,15 @@
 from flask import Flask
-from flask_testing import TestCase
+import unittest
 from flask_sqlalchemy import SQLAlchemy
 from webportal.controller.mapcontroller import *
 from webportal import create_test_app, db
-from webportal import app
 
-class TestMapController(TestCase):
+app = create_test_app()
+
+class TestMapController(unittest.TestCase):
     '''
         Test cases for the MapControllerAPI class
     '''
-    def create_app(self):
-        """
-            Uses app context for testing environment instead of the production one.
-        """
-        return create_test_app()
-
     def setUp(self):
         '''
             Sets up the testing environment by creating a new database for the test cases to use and
@@ -43,7 +38,9 @@ class TestMapController(TestCase):
         latest_entry = data[-1]
         self.assertEqual(latest_entry.map_coordinates, "0,0,0,0,0,0,0,0,0,1,2,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
+    def test_delete(self):
         # delete function
+        tester = app.test_client(self)
         response = tester.delete("/map_controller")
         success_delete_response_body = response.data.decode("ascii").strip()
         self.assertEqual(success_delete_response_body, "200")

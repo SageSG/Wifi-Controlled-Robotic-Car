@@ -82,7 +82,7 @@ The statement coverage statistics for each function were manually driven by firs
 ![tested_statements_post12](https://drive.google.com/uc?export=view&id=1Ak6IBY4EiC_tg5VUtnH6GkBmVmVkqPK3)
 ![tested_statements_post34](https://drive.google.com/uc?export=view&id=1NogjtjlHitDnt_s7gh951TL2UxFxtPoQ)
 
-* Coverage statistics = 4/4 = 1
+* Coverage statistics = (4/4)*100 = 100%
 
 #### test_delete
 * Tests the delete method in the MapControllerAPI class.
@@ -96,13 +96,14 @@ The statement coverage statistics for each function were manually driven by firs
 ![tested_statements_delete12](https://drive.google.com/uc?export=view&id=1Q_-YmoQXQkMw1bZBn41B1S9KvPhNUvFp)
 ![tested_statementes_3456](https://drive.google.com/uc?export=view&id=1mzwwiQPuouaGqc3jWKQznsDXpRl6dSLF)
 
-* Coverage statistics = 6/6 = 1
+* Coverage statistics = (6/6)*100 = 100%
 
 ### <ins>Running the Test Suite</ins>
 1) Download the zipped file.
 2) Navigate to the directory of the project. (2x01)
 4) Run python -m unittest whitebox_testing/test_mapcontroller.py
 
-https://user-images.githubusercontent.com/45367080/144782804-a8fc9ced-5ba0-4ab9-bc08-da0b9385ecd9.mp4
+https://user-images.githubusercontent.com/45367080/144812563-1a35d873-6674-4e3c-b75c-cedcabe289ce.mp4
+
 
 ## Blackbox Test <a name="blackbox_test"></a>

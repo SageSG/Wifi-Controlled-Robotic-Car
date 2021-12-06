@@ -326,7 +326,12 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
-        listofcommands.push('3')
+        
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 3); 
+            
         if (car_face_downwards == true) {
             car_face_right = true;
             car_face_downwards = false;
@@ -380,7 +385,12 @@
 
     // Function to process the car index if the car turns right 
     function turnRight(car_index) {
-        listofcommands.push('4')
+        
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 4); 
+            
         if (car_face_downwards == true) {
             car_face_right = false;
             car_face_downwards = false;
@@ -433,7 +443,12 @@
 
     // Function to process the car index if the car moves forward 
     function moveForward(car_index) {
-        listofcommands.push('1')
+        
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 1); 
+            
         if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
@@ -544,7 +559,7 @@
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
         alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
-        timing = 18000; // time for car to run
+        timing = 15000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -570,11 +585,6 @@
         // Check to see if the car has reached the end point 
         setTimeout(function () {
         if (car_index == path_end && game_over == false) {
-            
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/controls_controller");
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("command=" + listofcommands); 
             
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
             if (challenge == 1){

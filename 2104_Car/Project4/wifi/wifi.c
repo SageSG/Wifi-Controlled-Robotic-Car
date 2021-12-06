@@ -37,6 +37,7 @@ int16_t conRes;
 
 //==========================================
 
+// Delay
 static void Delay(uint32_t loop)
 {
     volatile uint32_t i;
@@ -45,9 +46,9 @@ static void Delay(uint32_t loop)
         ;
 }
 
+// Initialise Wifi Module.
 void initWifi()
 {
-
     MAP_WDT_A_holdTimer();
 
     /*Pointer to ESP8266 global buffer*/
@@ -72,7 +73,7 @@ void initWifi()
 
     MSPrintf(EUSCI_A0_BASE,
              "Data sent: %s to %s\r\n\r\nESP8266 Data Received: %s\r\n",
-             HTTP_Request, "192.168.125.247", ESP8266_Data);
+             HTTP_Request, "192.168.184.247", ESP8266_Data);
 
     getData(ESP8266_Data);
 
@@ -81,6 +82,7 @@ void initWifi()
 }
 ;
 
+//   Make Wifi connection.
 void connectWifi(void)
 {
     /*Ensure MSP432 is Running at 24 MHz*/
@@ -143,10 +145,11 @@ void connectWifi(void)
         while (1)
             ;
     }
-    MSPrintf(EUSCI_A0_BASE, "AT+CIPSTART='TCP','192.168.125.247',80\n\r");
+    MSPrintf(EUSCI_A0_BASE, "AT+CIPSTART='TCP','192.168.184.247',80\n\r");
 
 }
 
+// Seconds Counter.
 void counter()
 {
     //        ===============================================================================
@@ -166,6 +169,7 @@ void counter()
     //        ===============================================================================
 }
 
+// Receive data from the portal.
 char getData(char *s)
 {
     char *target = NULL;
@@ -196,6 +200,7 @@ char getData(char *s)
 }
 ;
 
+//   Sending data to the portal.
 void sendWifi()
 {
     /*Pointer to ESP8266 global buffer*/
@@ -224,22 +229,23 @@ void sendWifi()
 
     MSPrintf(EUSCI_A0_BASE,
              "Data sent: %s to %s\r\n\r\nESP8266 Data Received: %s\r\n",
-             HTTP_Request, "192.168.125.247", ESP8266_DataSend);
+             HTTP_Request, "192.168.184.247", ESP8266_DataSend);
 }
 ;
 
+/* Obstacle Checking */
 void checkObstacle()
 {
-//    printf("\nDistance: %.2f", getHCSR04Distance());
-
+    /* Line Checking */
     if (GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN6) == 1
-            && GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 1)
+            || GPIO_getInputPinValue(GPIO_PORT_P5, GPIO_PIN7) == 1)
     {
         printf("\n--LINE Detected--");
         lineReading = 1;
         motor_stop();
         obstacle = true;
     }
+    /* Obstacle Checking */
     if ((getHCSR04Distance() < 4.0))
     {
         printf("\nOBSTACLEEEE;");
@@ -252,11 +258,12 @@ void checkObstacle()
     }
 }
 
+/* Running of command string */
 void runString()
 {
     obstacle = false;
     lineReading = 0;
-//    char cmdString[] = '1';
+//    char cmdString[] = '111111';
     printf("\nString: %s", cmdString);
 
     TIMER32_1->LOAD = 3000000; /* set the reload value */
@@ -266,19 +273,21 @@ void runString()
 
     size_t length = strlen(cmdString);
     int i = 0;
+
+    /* For loop to run through the string of commands */
     for (; i < length; i++)
     {
         switch (cmdString[i])
         {
-        case '2':
+        case '2':                                           // Motor Stop.
             printf("\nMotor_Stop();");
             motor_stop();
             obstacle = true;
             break;
-        case '1':
+        case '1':                                       // Motor Start (forward)
             printf("\nMotor_Start();");
             motor_start();
-            while (secCounter < 5 && obstacle == false)
+            while (secCounter < 10 && obstacle == false)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -299,32 +308,32 @@ void runString()
                 printf(" | rpmRIGHT: %.2f", rpmR);
                 if (rpmL > rpmR)
                 {
-                    if (rpmL - rpmR >= 1)
-                    {
-                        printf(" - FAST LEFT");
-                        adjustLeft();
-                    }
+//                    if (rpmL - rpmR >= 1)
+//                    {
+                    printf(" - FAST LEFT");
+                    adjustLeft();
+//                    }
                 }
                 else if (rpmR > rpmL)
                 {
-                    if (rpmR - rpmL >= 1)
-                    {
-                        printf(" - FAST RIGHT");
-                        adjustRight();
-                    }
+//                    if (rpmR - rpmL >= 1)
+//                    {
+                    printf(" - FAST RIGHT");
+                    adjustRight();
+//                    }
                 }
 
                 checkObstacle();
-//                rpm = 0;
+                rpm = 0;
                 counter();
                 secCounter += 1;
             }
             secCounter = 0;
             break;
-        case '3':
+        case '3':                                       // Motor Left (Turn Left)
             printf("\nMotor_Left();");
             motor_left();
-            while (secCounter < 5 && obstacle == false)
+            while (secCounter < 10 && obstacle == false)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -332,12 +341,11 @@ void runString()
                 rpmL = ((float) (getLeft() / 20) / (float) timer) * 60.00;
                 rpmR = ((float) (getRight() / 20) / (float) timer) * 60.00;
                 speedReading = ((rpmL + rpmR) / 2.0);
-                //                printf("Speed reeading:  %.2f", speedReading);
                 temperatureReading = ((float) rand() / RAND_MAX)
                         * (float) (28.0);
                 //                temperatureReading = ((float) rand() % (26 - 18 + 1) * (float))
                 distanceReading = getHCSR04Distance();
-                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+//                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
                 printf("\nrpm: %.2f", rpm);
                 checkObstacle();
                 rpm = 0;
@@ -346,10 +354,10 @@ void runString()
             }
             secCounter = 0;
             break;
-        case '4':
+        case '4':                                        // Motor Right (Turn Right)
             printf("\nMotor_Right();");
             motor_right();
-            while (secCounter < 5)
+            while (secCounter < 10 && obstacle == false)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -357,15 +365,14 @@ void runString()
                 rpmL = ((float) (getLeft() / 20) / (float) timer) * 60.00;
                 rpmR = ((float) (getRight() / 20) / (float) timer) * 60.00;
                 speedReading = ((rpmL + rpmR) / 2.0);
-                //                printf("Speed reeading:  %.2f", speedReading);
                 temperatureReading = ((float) rand() / RAND_MAX)
                         * (float) (28.0);
                 //                temperatureReading = ((float) rand() % (26 - 18 + 1) * (float))
                 distanceReading = getHCSR04Distance();
-
                 //                conRes = ((ADC14_getResult(ADC_MEM0) - cal30) * 55);
                 //                tempC = (conRes / calDifference) + 30.0f;
                 //                temperatureReading = tempC;
+//                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
                 printf("\nrpmLEFT: %.2f", rpmL);
                 printf(" | rpmRIGHT: %.2f", rpmR);
                 checkObstacle();
@@ -375,10 +382,10 @@ void runString()
             }
             secCounter = 0;
             break;
-        case '9':
+        case '9':                                               // Motor Back (Reverse)
             printf("\nMotor_back();");
             motor_back();
-            while (secCounter < 5 && obstacle == false)
+            while (secCounter < 10 && obstacle == false)
             {
                 rotations = ((getLeft() + getRight()) / 20) / 2;
                 rpm = ((float) rotations / (float) timer) * 60.00;
@@ -386,12 +393,11 @@ void runString()
                 rpmL = ((float) (getLeft() / 20) / (float) timer) * 60.00;
                 rpmR = ((float) (getRight() / 20) / (float) timer) * 60.00;
                 speedReading = ((rpmL + rpmR) / 2.0);
-                //                printf("Speed reeading:  %.2f", speedReading);
                 temperatureReading = ((float) rand() / RAND_MAX)
                         * (float) (28.0);
                 //                temperatureReading = ((float) rand() % (26 - 18 + 1) * (float))
                 distanceReading = getHCSR04Distance();
-//                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
+                TIMER32_1->LOAD = 3000000; /* reload LOAD register to restart one-shot */
                 printf("\nrpm: %.2f", rpm);
                 checkObstacle();
                 rpm = 0;

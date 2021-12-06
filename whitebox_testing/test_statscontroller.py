@@ -3,16 +3,18 @@ from flask_testing import TestCase
 from webportal.controller.statscontroller import *
 from webportal import create_test_app
 from webportal import app
+import unittest
 
-class TestStatsController(TestCase):
+app = create_test_app()
+
+class TestStatsController(unittest.TestCase):
     '''
         Test cases for the statscontroller.py file.
     '''
-    def create_app(self):
-        """
-            Uses app context for testing environment instead of the production one.
-        """
-        return create_test_app()
+    def setUp(self):
+        db.create_all()
+        insert_stats(100, 101, 105, True)
+        insert_stats(200, 201, 205, True)
 
     def test_post_delete(self):
         """
@@ -26,3 +28,6 @@ class TestStatsController(TestCase):
         response = tester.delete("/stats_controller")
         statuscode2 = response.status_code
         self.assertEqual(statuscode2, 200)
+
+    def tearDown(self):
+        db.drop_all()

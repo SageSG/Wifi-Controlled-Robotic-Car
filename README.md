@@ -48,6 +48,15 @@ pip install -r requirements.txt
 1) Download source code from latest release and extract contents.
 2) Execute the program: python main.py
 3) Open the browser and navigate to the link provided in the command line. (https://localhost:7000)
+## For running the car
+1) Plug the car board with a computer
+2) Connect computer to phone wifi hotspot
+3) Change the host in main.py to the same address and port will be 80 (e.g. https://198.168.8.8:80)
+4) Rerun python main.py
+5) Open code composer 
+6) Add IPv4 to url in wifi.h
+7) Flash the code into the car, to store the IP address
+8) Navigate to the portal and start playing
 
 ![screenshot](https://drive.google.com/uc?export=view&id=1JWoiP1Clp29KRJQxnHNQIVjMYjqNzBQ-)
 

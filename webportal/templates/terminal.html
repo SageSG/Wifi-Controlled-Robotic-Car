@@ -1,30 +1,7 @@
 {% extends "layout.html" %} {% block content %}
-
 <xml xmlns="https://developers.google.com/blockly/xml" id="workspaceBlocks" style="display: none"></xml>
 <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-
-<!-- <script src="../static/scripts/blockly_compressed.js"></script>
-<script src="../static/scripts/blocks_compressed.js"></script>
-<script src="../static/scripts/javascript_compressed.js"></script>
-<script src="../static/scripts/en.js"></script> -->
-<script src="../static/scripts/block.js"></script>
-
-<!-- <script src="../static/scripts/music_maker.js"></script>
-<script src="../static/scripts/sound_blocks.js"></script> -->
-<!-- <script src="scripts/workspace.js"></script>
-<script src="scripts/main.js"></script> -->
-
-<style>
-    .bgMap {
-        background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}');
-        background-repeat: no-repeat;
-    }
-
-    .bgProg {
-        background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}');
-        background-repeat: no-repeat;
-    }
-</style>
+<script src="{{ url_for('static', filename='scripts/block.js')}}"></script>
 
 <!-- Row 1 -->
 <div class="container-fluid py-4">
@@ -84,7 +61,6 @@
 
                                 {% elif map_coordinates == '2' %}
                                 <div class="div1" id="grid{{count.value}}" style="background:yellow;">
-                                    <!-- <img src="{{ url_for('static', filename='/img/yellow_box.png')}}" width="40" height="40"> -->
                                 </div>
 
                                 {% elif map_coordinates == '3' %}
@@ -116,16 +92,13 @@
                             <div>
                                 <button type="button" class="btn btn-success btn-sm " onclick="showCode()">Send</button>
                             </div>
-
                         </div>
                         <div class="col-1 d-grid p-0 mb-1">
                             <div>
                                 <button type="button" onclick="resetGame()"
                                     class="btn btn-danger btn-sm me-1">Clear</button>
                             </div>
-
                         </div>
-
                     </div>
 
                     <!-- Row 2 -->
@@ -167,14 +140,6 @@
                                     </category>
                                     <category name="Variables" custom="VARIABLE" colour="%{BKY_VARIABLES_HUE}">
                                     </category>
-                                    <!-- <block type="print"></block> -->
-                                    <!-- <block type="repeatuntilend"></block> -->
-                                    <!-- <block type="controls_if"></block> -->
-                                    <!-- <block type="controls_repeat_ext"></block> -->
-                                    <!-- <block type="math_number">
-                                        <field name="NUM">123</field>
-                                    </block>
-                                    <block type="text_print"></block> -->
                                 </xml>
                                 <xml id="startBlocks" style="display: none">
                                 </xml>
@@ -264,6 +229,7 @@
 
     // One function 
     var map = {{ map| safe }};  // Get the map from Python 
+    var resetmap = map;
     var counter = 1;            // Counter is used to facilitate 
     var path_start = 0;         // Start of the map path 
     var path_end = 0;           // End of the map path
@@ -273,6 +239,9 @@
     const car_path = [];        // Path the car traveresed 
     var i = 0;  
     var challenge = 0                // To see if its the challenge map
+
+    var timing;
+    var additional = 2000;
 
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
@@ -324,7 +293,6 @@
     car_face_upwards = true;
     car_face_left = false;
     car_face_right = false;
-    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
     }
     
 
@@ -356,9 +324,11 @@
 
     // Function to process the car index if the car turns left 
     function turnLeft(car_index) {
-
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 3); 
         if (car_face_downwards == true) {
-            car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -371,7 +341,6 @@
         }
 
         else if (car_face_upwards == true) {
-            car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -384,7 +353,6 @@
         }
 
         else if (car_face_left == true) {
-            car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
@@ -397,7 +365,6 @@
         }
 
         else if (car_face_right == true) {
-            car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
@@ -414,8 +381,11 @@
 
     // Function to process the car index if the car turns right 
     function turnRight(car_index) {
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 4); 
         if (car_face_downwards == true) {
-            car_index -= 1;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -428,7 +398,6 @@
         }
 
         else if (car_face_upwards == true) {
-            car_index += 1;
             car_face_right = true;
             car_face_downwards = false;
             car_face_upwards = false;
@@ -441,7 +410,6 @@
         }
 
         else if (car_face_left == true) {
-            car_index -= 8;
             car_face_right = false;
             car_face_downwards = false;
             car_face_upwards = true;
@@ -454,7 +422,6 @@
         }
 
         else if (car_face_right == true) {
-            car_index += 8;
             car_face_right = false;
             car_face_downwards = true;
             car_face_upwards = false;
@@ -470,6 +437,10 @@
 
     // Function to process the car index if the car moves forward 
     function moveForward(car_index) {
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/controls_controller");
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("command=" + 1); 
         if (car_face_downwards == true) {
             car_index += 8;
             car_face_right = false;
@@ -524,43 +495,44 @@
 
     // Move the car left
     function Motor_Left() {
+        setTimeout(function () {
         car_index = turnLeft(car_index);
-        if (!checkRoute(car_index)) {
-            game_over = true
-        }
+        
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     // Move the car right 
     function Motor_Right() {
+        setTimeout(function () {
         car_index = turnRight(car_index);
-        if (!checkRoute(car_index)) {
-            game_over = true
-        }
+        
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     // Move the car forward
     function Motor_Start() {
+        setTimeout(function () {
         car_index = moveForward(car_index);
         if (!checkRoute(car_index)) {
             game_over = true
         }
         car_path.push(car_index);
+    }, timing);
+        timing += additional
     }
 
     function checkRoute(gridnum) {
         let x = 0
         let y = 0
-        x = Math.floor(gridnum / 8)
+        x = Math.ceil(gridnum / 8) -1
         y = (gridnum - ((x) * 8)) - 1
-        
-        console.log(x,y)
-        if(y < 0){
+        if (y == -1){
             y = 7
-            x -= 1
         }
-        
         if (map[x][y] == 2) {
             document.getElementById("grid" + gridnum).style.backgroundColor = "green"
             return true
@@ -577,6 +549,8 @@
     var game_over = false;
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
+        alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
+        timing = 1000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {
@@ -600,7 +574,9 @@
         
 
         // Check to see if the car has reached the end point 
-        if (car_index == path_end) {
+        setTimeout(function () {
+        if (car_index == path_end && game_over == false) {
+            
             document.getElementById("grid" + car_index).style.backgroundColor = "lightblue"
             if (challenge == 1){
                 $("#challenge_won_modal").modal({ backdrop: 'static', keyboard: false })
@@ -623,11 +599,17 @@
             $("#game_over_modal").modal("show");
             return;
         }
+    }, timing);
 
     }
 
     function resetGame() {
-        
+        map = resetmap;
+        car_face_downwards = false;
+        car_face_upwards = true;
+        car_face_left = false;
+        car_face_right = false;
+        game_over = false;
         clearCode();
         document.getElementById('createMap').innerHTML = '<div class="card-body pb-4">\
                     <div class="row">\
@@ -664,46 +646,14 @@
                         </div>\
                     </div>\
                 </div>';
-                console.log(path_start)
-        if(path_start <= 8){
-        car_face_downwards = true;
-    car_face_upwards = false;
-    car_face_left = false;
-    car_face_right = false;
-    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="facedown" width="40" height="40">';
-    }
-    else if (path_start == 9 || path_start == 17 || path_start == 25 || path_start == 33 || path_start == 41 || path_start == 49){
-        car_face_downwards = false;
-    car_face_upwards = false;
-    car_face_left = false;
-    car_face_right = true;
-    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceright" width="40" height="40">';
-    }else if (path_start == 56 || path_start == 48 || path_start == 40 || path_start == 32 || path_start == 24 || path_start == 16){
-        car_face_downwards = false;
-    car_face_upwards = false;
-    car_face_left = true;
-    car_face_right = false;
-    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceleft" width="40" height="40">';
-    }
-    else if(path_start >= 57){
-        car_face_downwards = false;
-    car_face_upwards = true;
-    car_face_left = false;
-    car_face_right = false;
-    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
-    }else{
-        car_face_downwards = false;
-    car_face_upwards = true;
-    car_face_left = false;
-    car_face_right = false;
-    document.getElementById("grid" + path_start).innerHTML = '<img src="{{ url_for("static", filename="/img/carimg.png")}}" class="faceup" width="40" height="40">';
-    }
-        workspace.clear()
+        // workspace.clear()
+        document.getElementById("textArea").setAttribute = "";
+
     }
 
     function generateBomb() {
-        
-        workspace.clear()
+        document.getElementById("textArea").setAttribute = "";
+        // workspace.clear()
         clearCode();
 
         let listofroute = []
@@ -824,6 +774,7 @@
     car_face_left = false;
     car_face_right = false;
     }
+    
         document.getElementById('grid' + path_end).style.background = "lightblue"
         var imgEnd = '<img src="{{ url_for("static", filename="/img/end.jpg")}}" width="40" height="40">'
         document.getElementById('grid' + path_end).innerHTML = imgEnd
@@ -848,6 +799,16 @@
 
     .facedown {
         transform: rotate(180deg);
+    }
+
+    .bgMap {
+        background-image: url('{{ url_for("static", filename="/img/map1.jpg")}}');
+        background-repeat: no-repeat;
+    }
+
+    .bgProg {
+        background-image: url('{{ url_for("static", filename="/img/prog.jpg")}}');
+        background-repeat: no-repeat;
     }
 </style>
 {% endblock %}

@@ -1,20 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_testing import TestCase
 from webportal.models.carstats import CarStats
 from webportal.models.carstats import *
 from webportal import db, create_test_app
+import unittest
 
-class TestCarStats(TestCase):
+app = create_test_app()
+
+class TestCarStats(unittest.TestCase):
     '''
         Test cases for the carstats.py file.
     '''
-    def create_app(self):
-        """
-        	Uses app context for testing environment instead of the production one.
-        """
-        return create_test_app()
-
     def setUp(self):
         '''
             Sets up the testing environment by creating a new database for the test cases to use and

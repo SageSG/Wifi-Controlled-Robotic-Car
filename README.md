@@ -60,6 +60,13 @@ pip install -r requirements.txt
 
 **Location:** whitebox_testing
 
+#### Description of white box testing
+White box unit testing was conducted on the MapControllerAPI class for its two functions - post and delete. The testing 
+technique used is statement coverage, where each statement is tested at least once
+
+Unit testing is a small test performed on either a component, method, or class. It allows the tests to be completed in a
+short amount of time and is used to determine if the function is behaving as expected.
+
 ### <ins>Test Cases</ins>
 The statement coverage statistics for each function were manually driven by first counting the total number of statements in the function and then counting the number of statements tested in the test case.
 
@@ -72,29 +79,32 @@ The statement coverage statistics for each function were manually driven by firs
 
 * Number of statements tested = 4
 
-![tested_statements_post](https://drive.google.com/uc?export=view&id=1S958vnvJA7gHEXcM_Y7zen95j1JOviGI)
+![tested_statements_post12](https://drive.google.com/uc?export=view&id=1Ak6IBY4EiC_tg5VUtnH6GkBmVmVkqPK3)
+![tested_statements_post34](https://drive.google.com/uc?export=view&id=1NogjtjlHitDnt_s7gh951TL2UxFxtPoQ)
 
-* Coverage statistics = 4/4 = 1
+* Coverage statistics = (4/4)*100 = 100%
 
 #### test_delete
 * Tests the delete method in the MapControllerAPI class.
 
-* Total number of statements = 5
+* Total number of statements = 6
 
 ![total_statements_delete](https://drive.google.com/uc?export=view&id=1rK_7eopl9eaU0LIcKt1vk92riK1EB8nw)
 
-* Number of statements tested = 5
+* Number of statements tested = 6
 
-![tested_statements_delete](https://drive.google.com/uc?export=view&id=1tRrhzzwZ9s7XkY5qnQDt9EYKWCfl7OoA)
+![tested_statements_delete12](https://drive.google.com/uc?export=view&id=1Q_-YmoQXQkMw1bZBn41B1S9KvPhNUvFp)
+![tested_statementes_3456](https://drive.google.com/uc?export=view&id=1mzwwiQPuouaGqc3jWKQznsDXpRl6dSLF)
 
-* Coverage statistics = 5/5 = 1
+* Coverage statistics = (6/6)*100 = 100%
 
 ### <ins>Running the Test Suite</ins>
 1) Download the zipped file.
 2) Navigate to the directory of the project. (2x01)
+3) If required, install tabulate or install using requirements.txt: pip install tabulate or pip install -r requirements.txt
 4) Run python -m unittest whitebox_testing/test_mapcontroller.py
 
-https://user-images.githubusercontent.com/32363441/144780066-fece0879-ef2a-423a-a31a-e52f0f33609d.mp4
+https://user-images.githubusercontent.com/45367080/144812563-1a35d873-6674-4e3c-b75c-cedcabe289ce.mp4
 
 ## Blackbox Test <a name="blackbox-test"></a>
 The various system test cases as shown in the video for the web portal's features are derived from its state diagram.

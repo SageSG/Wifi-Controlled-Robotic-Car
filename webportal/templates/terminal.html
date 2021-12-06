@@ -241,7 +241,7 @@
     var challenge = 0                // To see if its the challenge map
 
     var timing;
-    var additional = 2000;
+    var additional = 50000;
 
     setInterval(function () {
         numberofblockly = parseInt(workspace.getAllBlocks(false).length)
@@ -550,7 +550,7 @@
     // Function to parse and execute the commands on the "Command List" textarea from the webpage.
     function showCode() {
         alert("Please wait for the car to run LOL eta 18s - 1min per step :)")
-        timing = 1000; // time for car to run
+        timing = 15000; // time for car to run
         console.log(map)
         // Generate code and display it.
         while (directionArr.length > 0) {

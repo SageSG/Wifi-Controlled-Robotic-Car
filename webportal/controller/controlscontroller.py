@@ -30,20 +30,19 @@ class ControlsControllerAPI(Resource):
 		"""  		
 		args = parser.parse_args()
 		print(args['command'])
-		xlist = args['command'].split(",")
-		for x in xlist:
-			print (x)
-			if x == "1":
-				command = 1
-
-			elif x == "2":
-				command = 2
-
-			elif x == "3":
-				command = 3
-
-			elif x == "4":
-				command = 4
-			
-			insert_commands(command)
+		command = args['command']	
+		insert_commands(command)
 		return 200
+
+
+	def delete(self):
+		"""
+		Defines the behaviour of how the Controls Controller API reacts to a HTTP DELETE request. 
+		:param: self. 
+		:return: 200 or 500.
+		"""         		
+		status = delete_all_commands()
+		if status is True:
+			return 200
+		else:
+			return 500

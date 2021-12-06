@@ -22,10 +22,8 @@ volatile static uint32_t right = 0;
 volatile static uint32_t left = 0;
 int rotationLeft = 0;
 int rotationRight = 0;
-
-//char rpmChar[20];
-//char notchesRightString[20];
-//char notchesLeftString[20];
+uint32_t status = 0;
+uint32_t status2 = 0;
 
 float getRight()
 {
@@ -81,7 +79,7 @@ void initEncoder()
 
 void PORT3_IRQHandler(void)
 {
-    uint32_t status = 0;
+//    status = 0;
     status = GPIO_getEnabledInterruptStatus(GPIO_PORT_P3) & BIT6;
     GPIO_clearInterruptFlag(GPIO_PORT_P3, status);
 //    printf("\nright: %d", right);
@@ -101,7 +99,7 @@ void PORT3_IRQHandler(void)
 
 void PORT2_IRQHandler(void)
 {
-    uint32_t status2 = 0;
+//    status2 = 0;
     status2 = GPIO_getEnabledInterruptStatus(GPIO_PORT_P2) & BIT7;
     GPIO_clearInterruptFlag(GPIO_PORT_P2, status2);
 //    printf("\nleft: %d", left);

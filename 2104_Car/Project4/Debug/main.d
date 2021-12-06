@@ -61,12 +61,6 @@ main.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/string.
 main.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 main.obj: ../motor/motor.h
 main.obj: ../ultrasonic/ultrasonic.h
-main.obj: ../encoder/encoder.h
-main.obj: ../temperature/temperature.h
-main.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/UART_Driver.h
-main.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/MSPIO.h
-main.obj: C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ESP8266.h
-main.obj: C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h
 
 ../main.c:
 
@@ -189,16 +183,4 @@ C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/xlocale/_string.h
 ../motor/motor.h:
 
 ../ultrasonic/ultrasonic.h:
-
-../encoder/encoder.h:
-
-../temperature/temperature.h:
-
-C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/UART_Driver.h:
-
-C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/MSPIO.h:
-
-C:/Users/Jaspzx/Downloads/Project4\ (1)/Project4/ESP8266.h:
-
-C:/ti/ccs1100/ccs/tools/compiler/ti-cgt-arm_20.2.5.LTS/include/stdlib.h:
 

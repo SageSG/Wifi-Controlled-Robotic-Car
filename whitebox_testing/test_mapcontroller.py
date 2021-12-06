@@ -3,7 +3,7 @@ import unittest
 from flask_sqlalchemy import SQLAlchemy
 from webportal.controller.mapcontroller import *
 from webportal import create_test_app, db
-import logging
+from tabulate import tabulate
 
 app = create_test_app()
 
@@ -59,11 +59,11 @@ class TestMapController(unittest.TestCase):
 
         self.assertEqual(latest_entry.map_coordinates, "0,0,0,0,0,0,0,0,0,1,2,2,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0")
 
-        print("Success. Third statement tested.")
+        print("Success. Third statement tested.\n")
 
-        print("\nTotal number of statements for post function = 4")
-        print("Number of statements tested for post function = 4")
-        print("Statement code coverage statistics = 4/4 = 1")
+        table = [["Total Number of Statements", "Number of Statements Tested", "Statement Coverage"],
+                 ["4", "4", "100%"]]
+        print(tabulate(table, headers="firstrow", tablefmt="fancy_grid", colalign=("center", "center", "center")))
 
         print("\n----------------------------------------------------------------------")
 
@@ -109,11 +109,10 @@ class TestMapController(unittest.TestCase):
         self.assertEqual(failed_delete_response_body, "500")
 
         print("Actual Output = 500")
-        print("Success. Fifth and sixth statements tested.")
+        print("Success. Fifth and sixth statements tested.\n")
 
-        print("\nTotal number of statements for post function = 6")
-        print("Number of statements tested for post function = 6")
-        print("Statement code coverage statistics = 6/6 = 1")
+        table = [["Total Number of Statements", "Number of Statements Tested", "Statement Coverage"], ["6", "6", "100%"]]
+        print(tabulate(table, headers="firstrow", tablefmt="fancy_grid", colalign=("center", "center", "center")))
 
         print("\n----------------------------------------------------------------------")
 

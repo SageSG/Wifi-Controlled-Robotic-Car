@@ -93,6 +93,6 @@ The statement coverage statistics for each function were manually driven by firs
 2) Navigate to the directory of the project. (2x01)
 4) Run python -m unittest whitebox_testing/test_mapcontroller.py
 
-https://user-images.githubusercontent.com/45367080/144782601-da7b65e0-818c-4f97-a49d-37402b18a213.mp4
+https://user-images.githubusercontent.com/45367080/144782804-a8fc9ced-5ba0-4ab9-bc08-da0b9385ecd9.mp4
 
 ## Blackbox Test <a name="blackbox_test"></a>

@@ -227,6 +227,10 @@
             collapse: true
         });
 
+        var xhttp = new XMLHttpRequest();
+            xhttp.open("DELETE", "/controls_controller");
+            xhttp.send(); 
+
     // One function 
     var map = {{ map| safe }};  // Get the map from Python 
     var counter = 1;            // Counter is used to facilitate 
@@ -611,9 +615,10 @@
 
     function resetGame() {
 
-        var xhttp = new XMLHttpRequest();
-            xhttp.open("DELETE", "/controls_controller");
-            xhttp.send(); 
+        var change = new XMLHttpRequest();
+        change.open("DELETE", "/controls_controller");
+        change.send(); 
+        
         map = {{ map| safe }}
 
         console.log(map)
